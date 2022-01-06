@@ -1,13 +1,23 @@
 import React from 'react';
-import Latex from 'react-latex';
+
+import { Grid } from '@mui/material';
 
 const Home = () => {
   return (
-    <div>
-      <p>
-        <Latex>{'Hello $ x + y = z$'}</Latex>
-      </p>
-    </div>
+    <Grid
+      container
+      direction="column"
+      justifyContent="flex-start"
+      alignItems="stretch"
+      sx={{ textAlign: 'center' }}
+    >
+      <Grid item>
+        <p>David Feng</p>
+      </Grid>
+      <Grid item>
+        <p> Welcome to my website</p>
+      </Grid>
+    </Grid>
   );
 };
 

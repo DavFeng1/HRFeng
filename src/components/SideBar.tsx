@@ -1,44 +1,49 @@
-import { Container, Grid, Link, Button } from '@mui/material';
-
 import * as React from 'react';
 
-import styles from '../assets/styles/SideBar.module.css';
+import { Box, List, Link, ListItem, ListItemText } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles({
+  menuSliderContainer: {
+    padding: '1em',
+  },
+});
+
+const listItems = [
+  {
+    listText: 'Home',
+    listHref: '/',
+  },
+  {
+    listText: 'Projects',
+    listHref: '/blochSphere',
+  },
+  {
+    listText: 'test',
+    listHref: '/test',
+  },
+  {
+    listText: 'Contact',
+    listHref: '/contact',
+  },
+];
 
 const SideBar = () => {
+  const classes = useStyles();
+
   return (
     <>
-      <Container className={styles.sideBarContainer}>
-        <Grid container>
-          <Grid item xs={12}>
-            <Button variant="contained">
-              <Link className="navLink" href="/">
-                Home
+      <Box className={classes.menuSliderContainer} component="div">
+        <List>
+          {listItems.map((listItem, index) => (
+            <ListItem button key={index}>
+              <Link href={listItem.listHref}>
+                <ListItemText primary={listItem.listText} />
               </Link>
-            </Button>
-          </Grid>
-          <Grid item xs={12}>
-            <Button variant="contained">
-              <Link className="navLink" href="/snake">
-                Stuff
-              </Link>
-            </Button>
-          </Grid>
-          <Grid item xs={12}>
-            <Button variant="contained">
-              <Link className="navLink" href="/blochSphere">
-                Bloch Sphere
-              </Link>
-            </Button>
-          </Grid>
-          <Grid item xs={12}>
-            <Button variant="contained">
-              <Link className="navLink" href="/contact">
-                Contact
-              </Link>
-            </Button>
-          </Grid>
-        </Grid>
-      </Container>
+            </ListItem>
+          ))}
+        </List>
+      </Box>
     </>
   );
 };

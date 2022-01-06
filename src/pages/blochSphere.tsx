@@ -1,34 +1,33 @@
+import Latex from 'react-latex';
+
 import BlochSphere from '../engines/BlochSphereEngine';
 import text from '../assets/text/blochSphereText';
-import Latex from 'react-latex';
+
+import { Grid } from '@mui/material';
 
 const Home = () => {
   return (
-    <div className="container">
-      <div>
-        <h1> Bloch Sphere </h1>
-      </div>
-      <div className="row row-cols-2">
-        <div className="col-md">
+    <Grid container direction="row" justifyContent="center" alignItems="flex-start" xs={12}>
+      <Grid item xs={7} sx={{ height: '100%', padding: '1em' }}>
+        <Grid item>
           <BlochSphere />
-          <div>
-            <label className="form-label">
-              <Latex> $\theta$ value </Latex>
-            </label>
-            <input type="range" className="form-range"></input>
-          </div>
-          <div>
-            <label className="form-label">
-              <Latex> $\phi$ value </Latex>
-            </label>
-            <input type="range" className="form-range"></input>
-          </div>
-        </div>
-        <div className="col-sm overflow-auto">
-          <p className="explain">{text}</p>
-        </div>
-      </div>
-    </div>
+        </Grid>
+        <Grid item>
+          <label className="form-label">
+            <Latex> $\theta$ value </Latex>
+          </label>
+          <input type="range" className="form-range"></input>
+          <label className="form-label">
+            <Latex> $\phi$ value </Latex>
+          </label>
+          <input type="range" className="form-range"></input>
+        </Grid>
+      </Grid>
+      <Grid item xs={5} sx={{ padding: '1em' }}>
+        <h1> Bloch Sphere </h1>
+        <p className="explain">{text}</p>
+      </Grid>
+    </Grid>
   );
 };
 

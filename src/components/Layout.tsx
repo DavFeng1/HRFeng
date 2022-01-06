@@ -2,11 +2,9 @@ import React from 'react';
 
 import { motion } from 'framer-motion';
 import { Outlet } from 'react-router';
-import { Drawer, Typography } from '@mui/material';
+import { Grid } from '@mui/material';
 
 import SideBar from './SideBar';
-
-import '../assets/styles/Layout.module.css';
 
 const variants = {
   hidden: { opacity: 0, x: -200, y: 0 },
@@ -17,23 +15,23 @@ const variants = {
 const Layout = (): JSX.Element => {
   return (
     <>
-      <div>
-        <Drawer variant="permanent">
+      <Grid container>
+        <Grid item xs={2}>
           <SideBar />
-          <Typography>I'm the Sidebar</Typography>
-        </Drawer>
-
-        <motion.main
-          variants={variants} // Pass the variant object into Framer Motion
-          initial="hidden" // Set the initial state to variants.hidden
-          animate="enter" // Animated state to variants.enter
-          exit="exit" // Exit state (used later) to variants.exit
-          transition={{ type: 'linear' }} // Set the transition to linear
-          className="main"
-        >
-          <Outlet />
-        </motion.main>
-      </div>
+        </Grid>
+        <Grid item xs={10}>
+          <motion.main
+            variants={variants} // Pass the variant object into Framer Motion
+            initial="hidden" // Set the initial state to variants.hidden
+            animate="enter" // Animated state to variants.enter
+            exit="exit" // Exit state (used later) to variants.exit
+            transition={{ type: 'linear' }} // Set the transition to linear
+            className="main"
+          >
+            <Outlet />
+          </motion.main>
+        </Grid>
+      </Grid>
     </>
   );
 };

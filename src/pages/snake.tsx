@@ -1,9 +1,5 @@
 const Snake = () => {
-  return (
-    <div>
-      <h5> snek </h5>
-    </div>
-  );
+  return <div></div>;
 };
 
 export default Snake;
