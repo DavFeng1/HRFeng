@@ -1,16 +1,20 @@
 import * as THREE from 'three';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 
-const StateController = () => {
+interface Props {
+  canvasWidth: number;
+}
+const StateController = ({ canvasWidth }: Props) => {
   const state = useThree();
 
   // Run once on mount
   useEffect(() => {
     state.gl.setPixelRatio(window.devicePixelRatio);
-  });
+    state.gl.setSize(canvasWidth, (canvasWidth * window.innerHeight) / window.innerWidth);
+  }, []);
 
   return <></>;
 };
@@ -33,16 +37,26 @@ const StateController = () => {
 // }
 
 const SceneCanvas = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [canvasWidth, setCanvasWidth] = useState(0);
+
   const texture = new THREE.TextureLoader().load('/textures/disc.png');
   const BLOCH_SPHERE_RADIUS = 5;
+
+  useEffect(() => {
+    if (canvasRef.current) {
+      setCanvasWidth(canvasRef.current.clientWidth);
+    }
+  }, []);
 
   return (
     <Canvas
       onCreated={(state) => state.gl.setClearColor(0xffffff, 0)}
       gl={{ antialias: true, alpha: true }}
       camera={{ fov: 75, position: [15, 10, 15] }}
+      ref={canvasRef}
     >
-      <StateController />
+      <StateController canvasWidth={canvasWidth} />
       <perspectiveCamera args={[75, window.innerHeight / window.innerWidth, 0.1, 10000]} />
       <OrbitControls minDistance={5} maxDistance={15} />
       <ambientLight intensity={0.5} />
