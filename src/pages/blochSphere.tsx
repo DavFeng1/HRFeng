@@ -1,18 +1,25 @@
 import Latex from 'react-latex';
-
 import BlochSphere from '../engines/BlochSphereEngine';
 import text from '../assets/text/blochSphereText';
+
+import { useRef, useEffect, useState } from 'react';
 
 import { Grid } from '@mui/material';
 
 const Home = () => {
   return (
-    <Grid container direction="row" justifyContent="center" alignItems="flex-start" xs={12}>
-      <Grid item xs={7} sx={{ height: '100%', padding: '1em' }}>
-        <Grid item>
+    <Grid
+      container
+      direction="row"
+      justifyContent="center"
+      alignItems="flex-start"
+      sx={{ height: 1, padding: '1em' }}
+    >
+      <Grid item xs={7} sx={{ height: 1, padding: '1em' }}>
+        <Grid item xs={9} sx={{ width: 1 }}>
           <BlochSphere />
         </Grid>
-        <Grid item>
+        <Grid item xs={3} sx={{ width: 1 }}>
           <label className="form-label">
             <Latex> $\theta$ value </Latex>
           </label>

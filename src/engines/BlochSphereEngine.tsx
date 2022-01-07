@@ -7,15 +7,32 @@ import { OrbitControls } from '@react-three/drei';
 const StateController = () => {
   const state = useThree();
 
+  // Run once on mount
   useEffect(() => {
     state.gl.setPixelRatio(window.devicePixelRatio);
-    state.gl.setSize(650, 650);
   });
 
   return <></>;
 };
 
-const sceneCanvas = () => {
+// function resizeCanvasToDisplaySize() {
+//   const canvas = renderer.domElement;
+//   // look up the size the canvas is being displayed
+//   const width = canvas.clientWidth;
+//   const height = canvas.clientHeight;
+
+//   // adjust displayBuffer size to match
+//   if (canvas.width !== width || canvas.height !== height) {
+//     // you must pass false here or three.js sadly fights the browser
+//     renderer.setSize(width, height, false);
+//     camera.aspect = width / height;
+//     camera.updateProjectionMatrix();
+
+//     // update any render target sizes here
+//   }
+// }
+
+const SceneCanvas = () => {
   const texture = new THREE.TextureLoader().load('/textures/disc.png');
   const BLOCH_SPHERE_RADIUS = 5;
 
@@ -23,10 +40,10 @@ const sceneCanvas = () => {
     <Canvas
       onCreated={(state) => state.gl.setClearColor(0xffffff, 0)}
       gl={{ antialias: true, alpha: true }}
-      camera={{ fov: 75, position: [-10, 45, 20] }}
+      camera={{ fov: 75, position: [15, 10, 15] }}
     >
       <StateController />
-      <perspectiveCamera args={[75, 650 / 400, 0.1, 50]} />
+      <perspectiveCamera args={[75, window.innerHeight / window.innerWidth, 0.1, 10000]} />
       <OrbitControls minDistance={5} maxDistance={15} />
       <ambientLight intensity={0.5} />
       <pointLight position={[0, 200, 0]} />
@@ -49,4 +66,4 @@ const sceneCanvas = () => {
   );
 };
 
-export default sceneCanvas;
+export default SceneCanvas;
