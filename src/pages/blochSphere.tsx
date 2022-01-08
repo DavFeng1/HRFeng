@@ -2,8 +2,6 @@ import Latex from 'react-latex';
 import BlochSphere from '../engines/BlochSphereEngine';
 import text from '../assets/text/blochSphereText';
 
-import { useRef, useEffect, useState } from 'react';
-
 import { Grid } from '@mui/material';
 
 const Home = () => {
@@ -15,7 +13,7 @@ const Home = () => {
       alignItems="flex-start"
       sx={{ height: 1, padding: '1em' }}
     >
-      <Grid container xs={7} sx={{ height: 1 }}>
+      <Grid container sx={{ height: 1 }}>
         <Grid item xs={12}>
           <BlochSphere />
         </Grid>

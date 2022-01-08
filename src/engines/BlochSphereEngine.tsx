@@ -2,7 +2,8 @@ import * as THREE from 'three';
 
 import React, { useEffect, useRef, useState } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 interface Props {
   canvasWidth: number;
@@ -14,27 +15,24 @@ const StateController = ({ canvasWidth }: Props) => {
   useEffect(() => {
     state.gl.setPixelRatio(window.devicePixelRatio);
     state.gl.setSize(canvasWidth, (canvasWidth * window.innerHeight) / window.innerWidth);
-  }, []);
+  }, [state.gl, canvasWidth]);
 
-  return <></>;
+  return null;
 };
 
-// function resizeCanvasToDisplaySize() {
-//   const canvas = renderer.domElement;
-//   // look up the size the canvas is being displayed
-//   const width = canvas.clientWidth;
-//   const height = canvas.clientHeight;
+const CameraController = () => {
+  const { camera, gl } = useThree();
+  useEffect(() => {
+    const controls = new OrbitControls(camera, gl.domElement);
 
-//   // adjust displayBuffer size to match
-//   if (canvas.width !== width || canvas.height !== height) {
-//     // you must pass false here or three.js sadly fights the browser
-//     renderer.setSize(width, height, false);
-//     camera.aspect = width / height;
-//     camera.updateProjectionMatrix();
-
-//     // update any render target sizes here
-//   }
-// }
+    controls.minDistance = 5;
+    controls.maxDistance = 15;
+    return () => {
+      controls.dispose();
+    };
+  }, [camera, gl]);
+  return null;
+};
 
 const SceneCanvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -56,9 +54,9 @@ const SceneCanvas = () => {
       camera={{ fov: 75, position: [15, 10, 15] }}
       ref={canvasRef}
     >
+      <CameraController />
       <StateController canvasWidth={canvasWidth} />
       <perspectiveCamera args={[75, window.innerHeight / window.innerWidth, 0.1, 10000]} />
-      <OrbitControls minDistance={5} maxDistance={15} />
       <ambientLight intensity={0.5} />
       <pointLight position={[0, 200, 0]} />
       <pointLight position={[100, 200, 100]} />
