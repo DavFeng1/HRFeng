@@ -1,6 +1,6 @@
 {
   "name": "hrfeng",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.7.1",
@@ -15,9 +15,9 @@
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "framer-motion": "^5.5.5",
+    "katex": "^0.15.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-latex": "^2.0.0",
     "react-router-dom": "^6.2.1",
     "react-scripts": "^5.0.0",
     "three": "^0.135.0",
@@ -49,11 +49,18 @@
   },
   "devDependencies": {
     "@types/jest": "^27.4.0",
+    "@types/katex": "^0.11.1",
     "@types/node": "^16.11.18",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "@types/react-latex": "^2.0.0",
     "@types/three": "^0.136.0",
+    "css-loader": "^6.5.1",
+    "mini-css-extract-plugin": "^2.4.6",
+    "prettier": "^2.5.1",
+    "sass": "^1.47.0",
+    "sass-loader": "^12.4.0",
+    "style-loader": "^3.3.1",
     "ts-loader": "^9.2.6",
     "typescript": "^4.5.4"
   }

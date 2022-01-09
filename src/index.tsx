@@ -10,9 +10,11 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
 import './index.css';
+import 'katex/dist/katex.min.css';
 
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
+
 import theme from './theme';
 
 ReactDOM.render(

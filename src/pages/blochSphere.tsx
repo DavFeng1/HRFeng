@@ -1,8 +1,8 @@
-import Latex from 'react-latex';
-import BlochSphere from '../engines/BlochSphereEngine';
-import text from '../assets/text/blochSphereText';
+import BlochSphere from '../apps/quantum/blochSphere/BlochSphereEngine';
+import BLochSphereControls from '../apps/quantum/blochSphere/BlochSphereControls';
+import BlochSphereDescription from '../apps/quantum/blochSphere/BlochSphereDescription';
 
-import { Grid } from '@mui/material';
+import { Grid, Paper } from '@mui/material';
 
 const Home = () => {
   return (
@@ -10,27 +10,20 @@ const Home = () => {
       container
       direction="row"
       justifyContent="center"
-      alignItems="flex-start"
       sx={{ height: 1, padding: '1em' }}
+      columnSpacing={3}
     >
-      <Grid container sx={{ height: 1 }}>
-        <Grid item xs={12}>
-          <BlochSphere />
-        </Grid>
-        <Grid item xs={12}>
-          <label className="form-label">
-            <Latex> $\theta$ value </Latex>
-          </label>
-          <input type="range" className="form-range"></input>
-          <label className="form-label">
-            <Latex> $\phi$ value </Latex>
-          </label>
-          <input type="range" className="form-range"></input>
-        </Grid>
+      <Grid item xs={8} sx={{ padding: '0.5em', border: 1, borderRadius: 1 }}>
+        <BlochSphere />
       </Grid>
-      <Grid item xs={5} sx={{ padding: '1em' }}>
-        <h1> Bloch Sphere </h1>
-        <p className="explain">{text}</p>
+      <Grid item xs={4}>
+        <Paper elevation={1} sx={{ height: 1, padding: '1em' }}>
+          <BLochSphereControls />
+        </Paper>
+      </Grid>
+
+      <Grid item xs={12} sx={{ padding: '1em', height: 1 }}>
+        <BlochSphereDescription />
       </Grid>
     </Grid>
   );
