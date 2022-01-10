@@ -5,6 +5,8 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
+import Latex from 'react-latex';
+
 import text from '../../../assets/text/blochSphereText';
 
 interface TabPanelProps {
@@ -59,7 +61,9 @@ export default function BasicTabs() {
 
       <TabPanel value={value} index={0}>
         <Container fixed>
-          <h1> Overview </h1>
+          <h1>
+            <Latex>What is $\sigma_x$</Latex>
+          </h1>
           <p className="explain">{text}</p>
         </Container>
       </TabPanel>

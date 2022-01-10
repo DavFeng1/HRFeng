@@ -11,18 +11,18 @@ const Home = () => {
       direction="row"
       justifyContent="center"
       sx={{ height: 1, padding: '1em' }}
-      columnSpacing={3}
+      columnSpacing={2}
     >
-      <Grid item xs={8} sx={{ padding: '0.5em', border: 1, borderRadius: 1 }}>
+      <Grid container item xs={8} sx={{ padding: '0.5em', border: 1, borderRadius: 1 }}>
         <BlochSphere />
       </Grid>
-      <Grid item xs={4}>
+      <Grid container item xs={4}>
         <Paper elevation={1} sx={{ height: 1, padding: '1em' }}>
           <BLochSphereControls />
         </Paper>
       </Grid>
 
-      <Grid item xs={12} sx={{ padding: '1em', height: 1 }}>
+      <Grid container item xs={12} sx={{ padding: '1em', height: 1 }}>
         <BlochSphereDescription />
       </Grid>
     </Grid>

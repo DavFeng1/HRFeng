@@ -1,66 +1,93 @@
 import ParamSlider from '../../../components/ParamSlider';
 
-import { Box, Button, Divider, Grid, Typography, Stack } from '@mui/material';
-import Paper from '@mui/material/Paper';
+import katex from 'katex';
 
-import { styled } from '@mui/material/styles';
+import { Button, Divider, Grid, Typography, Stack } from '@mui/material';
 
-const StyledButton = styled(Button)(() => ({
-  variant: 'contained',
-}));
+import ButtonLowercase from '../../../components/ButtonLowercase';
 
 const BlochSphereControls = () => {
+  const katexZeroState = { __html: katex.renderToString('\\ket{0}') };
+  const katexOneState = { __html: katex.renderToString('\\ket{1}') };
+
+  const katexPlusState = { __html: katex.renderToString('\\ket{+}') };
+  const katexMinusState = { __html: katex.renderToString('\\ket{-}') };
+
+  const katexH = { __html: katex.renderToString('H') };
+  const katexSigmaX = { __html: katex.renderToString('\\sigma_x') };
+  const katexSigmaY = { __html: katex.renderToString('\\sigma_y') };
+  const katexSigmaZ = { __html: katex.renderToString('\\sigma_z') };
+
   return (
     <>
-      <Grid item xs={12}>
-        <Typography align="center"> States </Typography>
-        <Grid item xs={6}>
-          <Typography variant="caption"> Base States </Typography>
-          <Stack direction="row" spacing={2}>
-            <Button variant="contained" size="small">
-              | 0 &gt;
-            </Button>
-            <Button variant="contained" size="small">
-              | 1 &gt;
-            </Button>
-          </Stack>
+      <Grid container item>
+        <Grid item xs={12}>
+          <Typography align="center" sx={{ p: '0.5em' }}>
+            States
+          </Typography>
         </Grid>
-        <Grid item xs={6}>
-          <Typography variant="caption"> Superposition </Typography>
-          <Stack direction="row" spacing={2}>
+        <Grid container item>
+          <Grid item xs={12}>
+            <Typography variant="caption"> Base States </Typography>
+          </Grid>
+          <Grid item xs={6}>
             <Button variant="contained" size="small">
-              | 0 &gt;
+              <span dangerouslySetInnerHTML={katexZeroState} />
             </Button>
+          </Grid>
+          <Grid item xs={6}>
             <Button variant="contained" size="small">
-              | 1 &gt;
+              <span dangerouslySetInnerHTML={katexOneState} />
             </Button>
-          </Stack>
+          </Grid>
+        </Grid>
+        <Divider orientation="vertical" />
+
+        <Grid container item>
+          <Grid item xs={12}>
+            <Typography variant="caption"> Superposition States </Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <Button variant="contained" size="small">
+              <span dangerouslySetInnerHTML={katexPlusState} />
+            </Button>
+          </Grid>
+          <Grid item xs={6}>
+            <Button variant="contained" size="small">
+              <span dangerouslySetInnerHTML={katexMinusState} />
+            </Button>
+          </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={12}>
-        <Typography align="center"> Operators </Typography>
+      <Grid container item xs={12}>
+        <Grid item xs={12}>
+          <Typography align="center" sx={{ p: '0.5em' }}>
+            Operators
+          </Typography>
+        </Grid>
         <Stack direction="row" spacing={2}>
-          <Button variant="contained" size="small">
-            Hadamard
-          </Button>
-          <Button variant="contained" size="small">
-            X
-          </Button>
-          <Button variant="contained" size="small">
-            Y
-          </Button>
-          <Button variant="contained" size="small">
-            Z
-          </Button>
+          <ButtonLowercase variant="contained" size="small">
+            <span dangerouslySetInnerHTML={katexH} />
+          </ButtonLowercase>
+          <ButtonLowercase variant="contained" size="small">
+            <span dangerouslySetInnerHTML={katexSigmaX} />
+          </ButtonLowercase>
+          <ButtonLowercase variant="contained" size="small" style={{ textTransform: 'lowercase' }}>
+            <span dangerouslySetInnerHTML={katexSigmaY} />
+          </ButtonLowercase>
+          <ButtonLowercase variant="contained" size="small">
+            <span dangerouslySetInnerHTML={katexSigmaZ} />
+          </ButtonLowercase>
         </Stack>
       </Grid>
       <Grid item xs={12}>
-        <Typography align="center"> State Parameters </Typography>
+        <Grid item xs={12}>
+          <Typography align="center" sx={{ p: '0.5em' }}>
+            State Parameters
+          </Typography>
+        </Grid>
         <ParamSlider katexString="\theta" />
         <ParamSlider katexString="\phi" />
-      </Grid>
-      <Grid item xs={12}>
-        <Typography align="center"> Data </Typography>
       </Grid>
     </>
   );
