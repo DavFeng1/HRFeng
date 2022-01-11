@@ -1,4 +1,4 @@
-import BlochSphere from '../apps/quantum/blochSphere/BlochSphereEngine';
+import BlochSphere from '../apps/quantum/blochSphere/BlochSphereRender';
 import BLochSphereControls from '../apps/quantum/blochSphere/BlochSphereControls';
 import BlochSphereDescription from '../apps/quantum/blochSphere/BlochSphereDescription';
 

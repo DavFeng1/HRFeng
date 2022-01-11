@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Grid } from '@mui/material';
+import Typography from '@mui/material/Typography';
 
 const Home = () => {
   return (
@@ -12,10 +13,10 @@ const Home = () => {
       sx={{ textAlign: 'center' }}
     >
       <Grid item>
-        <p>David Feng</p>
+        <Typography component="p">David Feng</Typography>
       </Grid>
       <Grid item>
-        <p> Welcome to my website</p>
+        <Typography component="p"> Welcome to my website</Typography>
       </Grid>
     </Grid>
   );

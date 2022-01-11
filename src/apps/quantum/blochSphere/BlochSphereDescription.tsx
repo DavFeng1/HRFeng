@@ -61,22 +61,22 @@ export default function BasicTabs() {
 
       <TabPanel value={value} index={0}>
         <Container fixed>
-          <h1>
+          <Typography component="h1">
             <Latex>What is $\sigma_x$</Latex>
-          </h1>
-          <p className="explain">{text}</p>
+          </Typography>
+          <Typography className="explain">{text}</Typography>
         </Container>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <Container fixed>
-          <h1> Parameters </h1>
-          <p className="explain">beans</p>
+          <Typography> Parameters </Typography>
+          <Typography className="explain">beans</Typography>
         </Container>
       </TabPanel>
       <TabPanel value={value} index={2}>
         <Container fixed>
-          <h1> Background </h1>
-          <p className="explain">{text}</p>
+          <Typography> Background </Typography>
+          <Typography className="explain">{text}</Typography>
         </Container>
       </TabPanel>
     </Box>
