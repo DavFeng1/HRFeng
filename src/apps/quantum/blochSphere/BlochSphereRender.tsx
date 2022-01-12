@@ -1,32 +1,50 @@
 import * as THREE from 'three';
-import { Suspense, useRef } from 'react';
+
+import create from 'zustand';
+
+import { Suspense, useRef, useEffect } from 'react';
 
 import { OrbitControls } from '@react-three/drei';
 import { Canvas, useLoader, useFrame } from '@react-three/fiber';
 
-import discTexture from './disc.png';
-import { Object3D } from 'three';
+import { useStore, api } from '../../../pages/blochSphere';
 
-const BLOCH_SPHERE_RADIUS = 1;
-const RING_WIDTH = 0.01;
+import discTexture from './disc.png';
 
 interface BlochSphereProps {
-  hi?: string;
+  phi: number;
+  theta: number;
 }
 
 const BlochSphere = (props: BlochSphereProps) => {
-  const xRingRef = useRef<Object3D>(null);
-  const yRingRef = useRef<Object3D>(null);
+  const xRingRef = useRef<THREE.Object3D>(null);
+  const yRingRef = useRef<THREE.Object3D>(null);
 
-  let time = 0;
+  const stateRef = useRef<THREE.Object3D>(null);
+  const pointRef = useRef<THREE.Object3D>(null);
 
-  useFrame((clock) => {
-    time += Math.PI / 32;
-    if (xRingRef.current && yRingRef.current) {
-      xRingRef.current.rotation.x += 0.01;
+  const clock = new THREE.Clock();
+
+  useEffect(() => {});
+
+  useFrame(() => {
+    const time = clock.getElapsedTime();
+    if (xRingRef.current && yRingRef.current && stateRef.current && pointRef.current) {
       yRingRef.current.rotation.y += 0.01;
 
-      xRingRef.current.position.y += 0.04 * Math.sin(time);
+      xRingRef.current.scale.x = Math.sin(time);
+      xRingRef.current.scale.y = Math.sin(time);
+      xRingRef.current.scale.z = Math.sin(time);
+
+      // xRingRef.current.position.z = Math.sin(time);
+
+      // stateRef.current.rotation.y += 0.01;
+      // pointRef.current.rotation.y += 0.01;
+
+      // stateRef.current.rotation.x += 0.01;
+      // pointRef.current.rotation.x += 0.01;
+
+      // console.log('Elapsed time: ', time);
     }
   });
 
@@ -46,8 +64,15 @@ const BlochSphere = (props: BlochSphereProps) => {
   const axisX = new THREE.Vector3(1, 0, 0);
   const axisY = new THREE.Vector3(0, 1, 0);
   const axisZ = new THREE.Vector3(0, 0, 1);
-  const state = new THREE.Vector3(1, 1, 1);
-  state.normalize();
+  const state = new THREE.Vector3(
+    Math.cos(props.phi) * Math.sin(props.theta),
+    Math.sin(props.phi) * Math.sin(props.theta),
+    Math.cos(props.theta),
+  );
+
+  console.log(state);
+
+  // state.normalize();
 
   const pointsGeometry = new THREE.BufferGeometry();
   pointsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(state.toArray(), 3));
@@ -73,11 +98,10 @@ const BlochSphere = (props: BlochSphereProps) => {
         <arrowHelper args={[axisZ, origin, 1.5, 0x0080ff, 0.05]} />
       </mesh>
       <mesh>
-        <sphereGeometry args={[BLOCH_SPHERE_RADIUS, 32, 16]} />
+        <sphereGeometry args={[1, 32, 16]} />
         <meshLambertMaterial color={0x522d70} opacity={0.1} transparent={true} depthWrite={false} />
       </mesh>
       <lineSegments geometry={edgesGeometry} material={linesMaterial} />
-      <points geometry={pointsGeometry} material={pointsMaterial} />
       <mesh ref={xRingRef}>
         <ringGeometry args={[1, 1.01, 60, 0, 0]} />
         <meshBasicMaterial color={0x89cff0} side={THREE.DoubleSide} />
@@ -86,7 +110,8 @@ const BlochSphere = (props: BlochSphereProps) => {
         <ringGeometry args={[1, 1.01, 30, 0, 90]} />
         <meshBasicMaterial color={0xff0000} side={THREE.DoubleSide} />
       </mesh>
-      <mesh>
+      <points ref={pointRef} geometry={pointsGeometry} material={pointsMaterial} />
+      <mesh ref={stateRef}>
         <arrowHelper args={[state, origin, 1, 0x0080ff, 0]} />
       </mesh>
     </>
@@ -97,7 +122,7 @@ const Fallback = () => {
   return <mesh></mesh>;
 };
 
-const Main = () => {
+const Main = (props: BlochSphereProps) => {
   return (
     <Canvas
       gl={{ antialias: true, alpha: true }}
@@ -105,7 +130,7 @@ const Main = () => {
       style={{ height: '100%', width: '100%' }}
     >
       <Suspense fallback={<Fallback />}>
-        <BlochSphere />
+        <BlochSphere phi={props.phi} theta={props.theta} />
       </Suspense>
     </Canvas>
   );

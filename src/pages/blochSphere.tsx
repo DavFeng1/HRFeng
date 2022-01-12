@@ -4,6 +4,20 @@ import BlochSphereDescription from '../apps/quantum/blochSphere/BlochSphereDescr
 
 import { Grid, Paper } from '@mui/material';
 
+import create from 'zustand';
+
+export const [useStore, api] = create((set) => ({
+  phi: 0,
+  theta: 0,
+  setter: (type: string) => {
+    if (type === 'phi') {
+      set((state: any) => ({ phi: state.value }));
+    } else if (type === 'theta') {
+      set((state: any) => ({ phi: state.value }));
+    }
+  },
+}));
+
 const Home = () => {
   return (
     <Grid

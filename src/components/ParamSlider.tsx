@@ -9,33 +9,38 @@ import Grid from '@mui/material/Grid';
 import Slider from '@mui/material/Slider';
 import MuiInput from '@mui/material/Input';
 
+import { useStore } from '../pages/blochSphere';
+
 const Input = styled(MuiInput)`
   width: 42px;
 `;
 
 interface ParamSliderProps {
+  max: number;
+  min: number;
   katexString: string;
+  type: string;
 }
 
-const ParamSlider = ({ katexString }: ParamSliderProps) => {
-  const [value, setValue] = useState<number | string | Array<number | string>>(30);
+const ParamSlider = ({ katexString, type, max, min }: ParamSliderProps) => {
+  const [value, setValue] = useState<number>(0);
 
   const katexInnerHTML = { __html: katex.renderToString(katexString) };
 
+  const storeSetter = useStore((state) => state.setter);
+
   const handleSliderChange = (event: Event, newValue: number | number[]) => {
-    setValue(newValue);
+    if (typeof newValue === 'number') {
+      setValue(newValue);
+      storeSetter(type, newValue);
+    }
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value === '' ? '' : Number(event.target.value));
-  };
+    const inputValue = event.target.value === '' ? 0 : Number(event.target.value);
 
-  const handleBlur = () => {
-    if (value < 0) {
-      setValue(0);
-    } else if (value > 100) {
-      setValue(100);
-    }
+    setValue(inputValue);
+    storeSetter(type, inputValue);
   };
 
   return (
@@ -49,6 +54,8 @@ const ParamSlider = ({ katexString }: ParamSliderProps) => {
             value={typeof value === 'number' ? value : 0}
             onChange={handleSliderChange}
             aria-labelledby="input-slider"
+            max={max}
+            min={min}
           />
         </Grid>
         <Grid item>
@@ -56,11 +63,10 @@ const ParamSlider = ({ katexString }: ParamSliderProps) => {
             value={value}
             size="small"
             onChange={handleInputChange}
-            onBlur={handleBlur}
             inputProps={{
-              step: 10,
-              min: 0,
-              max: 100,
+              step: 1,
+              min: min,
+              max: max,
               type: 'number',
               'aria-labelledby': 'input-slider',
             }}

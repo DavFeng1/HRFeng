@@ -1,12 +1,21 @@
-import ParamSlider from '../../../components/ParamSlider';
-
 import katex from 'katex';
+
+import { useState, useEffect } from 'react';
 
 import { Button, Divider, Grid, Typography, Stack } from '@mui/material';
 
 import ButtonLowercase from '../../../components/ButtonLowercase';
 
+import ParamSlider from '../../../components/ParamSlider';
+
 const BlochSphereControls = () => {
+  const [phiValue, setPhiValue] = useState(0);
+  const [thetaValue, setThetaValue] = useState(0);
+
+  useEffect(() => {
+    callback(phiValue, thetaValue);
+  }, [callback, phiValue, thetaValue]);
+
   const katexZeroState = { __html: katex.renderToString('\\ket{0}') };
   const katexOneState = { __html: katex.renderToString('\\ket{1}') };
 
@@ -86,8 +95,8 @@ const BlochSphereControls = () => {
             State Parameters
           </Typography>
         </Grid>
-        <ParamSlider katexString="\theta" />
-        <ParamSlider katexString="\phi" />
+        <ParamSlider type={'theta'} katexString="\theta" max={180} min={0} />
+        <ParamSlider type={'phi'} katexString="\phi" max={360} min={0} />
       </Grid>
     </>
   );
