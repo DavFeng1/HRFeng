@@ -27,12 +27,20 @@ const ParamSlider = ({ katexString, type, max, min }: ParamSliderProps) => {
 
   const katexInnerHTML = { __html: katex.renderToString(katexString) };
 
-  const storeSetter = useStore((state) => state.setter);
+  let valueSetter: (val: number) => void;
+
+  const { setPhi, setTheta } = useStore();
+
+  if (type === 'phi') {
+    valueSetter = setPhi;
+  } else {
+    valueSetter = setTheta;
+  }
 
   const handleSliderChange = (event: Event, newValue: number | number[]) => {
     if (typeof newValue === 'number') {
       setValue(newValue);
-      storeSetter(type, newValue);
+      valueSetter(newValue);
     }
   };
 
@@ -40,7 +48,7 @@ const ParamSlider = ({ katexString, type, max, min }: ParamSliderProps) => {
     const inputValue = event.target.value === '' ? 0 : Number(event.target.value);
 
     setValue(inputValue);
-    storeSetter(type, inputValue);
+    valueSetter(inputValue);
   };
 
   return (

@@ -8,14 +8,12 @@ import ButtonLowercase from '../../../components/ButtonLowercase';
 
 import ParamSlider from '../../../components/ParamSlider';
 
-const BlochSphereControls = () => {
-  const [phiValue, setPhiValue] = useState(0);
-  const [thetaValue, setThetaValue] = useState(0);
+interface BlochSphereControlsProps {
+  setPhi: (phi: number) => void;
+  setTheta: (theta: number) => void;
+}
 
-  useEffect(() => {
-    callback(phiValue, thetaValue);
-  }, [callback, phiValue, thetaValue]);
-
+const BlochSphereControls = ({ setPhi, setTheta }: BlochSphereControlsProps) => {
   const katexZeroState = { __html: katex.renderToString('\\ket{0}') };
   const katexOneState = { __html: katex.renderToString('\\ket{1}') };
 

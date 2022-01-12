@@ -1,15 +1,12 @@
 import * as THREE from 'three';
 
-import create from 'zustand';
-
 import { Suspense, useRef, useEffect } from 'react';
 
 import { OrbitControls } from '@react-three/drei';
 import { Canvas, useLoader, useFrame } from '@react-three/fiber';
 
-import { useStore, api } from '../../../pages/blochSphere';
-
 import discTexture from './disc.png';
+import { ArrowHelper } from 'three';
 
 interface BlochSphereProps {
   phi: number;
@@ -24,8 +21,6 @@ const BlochSphere = (props: BlochSphereProps) => {
   const pointRef = useRef<THREE.Object3D>(null);
 
   const clock = new THREE.Clock();
-
-  useEffect(() => {});
 
   useFrame(() => {
     const time = clock.getElapsedTime();
@@ -128,6 +123,7 @@ const Main = (props: BlochSphereProps) => {
       gl={{ antialias: true, alpha: true }}
       camera={{ fov: 75, position: [15, 10, 15] }}
       style={{ height: '100%', width: '100%' }}
+      mode="concurrent"
     >
       <Suspense fallback={<Fallback />}>
         <BlochSphere phi={props.phi} theta={props.theta} />
