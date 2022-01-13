@@ -1,19 +1,11 @@
 import katex from 'katex';
 
-import { useState, useEffect } from 'react';
-
 import { Button, Divider, Grid, Typography, Stack } from '@mui/material';
 
 import ButtonLowercase from '../../../components/ButtonLowercase';
-
 import ParamSlider from '../../../components/ParamSlider';
 
-interface BlochSphereControlsProps {
-  setPhi: (phi: number) => void;
-  setTheta: (theta: number) => void;
-}
-
-const BlochSphereControls = ({ setPhi, setTheta }: BlochSphereControlsProps) => {
+const BlochSphereControls = () => {
   const katexZeroState = { __html: katex.renderToString('\\ket{0}') };
   const katexOneState = { __html: katex.renderToString('\\ket{1}') };
 

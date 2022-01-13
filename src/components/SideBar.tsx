@@ -1,46 +1,80 @@
-import { Box, List, Link, ListItem, ListItemText } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import {
+  Box,
+  Divider,
+  Drawer,
+  IconButton,
+  List,
+  Link,
+  ListItem,
+  ListItemText,
+} from '@mui/material';
+import { drawerWidth } from './Layout';
+import { styled } from '@mui/material/styles';
 
-const useStyles = makeStyles({
-  menuSliderContainer: {
-    padding: '1em',
-  },
-});
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
-const listItems = [
+const routes = [
   {
-    listText: 'Home',
-    listHref: '/',
+    text: 'Home',
+    to: '/#/',
   },
   {
-    listText: 'Projects',
-    listHref: '/blochSphere',
+    text: 'Projects',
+    to: '/#/blochSphere',
   },
   {
-    listText: 'test',
-    listHref: '/test',
-  },
-  {
-    listText: 'Contact',
-    listHref: '/contact',
+    text: 'Contact',
+    to: '/#/contact',
   },
 ];
 
-const SideBar = () => {
-  const classes = useStyles();
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+  justifyContent: 'flex-end',
+}));
 
+interface SideBarProps {
+  open: boolean;
+  handleDrawerClose: () => void;
+}
+
+const SideBar = (props: SideBarProps) => {
   return (
     <>
-      <Box className={classes.menuSliderContainer} component="div">
-        <List>
-          {listItems.map((listItem, index) => (
-            <ListItem button key={index}>
-              <Link href={listItem.listHref}>
-                <ListItemText primary={listItem.listText} />
+      <Box component="nav">
+        <Drawer
+          variant="persistent"
+          sx={{
+            width: drawerWidth,
+            flexShrink: 0,
+            '& .MuiDrawer-paper': {
+              width: drawerWidth,
+              boxSizing: 'border-box',
+            },
+          }}
+          anchor="left"
+          open={props.open}
+        >
+          <DrawerHeader>
+            <IconButton onClick={props.handleDrawerClose}>
+              <ChevronLeftIcon />
+            </IconButton>
+          </DrawerHeader>
+          <Divider />
+          <List>
+            {routes.map((route, index) => (
+              <Link href={route.to}>
+                <ListItem button key={index}>
+                  <ListItemText primary={route.text} />
+                </ListItem>
               </Link>
-            </ListItem>
-          ))}
-        </List>
+            ))}
+          </List>
+        </Drawer>
       </Box>
     </>
   );

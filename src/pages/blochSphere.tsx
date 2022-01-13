@@ -4,39 +4,40 @@ import BlochSphereDescription from '../apps/quantum/blochSphere/BlochSphereDescr
 
 import { Grid, Paper } from '@mui/material';
 
-import create from 'zustand';
+import create, { GetState, SetState } from 'zustand';
+import { StoreApiWithSubscribeWithSelector, subscribeWithSelector } from 'zustand/middleware';
 
-interface someType {
+type StoreState = {
   phi: number;
   theta: number;
-  setPhi: (p: number) => void;
-  setTheta: (t: number) => void;
-}
+};
 
-export const useStore = create<someType>((set) => ({
-  phi: 0,
-  theta: 0,
-  setPhi: (p: number) => set((state) => ({ phi: (p * Math.PI) / 180 })),
-  setTheta: (t: number) => set((state) => ({ theta: (t * Math.PI) / 180 })),
-}));
+const useStore = create<
+  StoreState,
+  SetState<StoreState>,
+  GetState<StoreState>,
+  StoreApiWithSubscribeWithSelector<StoreState>
+>(
+  subscribeWithSelector(() => ({
+    phi: 0,
+    theta: 0,
+  })),
+);
 
 const Home = () => {
-  const { phi, theta, setPhi, setTheta } = useStore();
-
   return (
-    <Grid
-      container
-      direction="row"
-      justifyContent="center"
-      sx={{ height: 1, padding: '1em' }}
-      columnSpacing={2}
-    >
-      <Grid container item xs={8} sx={{ padding: '0.5em', border: 1, borderRadius: 1 }}>
-        <BlochSphere phi={phi} theta={theta} />
+    <Grid container direction="row" justifyContent="center" columnSpacing={2}>
+      <Grid
+        container
+        item
+        xs={8}
+        sx={{ padding: '0.5em', border: 1, borderRadius: 1, height: '450px' }}
+      >
+        <BlochSphere />
       </Grid>
       <Grid container item xs={4}>
         <Paper elevation={1} sx={{ height: 1, padding: '1em' }}>
-          <BLochSphereControls setPhi={setPhi} setTheta={setTheta} />
+          <BLochSphereControls />
         </Paper>
       </Grid>
 
@@ -47,4 +48,5 @@ const Home = () => {
   );
 };
 
+export { useStore };
 export default Home;

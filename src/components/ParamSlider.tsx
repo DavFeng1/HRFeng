@@ -27,20 +27,14 @@ const ParamSlider = ({ katexString, type, max, min }: ParamSliderProps) => {
 
   const katexInnerHTML = { __html: katex.renderToString(katexString) };
 
-  let valueSetter: (val: number) => void;
-
-  const { setPhi, setTheta } = useStore();
-
-  if (type === 'phi') {
-    valueSetter = setPhi;
-  } else {
-    valueSetter = setTheta;
-  }
-
   const handleSliderChange = (event: Event, newValue: number | number[]) => {
     if (typeof newValue === 'number') {
       setValue(newValue);
-      valueSetter(newValue);
+      if (type === 'phi') {
+        useStore.setState({ phi: newValue });
+      } else if (type === 'theta') {
+        useStore.setState({ theta: newValue });
+      }
     }
   };
 
@@ -48,7 +42,11 @@ const ParamSlider = ({ katexString, type, max, min }: ParamSliderProps) => {
     const inputValue = event.target.value === '' ? 0 : Number(event.target.value);
 
     setValue(inputValue);
-    valueSetter(inputValue);
+    if (type === 'phi') {
+      useStore.setState({ phi: inputValue });
+    } else if (type === 'theta') {
+      useStore.setState({ theta: inputValue });
+    }
   };
 
   return (
@@ -64,6 +62,7 @@ const ParamSlider = ({ katexString, type, max, min }: ParamSliderProps) => {
             aria-labelledby="input-slider"
             max={max}
             min={min}
+            step={1}
           />
         </Grid>
         <Grid item>

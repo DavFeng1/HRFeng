@@ -16,7 +16,6 @@ import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 
 import theme from './theme';
-
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>

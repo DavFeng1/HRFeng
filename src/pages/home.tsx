@@ -13,10 +13,7 @@ const Home = () => {
       sx={{ textAlign: 'center' }}
     >
       <Grid item>
-        <Typography component="p">David Feng</Typography>
-      </Grid>
-      <Grid item>
-        <Typography component="p"> Welcome to my website</Typography>
+        <Typography component="p">helo</Typography>
       </Grid>
     </Grid>
   );
