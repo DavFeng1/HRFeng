@@ -88,6 +88,14 @@ const BlochSphereControls = () => {
         <ParamSlider type={'theta'} katexString="\theta" max={180} min={0} />
         <ParamSlider type={'phi'} katexString="\phi" max={360} min={0} />
       </Grid>
+
+      <Grid item xs={12}>
+        <Grid item xs={12}>
+          <Typography align="center" sx={{ p: '0.5em' }}>
+            Current state
+          </Typography>
+        </Grid>
+      </Grid>
     </>
   );
 };

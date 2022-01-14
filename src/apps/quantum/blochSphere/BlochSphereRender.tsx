@@ -97,8 +97,6 @@ const BlochSphere = () => {
     }
   });
 
-  //        <ringGeometry args={[1, 1.02, 60, 0, 0]} />
-
   return (
     <>
       <perspectiveCamera args={[75, window.innerHeight / window.innerWidth, 0.1, 10000]} />

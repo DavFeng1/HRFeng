@@ -4,6 +4,8 @@ import BlochSphereDescription from '../apps/quantum/blochSphere/BlochSphereDescr
 
 import { Grid, Paper } from '@mui/material';
 
+import Typography from '@mui/material/Typography';
+
 import create, { GetState, SetState } from 'zustand';
 import { StoreApiWithSubscribeWithSelector, subscribeWithSelector } from 'zustand/middleware';
 
@@ -24,29 +26,34 @@ const useStore = create<
   })),
 );
 
-const Home = () => {
+const BlochSpherePage = () => {
   return (
-    <Grid container direction="row" justifyContent="center" columnSpacing={2}>
-      <Grid
-        container
-        item
-        xs={8}
-        sx={{ padding: '0.5em', border: 1, borderRadius: 1, height: '450px' }}
-      >
-        <BlochSphere />
+    <>
+      <Grid item p={5}>
+        <Typography variant="h1"> The Bloch Sphere </Typography>
       </Grid>
-      <Grid container item xs={4}>
-        <Paper elevation={1} sx={{ height: 1, padding: '1em' }}>
-          <BLochSphereControls />
-        </Paper>
-      </Grid>
+      <Grid container item direction="row" justifyContent="center" columnSpacing={2}>
+        <Grid
+          container
+          item
+          xs={8}
+          sx={{ padding: '0.5em', border: 1, borderRadius: 1, height: '600px' }}
+        >
+          <BlochSphere />
+        </Grid>
+        <Grid container item xs={4}>
+          <Paper elevation={1} sx={{ height: 1, padding: '1em' }}>
+            <BLochSphereControls />
+          </Paper>
+        </Grid>
 
-      <Grid container item xs={12} sx={{ padding: '1em', height: 1 }}>
-        <BlochSphereDescription />
+        <Grid container item xs={12} sx={{ padding: '1em', height: 1 }}>
+          <BlochSphereDescription />
+        </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 };
 
 export { useStore };
-export default Home;
+export default BlochSpherePage;

@@ -1,23 +1,33 @@
-import React from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 
 import Home from './home';
 import BlochSphere from './blochSphere';
 import Contact from './contact';
 import Layout from '../components/Layout';
 
-const App = () => {
+const AnimatedRoutes = () => {
+  const location = useLocation();
+
   return (
-    <HashRouter basename="/">
-      <Routes>
+    <AnimatePresence exitBeforeEnter>
+      <Routes location={location} key={location.pathname}>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/blochSphere" element={<BlochSphere />} />
           <Route path="/contact" element={<Contact />} />
         </Route>
       </Routes>
-    </HashRouter>
+    </AnimatePresence>
+  );
+};
+
+const App = () => {
+  return (
+    <Router basename="/">
+      <AnimatedRoutes />
+    </Router>
   );
 };
 
