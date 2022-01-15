@@ -17,7 +17,7 @@ const Layout = (): JSX.Element => {
       <Grid item>
         <TopBar />
       </Grid>
-      <Grid item container p={10}>
+      <Grid item container>
         <motion.main
           variants={variants} // Pass the variant object into Framer Motion
           initial="hidden" // Set the initial state to variants.hidden

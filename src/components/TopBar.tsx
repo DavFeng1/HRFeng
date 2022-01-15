@@ -21,11 +21,6 @@ const TopBar = (): JSX.Element => {
           </Link>
         </Button>
         <Button color="inherit">
-          <Link to="/aboout" style={{ color: '#FFF', textDecoration: 'none' }}>
-            /about
-          </Link>
-        </Button>
-        <Button color="inherit">
           <Link to="/contact" style={{ color: '#FFF', textDecoration: 'none' }}>
             /Contact
           </Link>

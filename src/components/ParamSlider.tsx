@@ -4,7 +4,6 @@ import katex from 'katex';
 
 import { styled } from '@mui/material/styles';
 
-import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Slider from '@mui/material/Slider';
 import MuiInput from '@mui/material/Input';
@@ -50,37 +49,35 @@ const ParamSlider = ({ katexString, type, max, min }: ParamSliderProps) => {
   };
 
   return (
-    <Box component="div">
-      <Grid container spacing={2} alignItems="center">
-        <Grid item>
-          <div id="input-slider" dangerouslySetInnerHTML={katexInnerHTML} />
-        </Grid>
-        <Grid item xs>
-          <Slider
-            value={typeof value === 'number' ? value : 0}
-            onChange={handleSliderChange}
-            aria-labelledby="input-slider"
-            max={max}
-            min={min}
-            step={1}
-          />
-        </Grid>
-        <Grid item>
-          <Input
-            value={value}
-            size="small"
-            onChange={handleInputChange}
-            inputProps={{
-              step: 1,
-              min: min,
-              max: max,
-              type: 'number',
-              'aria-labelledby': 'input-slider',
-            }}
-          />
-        </Grid>
+    <Grid container spacing={2} alignItems="center">
+      <Grid item>
+        <div id="input-slider" dangerouslySetInnerHTML={katexInnerHTML} />
       </Grid>
-    </Box>
+      <Grid item xs>
+        <Slider
+          value={typeof value === 'number' ? value : 0}
+          onChange={handleSliderChange}
+          aria-labelledby="input-slider"
+          max={max}
+          min={min}
+          step={1}
+        />
+      </Grid>
+      <Grid item>
+        <Input
+          value={value}
+          size="small"
+          onChange={handleInputChange}
+          inputProps={{
+            step: 1,
+            min: min,
+            max: max,
+            type: 'number',
+            'aria-labelledby': 'input-slider',
+          }}
+        />
+      </Grid>
+    </Grid>
   );
 };
 

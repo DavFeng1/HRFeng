@@ -1,11 +1,47 @@
 import katex from 'katex';
 
+import { useState, useEffect } from 'react';
 import { Button, Divider, Grid, Typography, Stack } from '@mui/material';
+
+import { useStore } from '../../../pages/blochSphere';
 
 import ButtonLowercase from '../../../components/ButtonLowercase';
 import ParamSlider from '../../../components/ParamSlider';
 
 const BlochSphereControls = () => {
+  const [phi, setPhi] = useState<number>(0);
+  const [theta, setTheta] = useState<number>(0);
+
+  const [currentStateLatex, setCurrentStateLatex] = useState('\\ket{\\psi}');
+
+  useStore.subscribe(
+    (state) => state.phi,
+    (updatedPhi) => setPhi((updatedPhi * Math.PI) / 180),
+  );
+
+  useStore.subscribe(
+    (state) => state.theta,
+    (updatedTheta) => setTheta((updatedTheta * Math.PI) / 180),
+  );
+
+  useEffect(() => {
+    const alpha = Math.cos(theta / 2);
+
+    const beta = Math.sin(theta / 2);
+
+    const expAlpha = Math.cos(phi);
+
+    const expBeta = Math.sin(phi);
+
+    const firstCoefficient = Math.round((alpha + Number.EPSILON) * 100) / 100;
+    const secondCoefficientReal = Math.round((beta + expAlpha + Number.EPSILON) * 100) / 100;
+    const secondCoefficientImaginary = Math.round((beta + expBeta + Number.EPSILON) * 100) / 100;
+
+    setCurrentStateLatex(
+      `\\ket{\\psi} = ${firstCoefficient} \\ket{0} + (${secondCoefficientReal} + i ${secondCoefficientImaginary}) \\ket{1}`,
+    );
+  }, [phi, theta]);
+
   const katexZeroState = { __html: katex.renderToString('\\ket{0}') };
   const katexOneState = { __html: katex.renderToString('\\ket{1}') };
 
@@ -93,6 +129,10 @@ const BlochSphereControls = () => {
         <Grid item xs={12}>
           <Typography align="center" sx={{ p: '0.5em' }}>
             Current state
+          </Typography>
+
+          <Typography sx={{ textAlign: 'center' }} p={5}>
+            <span dangerouslySetInnerHTML={{ __html: katex.renderToString(currentStateLatex) }} />
           </Typography>
         </Grid>
       </Grid>

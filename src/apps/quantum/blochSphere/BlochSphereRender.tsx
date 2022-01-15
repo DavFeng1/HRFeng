@@ -2,9 +2,9 @@ import * as THREE from 'three';
 
 import { Suspense, useRef, useState } from 'react';
 
-import { OrbitControls } from '@react-three/drei';
+import { OrbitControls, Text } from '@react-three/drei';
 
-import { Canvas, useLoader, useFrame } from '@react-three/fiber';
+import { Canvas, useLoader, useFrame, useThree } from '@react-three/fiber';
 
 import { useStore } from '../../../pages/blochSphere';
 
@@ -17,6 +17,12 @@ const BlochSphere = () => {
   const yRingRef = useRef<THREE.Object3D>(null);
   const zRingRef = useRef<THREE.Object3D>(null);
   const lineRef = useRef<THREE.ArrowHelper>(null);
+
+  const xTextRef = useRef<THREE.Object3D>(null);
+  const yTextRef = useRef<THREE.Object3D>(null);
+  const zTextRef = useRef<THREE.Object3D>(null);
+
+  const threeState = useThree();
 
   const [phi, setPhi] = useState(0);
   const [theta, setTheta] = useState(0);
@@ -46,7 +52,6 @@ const BlochSphere = () => {
   const axisX = new THREE.Vector3(1, 0, 0);
   const axisY = new THREE.Vector3(0, 1, 0);
   const axisZ = new THREE.Vector3(0, 0, 1);
-
   const state = new THREE.Vector3(1, 0, 0);
 
   const pointsGeometry = new THREE.BufferGeometry();
@@ -63,7 +68,15 @@ const BlochSphere = () => {
   // ===================================== Animation =====================================
 
   useFrame(() => {
-    if (lineRef.current && xRingRef.current && yRingRef.current && zRingRef.current) {
+    if (
+      lineRef.current &&
+      xRingRef.current &&
+      yRingRef.current &&
+      zRingRef.current &&
+      xTextRef.current &&
+      yTextRef.current &&
+      zTextRef.current
+    ) {
       // Update state point and vector
       pointsGeometry.attributes.position.setXYZ(
         0,
@@ -79,6 +92,7 @@ const BlochSphere = () => {
         ),
       );
 
+      // Update rings orientation
       xRingRef.current.scale.x = Math.sin(theta);
       xRingRef.current.scale.y = Math.sin(theta);
       xRingRef.current.position.z = Math.cos(theta);
@@ -94,21 +108,32 @@ const BlochSphere = () => {
         Math.cos(theta) ** 2 + Math.sin(theta) ** 2 * Math.sin(phi) ** 2,
       );
       zRingRef.current.position.x = Math.cos(phi) * Math.sin(theta);
+
+      // Update Text orientation
+      zTextRef.current.lookAt(threeState.camera.position);
+      yTextRef.current.lookAt(threeState.camera.position);
+      xTextRef.current.lookAt(threeState.camera.position);
+
+      xTextRef.current.position.x = 1.4;
+      yTextRef.current.position.y = 1.4;
+      zTextRef.current.position.z = 1.4;
     }
   });
+
+  // ====================================== Components ===============================
 
   return (
     <>
       <perspectiveCamera args={[75, window.innerHeight / window.innerWidth, 0.1, 10000]} />
-      <OrbitControls minDistance={1.5} maxDistance={2.25} />
+      <OrbitControls minDistance={2} maxDistance={2.5} />
       <ambientLight intensity={0.5} />
       <pointLight position={[0, 200, 0]} />
       <pointLight position={[100, 200, 100]} />
       <pointLight position={[-100, -200, -100]} />
       <mesh>
-        <arrowHelper args={[axisX, origin, 1.5, 0x0080ff, 0.1]} />
-        <arrowHelper args={[axisY, origin, 1.5, 0x0080ff, 0.1]} />
-        <arrowHelper args={[axisZ, origin, 1.5, 0x0080ff, 0.1]} />
+        <arrowHelper args={[axisX, origin, 1.3, 0x0080ff, 0.1]} />
+        <arrowHelper args={[axisY, origin, 1.3, 0x0080ff, 0.1]} />
+        <arrowHelper args={[axisZ, origin, 1.3, 0x0080ff, 0.1]} />
       </mesh>
       <mesh>
         <sphereGeometry args={[1, 32, 16]} />
@@ -127,9 +152,20 @@ const BlochSphere = () => {
         <torusGeometry args={[1, 0.007, 10, 70]} />
         <meshBasicMaterial color={0x9300ff} side={THREE.DoubleSide} />
       </mesh>
+
       <points geometry={pointsGeometry} material={pointsMaterial} />
       <mesh>
         <arrowHelper ref={lineRef} args={[state, origin, 1, 0x0080ff, 0]} />
+      </mesh>
+
+      <mesh ref={xTextRef}>
+        <Text color="white"> x </Text>
+      </mesh>
+      <mesh ref={yTextRef}>
+        <Text color="white"> y</Text>
+      </mesh>
+      <mesh ref={zTextRef}>
+        <Text color="white"> z </Text>
       </mesh>
     </>
   );

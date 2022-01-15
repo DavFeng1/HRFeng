@@ -29,16 +29,11 @@ const useStore = create<
 const BlochSpherePage = () => {
   return (
     <>
-      <Grid item p={5}>
+      <Grid item p={10}>
         <Typography variant="h1"> The Bloch Sphere </Typography>
       </Grid>
-      <Grid container item direction="row" justifyContent="center" columnSpacing={2}>
-        <Grid
-          container
-          item
-          xs={8}
-          sx={{ padding: '0.5em', border: 1, borderRadius: 1, height: '600px' }}
-        >
+      <Grid container item direction="row" justifyContent="center" columnSpacing={2} p={10}>
+        <Grid container item xs={8} sx={{ padding: '0.5em', height: '700px' }}>
           <BlochSphere />
         </Grid>
         <Grid container item xs={4}>
@@ -47,7 +42,7 @@ const BlochSpherePage = () => {
           </Paper>
         </Grid>
 
-        <Grid container item xs={12} sx={{ padding: '1em', height: 1 }}>
+        <Grid container item xs={12} sx={{ padding: '1em', height: 1 }} p={10}>
           <BlochSphereDescription />
         </Grid>
       </Grid>
