@@ -1,89 +1,173 @@
 import * as THREE from 'three';
 
-import { useEffect, useRef } from 'react';
+import { Suspense, useRef } from 'react';
 import { Grid, Typography } from '@mui/material';
 import { Canvas, useThree, useFrame } from '@react-three/fiber';
-import { Plane, TorusKnot } from '@react-three/drei';
+import { useAspect, Text } from '@react-three/drei';
+import { Flex, Box } from '@react-three/flex';
+import { motion } from 'framer-motion';
 
-const BackGrid = () => {
-  const { scene } = useThree();
+import HomeBackground from '../components/three/HomeBackground';
+import RotatingTorusKnot from '../components/three/RotatingTorusKnot';
 
-  useEffect(() => {
-    const fog = new THREE.FogExp2(0x121212, 0.05);
-    scene.fog = fog;
-  }, [scene]);
+export const state = {
+  top: 0,
+};
 
+const Title = () => {
   return (
-    <Plane
-      position={[4, 0, 0]}
-      rotation={[0, Math.PI / 2, 0]}
-      args={[80, 80, 128, 128]}
-      scale={[2.5, 2.5, 2.5]}
+    <Box
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      width="100%"
+      height="100%"
     >
-      <meshStandardMaterial color="#ea5455" wireframe side={THREE.DoubleSide} />
-    </Plane>
+      <Box margin={0.05}>
+        <Text color="white">
+          big beans are good
+          <meshStandardMaterial />
+        </Text>
+      </Box>
+    </Box>
   );
 };
 
-const RotatingTorusKnot = () => {
-  const ref = useRef<THREE.Mesh>();
+const HomeCanvas = () => {
+  const groupRef = useRef<THREE.Group>();
 
-  useFrame(({ clock }) => {
-    if (ref.current) {
-      ref.current.rotation.x = ref.current.rotation.y = clock.getElapsedTime();
+  const { size } = useThree();
+
+  const [vpWidth, vpHeight] = useAspect(size.width, size.height);
+
+  const vec = new THREE.Vector3();
+
+  useFrame(() => {
+    if (groupRef.current) {
+      groupRef.current.position.lerp(vec.set(-state.top / 100, 0, 0), 0.1);
     }
   });
 
   return (
-    <TorusKnot ref={ref} position={[0, 2.5, 0]} scale={[0.5, 0.5, 0.5]} args={[1, 0.4, 128, 32]}>
-      <meshStandardMaterial />
-    </TorusKnot>
-  );
-};
-
-const HomeBackground = () => {
-  return (
-    <>
-      <perspectiveCamera args={[75, window.innerHeight / window.innerWidth, 0.1, 10000]} />
-      <ambientLight intensity={0.5} />
-      <pointLight position={[0, 200, 0]} />
-      <pointLight position={[100, 200, 100]} />
-      <pointLight position={[-100, -200, -100]} />
-
-      <RotatingTorusKnot />
-
-      <BackGrid />
-    </>
+    <group ref={groupRef}>
+      <HomeBackground />
+      <Flex
+        flexDirection="column"
+        size={[vpWidth, vpHeight, 0]}
+        position={[-vpWidth / 2, vpHeight / 2, 0]}
+      >
+        <Box
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          width="100%"
+          height="100%"
+        >
+          <Box margin={0.05}>
+            <RotatingTorusKnot />
+          </Box>
+        </Box>
+        <Box
+          flexDirection="row"
+          alignItems="center"
+          justifyContent="flex-end"
+          flexWrap="wrap"
+          width="100%"
+          marginTop={0.3}
+          marginBottom={0.1}
+        >
+          <Box>
+            <Title />
+          </Box>
+        </Box>
+      </Flex>
+    </group>
   );
 };
 
 const Home = () => {
+  const scrollHandler = () => {
+    const top = document.body.getBoundingClientRect().top;
+
+    state.top = -top;
+  };
+
+  document.body.onscroll = scrollHandler;
+
   return (
     <>
       <Canvas style={{ position: 'fixed', top: 0, left: 0 }}>
-        <HomeBackground />
-        {/* <EffectComposer>
-          <Bloom luminanceThreshold={1} luminanceSmoothing={0.3} height={1024} />
-        </EffectComposer> */}
+        <perspectiveCamera args={[75, window.innerHeight / window.innerWidth, 0.1, 10000]} />
+        <ambientLight intensity={0.5} />
+        <pointLight position={[0, 200, 0]} />
+        <pointLight position={[100, 200, 100]} />
+        <pointLight position={[-100, -200, -100]} />
+        <spotLight
+          position={[1, 1, 1]}
+          penumbra={1}
+          castShadow
+          shadow-mapSize-width={1024}
+          shadow-mapSize-height={1024}
+        />
+
+        <Suspense fallback={null}>
+          <HomeCanvas />
+        </Suspense>
       </Canvas>
-      <Grid
-        item
-        container
-        sx={{
-          width: '100vw',
-          zIndex: 99,
-          position: 'absoulte',
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        transition={{ duraction: 0.3 }}
+        variants={{
+          visible: { opacity: 1, scale: 1 },
+          hidden: { opacity: 0, scale: 0 },
         }}
-        p={10}
+        style={{
+          zIndex: 999,
+        }}
       >
-        <Typography variant="h1"> Welcome to my website. </Typography>
-        <Grid item sx={{ width: '50vw', zIndex: 99 }} pt={10}>
-          <Typography variant="h4">
-            Here you'll find a series of interative mathematics and physics simulations. Built to be
-            engaging for educational purposes
-          </Typography>
+        <Grid
+          item
+          container
+          sx={{
+            width: '100vw',
+            position: 'absoulte',
+          }}
+          p={10}
+        >
+          <Typography variant="h1"> Welcome to my website </Typography>
+          <Grid item sx={{ width: '50vw' }} pt={10}>
+            <Typography variant="h4">
+              Here you'll find a series of interative mathematics and physics simulations.
+            </Typography>
+            <Typography variant="h4">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+              dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+              mollit anim id est laborum.
+            </Typography>
+            <Typography variant="h4">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+              dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+              mollit anim id est laborum.
+            </Typography>
+            <Typography variant="h4">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+              dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+              mollit anim id est laborum.
+            </Typography>
+          </Grid>
         </Grid>
-      </Grid>
+      </motion.div>
     </>
   );
 };

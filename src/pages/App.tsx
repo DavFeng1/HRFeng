@@ -5,7 +5,7 @@ import { AnimatePresence } from 'framer-motion';
 import Home from './home';
 import BlochSphere from './blochSphere';
 import Contact from './contact';
-import Layout from '../components/Layout';
+import Layout from '../components/react/Layout';
 
 const AnimatedRoutes = () => {
   const location = useLocation();

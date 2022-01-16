@@ -5,8 +5,8 @@ import { Button, Divider, Grid, Typography, Stack } from '@mui/material';
 
 import { useStore } from '../../../pages/blochSphere';
 
-import ButtonLowercase from '../../../components/ButtonLowercase';
-import ParamSlider from '../../../components/ParamSlider';
+import ButtonLowercase from '../../../components/react/ButtonLowercase';
+import ParamSlider from '../../../components/react/ParamSlider';
 
 const BlochSphereControls = () => {
   const [phi, setPhi] = useState<number>(0);
