@@ -1,4 +1,8 @@
 {
+  // use @craco/craco
+  "extends": "./tsconfig.paths.json",
+
+  // Regular settings
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,

@@ -1,14 +1,14 @@
 import * as THREE from 'three';
 
-import { Suspense, useRef, useState } from 'react';
+import { Suspense, useRef, useEffect } from 'react';
 
-import { OrbitControls, Text } from '@react-three/drei';
+import { OrbitControls, Text, Stars } from '@react-three/drei';
 
 import { Canvas, useLoader, useFrame, useThree } from '@react-three/fiber';
 
-import { useStore } from '../../../pages/blochSphere';
+import { useStore } from '@pages/BlochSphere';
 
-import discTexture from '../../../assets/textures/disc.png';
+import discTexture from '@assets/textures/disc.png';
 
 THREE.Object3D.DefaultUp.set(0, 0, 1);
 
@@ -24,21 +24,20 @@ const BlochSphere = () => {
 
   const threeState = useThree();
 
-  const [phi, setPhi] = useState(0);
-  const [theta, setTheta] = useState(0);
+  // ================================= LIFE CYCLE =========================================
 
-  useStore.subscribe(
-    (state) => state.phi,
-    (updatedPhi) => setPhi((updatedPhi * Math.PI) / 180),
-  );
-  useStore.subscribe(
-    (state) => state.theta,
-    (updatedTheta) => setTheta((updatedTheta * Math.PI) / 180),
-  );
+  const phi: number = useStore((state) => (state.phi * Math.PI) / 180);
+  const theta: number = useStore((state) => (state.theta * Math.PI) / 180);
+
+  useEffect(() => {
+    return () => {
+      threeState.gl.dispose();
+    };
+  }, [threeState.gl]);
 
   // ================================== GRID ON SPHERE =====================================
   const sphereGeoemtry = new THREE.SphereGeometry(1, 32, 16);
-  sphereGeoemtry.rotateX(Math.PI / 2);
+
   const edgesGeometry = new THREE.EdgesGeometry(sphereGeoemtry);
   const linesMaterial = new THREE.LineBasicMaterial({
     color: 0x113b47,
@@ -78,12 +77,14 @@ const BlochSphere = () => {
       zTextRef.current
     ) {
       // Update state point and vector
+
       pointsGeometry.attributes.position.setXYZ(
         0,
         Math.cos(phi) * Math.sin(theta),
         Math.sin(phi) * Math.sin(theta),
         Math.cos(theta),
       );
+
       lineRef.current.setDirection(
         new THREE.Vector3(
           Math.cos(phi) * Math.sin(theta),
@@ -175,13 +176,14 @@ const Fallback = () => {
   return <mesh></mesh>;
 };
 
-const Main = () => {
+const BlochSphereRender = () => {
   return (
     <Canvas
       gl={{ antialias: true, alpha: true }}
-      camera={{ fov: 75, position: [15, 10, 15] }}
+      camera={{ fov: 75, position: [10, 15, 15] }}
       style={{ height: '100%', width: '100%' }}
     >
+      <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade />
       <Suspense fallback={<Fallback />}>
         <BlochSphere />
       </Suspense>
@@ -189,4 +191,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default BlochSphereRender;

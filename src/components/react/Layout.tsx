@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { Grid } from '@mui/material';
 import { motion } from 'framer-motion';
 
-import TopBar from './TopBar';
+import TopBar from '@components/react/TopBar';
 
 const variants = {
   hidden: { opacity: 0, x: 0, y: 200 },
@@ -13,7 +13,7 @@ const variants = {
 
 const Layout = (): JSX.Element => {
   return (
-    <Grid container>
+    <Grid container data-scroll>
       <Grid item>
         <TopBar />
       </Grid>

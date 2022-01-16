@@ -2,10 +2,11 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 
 import { AnimatePresence } from 'framer-motion';
 
-import Home from './home';
-import BlochSphere from './blochSphere';
-import Contact from './contact';
-import Layout from '../components/react/Layout';
+import Home from '@pages/home';
+import BlochSpherePage from '@pages/BlochSphere';
+import Contact from '@pages/contact';
+
+import Layout from '@components/react/Layout';
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -15,7 +16,7 @@ const AnimatedRoutes = () => {
       <Routes location={location} key={location.pathname}>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/blochSphere" element={<BlochSphere />} />
+          <Route path="/blochSphere" element={<BlochSpherePage />} />
           <Route path="/contact" element={<Contact />} />
         </Route>
       </Routes>

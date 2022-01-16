@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './pages/App';
+import App from '@pages/App';
 import reportWebVitals from './reportWebVitals';
 
 // Roboto fonts
@@ -9,7 +9,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
-import './index.css';
+import './index.scss';
 import 'katex/dist/katex.min.css';
 
 import { ThemeProvider } from '@mui/material/styles';

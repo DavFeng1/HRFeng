@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^6.4.3",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@fontsource/roboto": "^4.5.1",
@@ -28,8 +29,8 @@
     "zustand": "^3.6.9"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "craco start",
+    "build": "craco build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -59,6 +60,7 @@
     "@types/react-dom": "^17.0.11",
     "@types/react-latex": "^2.0.0",
     "@types/three": "^0.136.0",
+    "craco-alias": "^3.0.1",
     "css-loader": "^6.5.1",
     "mini-css-extract-plugin": "^2.4.6",
     "prettier": "^2.5.1",

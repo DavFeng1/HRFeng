@@ -3,26 +3,17 @@ import katex from 'katex';
 import { useState, useEffect } from 'react';
 import { Button, Divider, Grid, Typography, Stack } from '@mui/material';
 
-import { useStore } from '../../../pages/blochSphere';
+import { useStore } from '@pages/BlochSphere';
 
-import ButtonLowercase from '../../../components/react/ButtonLowercase';
-import ParamSlider from '../../../components/react/ParamSlider';
+import ButtonLowercase from '@components/react/ButtonLowercase';
+
+import ParameterControls from '@apps/quantum/blochSphere/ParameterControls';
 
 const BlochSphereControls = () => {
-  const [phi, setPhi] = useState<number>(0);
-  const [theta, setTheta] = useState<number>(0);
+  const [currentStateLatex, setCurrentStateLatex] = useState<string>('');
 
-  const [currentStateLatex, setCurrentStateLatex] = useState('\\ket{\\psi}');
-
-  useStore.subscribe(
-    (state) => state.phi,
-    (updatedPhi) => setPhi((updatedPhi * Math.PI) / 180),
-  );
-
-  useStore.subscribe(
-    (state) => state.theta,
-    (updatedTheta) => setTheta((updatedTheta * Math.PI) / 180),
-  );
+  const phi: number = useStore((state) => (state.phi * Math.PI) / 180);
+  const theta: number = useStore((state) => (state.theta * Math.PI) / 180);
 
   useEffect(() => {
     const alpha = Math.cos(theta / 2);
@@ -38,9 +29,17 @@ const BlochSphereControls = () => {
     const secondCoefficientImaginary = Math.round((beta + expBeta + Number.EPSILON) * 100) / 100;
 
     setCurrentStateLatex(
-      `\\ket{\\psi} = ${firstCoefficient} \\ket{0} + (${secondCoefficientReal} + i ${secondCoefficientImaginary}) \\ket{1}`,
+      `\\ket{\\psi} = ${firstCoefficient} \\ket{0} + (${secondCoefficientReal} + ${secondCoefficientImaginary} i) \\ket{1}`,
     );
   }, [phi, theta]);
+
+  const setZeroState = () => {
+    useStore.setState({ phi: 0, theta: 0 });
+  };
+
+  const setOneState = () => {
+    useStore.setState({ phi: 0, theta: 180 });
+  };
 
   const katexZeroState = { __html: katex.renderToString('\\ket{0}') };
   const katexOneState = { __html: katex.renderToString('\\ket{1}') };
@@ -66,12 +65,12 @@ const BlochSphereControls = () => {
             <Typography variant="caption"> Base States </Typography>
           </Grid>
           <Grid item xs={6}>
-            <Button variant="contained" size="small">
+            <Button variant="contained" size="small" onClick={setZeroState}>
               <span dangerouslySetInnerHTML={katexZeroState} />
             </Button>
           </Grid>
           <Grid item xs={6}>
-            <Button variant="contained" size="small">
+            <Button variant="contained" size="small" onClick={setOneState}>
               <span dangerouslySetInnerHTML={katexOneState} />
             </Button>
           </Grid>
@@ -121,8 +120,7 @@ const BlochSphereControls = () => {
             State Parameters
           </Typography>
         </Grid>
-        <ParamSlider type={'theta'} katexString="\theta" max={180} min={0} />
-        <ParamSlider type={'phi'} katexString="\phi" max={360} min={0} />
+        <ParameterControls />
       </Grid>
 
       <Grid item xs={12}>

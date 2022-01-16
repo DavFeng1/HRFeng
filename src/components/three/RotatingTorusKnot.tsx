@@ -16,11 +16,11 @@ const RotatingTorusKnot = () => {
   return (
     <TorusKnot
       ref={torusKnotRef}
+      scale={[0.4, 0.4, 0.4]}
+      args={[1.25, 0.4, 128, 32]}
       position={[0, 2.5, 0]}
-      scale={[0.5, 0.5, 0.5]}
-      args={[1, 0.4, 128, 32]}
     >
-      <meshStandardMaterial />
+      <meshStandardMaterial color={0x692380} />
     </TorusKnot>
   );
 };
