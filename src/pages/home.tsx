@@ -6,6 +6,8 @@ import { Canvas, useThree, useFrame } from '@react-three/fiber';
 import { useAspect, Text } from '@react-three/drei';
 import { Flex, Box } from '@react-three/flex';
 
+import { motion } from 'framer-motion';
+
 import RotatingTorusKnot from '@components/three/RotatingTorusKnot';
 
 import HomeBackground from '@components/three/HomeBackground';
@@ -117,14 +119,34 @@ const Home = () => {
       <Canvas style={{ position: 'fixed', top: 0, left: 0, zIndex: 0 }}>
         <HomeCanvas />
       </Canvas>
-      <Grid item container p={10} flexDirection={'column'} alignItems={'flex-start'}>
-        <Grid item zIndex={99} pt={10} sx={{ width: '60vw' }}>
-          <Typography variant="h1"> Welcome. </Typography>
+      <Grid item container p={15} flexDirection={'column'} alignItems={'flex-start'}>
+        <Grid item zIndex={99} pt={10} sx={{ width: '70vw' }}>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              transition: {
+                duration: 1.5,
+              },
+            }}
+          >
+            <Typography variant="h1"> Welcome.</Typography>
+          </motion.div>
         </Grid>
-        <Grid item zIndex={99} pt={10} sx={{ width: '60vw' }}>
-          <Typography variant="h4">
-            Here you'll find a series of interative mathematics and physics simulations.
-          </Typography>
+        <Grid item zIndex={99} pt={10} sx={{ width: '50vw' }}>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              transition: {
+                duration: 2,
+              },
+            }}
+          >
+            <Typography variant="h4">
+              Here you'll find a series of interative mathematics and physics simulations.
+            </Typography>
+          </motion.div>
         </Grid>
         <Grid item sx={{ width: '60vw' }} pt={'100vh'} pb={'25vh'} zIndex={99}>
           <Typography variant="h4">

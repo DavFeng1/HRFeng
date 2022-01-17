@@ -2,13 +2,13 @@ import * as THREE from 'three';
 
 import { Suspense, useRef, useEffect } from 'react';
 
-import { OrbitControls, Text, Stars } from '@react-three/drei';
+import { OrbitControls, Text } from '@react-three/drei';
 
 import { Canvas, useLoader, useFrame, useThree } from '@react-three/fiber';
 
 import { useStore } from '@pages/BlochSphere';
 
-import discTexture from '@assets/textures/disc.png';
+import discTexture from '@assets/images/disc.png';
 
 THREE.Object3D.DefaultUp.set(0, 0, 1);
 
@@ -22,12 +22,22 @@ const BlochSphere = () => {
   const yTextRef = useRef<THREE.Object3D>(null);
   const zTextRef = useRef<THREE.Object3D>(null);
 
+  const pointRef = useRef<THREE.Object3D>(null);
+
   const threeState = useThree();
 
-  // ================================= LIFE CYCLE =========================================
+  const phiRef = useRef(useStore.getState().phi);
+  const thetaRef = useRef(useStore.getState().theta);
 
-  const phi: number = useStore((state) => (state.phi * Math.PI) / 180);
-  const theta: number = useStore((state) => (state.theta * Math.PI) / 180);
+  // ================================= LIFE CYCLE =========================================
+  useEffect(
+    () =>
+      useStore.subscribe((state) => {
+        phiRef.current = (state.phi * Math.PI) / 180;
+        thetaRef.current = (state.theta * Math.PI) / 180;
+      }),
+    [],
+  );
 
   useEffect(() => {
     return () => {
@@ -51,7 +61,7 @@ const BlochSphere = () => {
   const axisX = new THREE.Vector3(1, 0, 0);
   const axisY = new THREE.Vector3(0, 1, 0);
   const axisZ = new THREE.Vector3(0, 0, 1);
-  const state = new THREE.Vector3(1, 0, 0);
+  const state = new THREE.Vector3(0, 0, 0);
 
   const pointsGeometry = new THREE.BufferGeometry();
   pointsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(state.toArray(), 3));
@@ -65,6 +75,9 @@ const BlochSphere = () => {
   });
 
   // ===================================== Animation =====================================
+  const directionVec = new THREE.Vector3();
+
+  const lerpVec = new THREE.Vector3();
 
   useFrame(() => {
     if (
@@ -74,41 +87,59 @@ const BlochSphere = () => {
       zRingRef.current &&
       xTextRef.current &&
       yTextRef.current &&
-      zTextRef.current
+      zTextRef.current &&
+      pointRef.current
     ) {
-      // Update state point and vector
+      const theta = thetaRef.current || 0;
+      const phi = phiRef.current || 0;
 
-      pointsGeometry.attributes.position.setXYZ(
-        0,
+      directionVec.set(
         Math.cos(phi) * Math.sin(theta),
         Math.sin(phi) * Math.sin(theta),
         Math.cos(theta),
       );
 
-      lineRef.current.setDirection(
-        new THREE.Vector3(
-          Math.cos(phi) * Math.sin(theta),
-          Math.sin(phi) * Math.sin(theta),
-          Math.cos(theta),
-        ),
-      );
+      pointRef.current.position.lerp(directionVec, 0.1);
+
+      // pointRef.current.position.x = Math.cos(phi) * Math.sin(theta);
+      // pointRef.current.position.y = Math.sin(phi) * Math.sin(theta);
+      // pointRef.current.position.z = Math.cos(theta);
+
+      lineRef.current.setDirection(directionVec);
 
       // Update rings orientation
-      xRingRef.current.scale.x = Math.sin(theta);
-      xRingRef.current.scale.y = Math.sin(theta);
-      xRingRef.current.position.z = Math.cos(theta);
 
-      yRingRef.current.scale.x = Math.sqrt(1 - Math.sin(theta) ** 2 * Math.sin(phi) ** 2);
-      yRingRef.current.scale.y = Math.sqrt(1 - Math.sin(theta) ** 2 * Math.sin(phi) ** 2);
-      yRingRef.current.position.y = Math.sin(theta) * Math.sin(phi);
+      // X ring scale
+      lerpVec.set(Math.sin(theta), Math.sin(theta), 1);
+      xRingRef.current.scale.lerp(lerpVec, 0.1);
 
-      zRingRef.current.scale.x = Math.sqrt(
-        Math.cos(theta) ** 2 + Math.sin(theta) ** 2 * Math.sin(phi) ** 2,
+      // XRing position
+      lerpVec.set(0, 0, Math.cos(theta));
+      xRingRef.current.position.lerp(lerpVec, 0.1);
+
+      // Y ring scale
+      lerpVec.set(
+        Math.sqrt(1 - Math.sin(theta) ** 2 * Math.sin(phi) ** 2),
+        Math.sqrt(1 - Math.sin(theta) ** 2 * Math.sin(phi) ** 2),
+        1,
       );
-      zRingRef.current.scale.y = Math.sqrt(
-        Math.cos(theta) ** 2 + Math.sin(theta) ** 2 * Math.sin(phi) ** 2,
+      yRingRef.current.scale.lerp(lerpVec, 0.1);
+
+      // Y Ring position
+      lerpVec.set(0, Math.sin(theta) * Math.sin(phi), 0);
+      yRingRef.current.position.lerp(lerpVec, 0.1);
+
+      // Z ring scale
+      lerpVec.set(
+        Math.sqrt(Math.cos(theta) ** 2 + Math.sin(theta) ** 2 * Math.sin(phi) ** 2),
+        Math.sqrt(Math.cos(theta) ** 2 + Math.sin(theta) ** 2 * Math.sin(phi) ** 2),
+        1,
       );
-      zRingRef.current.position.x = Math.cos(phi) * Math.sin(theta);
+      zRingRef.current.scale.lerp(lerpVec, 0.1);
+
+      // Z ring position
+      lerpVec.set(Math.cos(phi) * Math.sin(theta), 0, 0);
+      zRingRef.current.position.lerp(lerpVec, 0.1);
 
       // Update Text orientation
       zTextRef.current.lookAt(threeState.camera.position);
@@ -154,7 +185,7 @@ const BlochSphere = () => {
         <meshBasicMaterial color={0x9300ff} side={THREE.DoubleSide} />
       </mesh>
 
-      <points geometry={pointsGeometry} material={pointsMaterial} />
+      <points ref={pointRef} geometry={pointsGeometry} material={pointsMaterial} />
       <mesh>
         <arrowHelper ref={lineRef} args={[state, origin, 1, 0x0080ff, 0]} />
       </mesh>
@@ -179,11 +210,11 @@ const Fallback = () => {
 const BlochSphereRender = () => {
   return (
     <Canvas
-      gl={{ antialias: true, alpha: true }}
+      gl={{ antialias: true }}
       camera={{ fov: 75, position: [10, 15, 15] }}
       style={{ height: '100%', width: '100%' }}
     >
-      <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade />
+      {/* <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade /> */}
       <Suspense fallback={<Fallback />}>
         <BlochSphere />
       </Suspense>

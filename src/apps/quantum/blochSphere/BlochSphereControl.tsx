@@ -12,26 +12,29 @@ import ParameterControls from '@apps/quantum/blochSphere/ParameterControls';
 const BlochSphereControls = () => {
   const [currentStateLatex, setCurrentStateLatex] = useState<string>('');
 
-  const phi: number = useStore((state) => (state.phi * Math.PI) / 180);
-  const theta: number = useStore((state) => (state.theta * Math.PI) / 180);
+  // ================================= LIFE CYCLE =========================================
+  useEffect(
+    () => useStore.subscribe((state) => storeUpdateEffect(state.theta, state.phi), console.log),
+    [],
+  );
 
-  useEffect(() => {
+  const storeUpdateEffect = (thetaVal: number, phiVal: number) => {
+    const theta = (thetaVal * Math.PI) / 180;
+    const phi = (phiVal * Math.PI) / 180;
+
     const alpha = Math.cos(theta / 2);
-
     const beta = Math.sin(theta / 2);
-
     const expAlpha = Math.cos(phi);
-
     const expBeta = Math.sin(phi);
 
     const firstCoefficient = Math.round((alpha + Number.EPSILON) * 100) / 100;
-    const secondCoefficientReal = Math.round((beta + expAlpha + Number.EPSILON) * 100) / 100;
-    const secondCoefficientImaginary = Math.round((beta + expBeta + Number.EPSILON) * 100) / 100;
+    const secondCoefficientReal = Math.round((beta * expAlpha + Number.EPSILON) * 100) / 100;
+    const secondCoefficientImaginary = Math.round((beta * expBeta + Number.EPSILON) * 100) / 100;
 
     setCurrentStateLatex(
       `\\ket{\\psi} = ${firstCoefficient} \\ket{0} + (${secondCoefficientReal} + ${secondCoefficientImaginary} i) \\ket{1}`,
     );
-  }, [phi, theta]);
+  };
 
   const setZeroState = () => {
     useStore.setState({ phi: 0, theta: 0 });
@@ -39,6 +42,33 @@ const BlochSphereControls = () => {
 
   const setOneState = () => {
     useStore.setState({ phi: 0, theta: 180 });
+  };
+
+  const setPlusState = () => {
+    useStore.setState({ phi: 0, theta: 90 });
+  };
+
+  const setMinusState = () => {
+    console.log('set minus');
+    useStore.setState({
+      phi: 180,
+      theta: 90,
+    });
+  };
+
+  const applyPauliX = () => {
+    console.log('pauli x');
+  };
+  const applyPauliY = () => {
+    console.log('pauli Y');
+  };
+
+  const applyPauliZ = () => {
+    console.log('pauli z');
+  };
+
+  const applyHadamard = () => {
+    console.log('hadamard');
   };
 
   const katexZeroState = { __html: katex.renderToString('\\ket{0}') };
@@ -82,12 +112,12 @@ const BlochSphereControls = () => {
             <Typography variant="caption"> Superposition States </Typography>
           </Grid>
           <Grid item xs={6}>
-            <Button variant="contained" size="small">
+            <Button variant="contained" size="small" onClick={setPlusState}>
               <span dangerouslySetInnerHTML={katexPlusState} />
             </Button>
           </Grid>
           <Grid item xs={6}>
-            <Button variant="contained" size="small">
+            <Button variant="contained" size="small" onClick={setMinusState}>
               <span dangerouslySetInnerHTML={katexMinusState} />
             </Button>
           </Grid>
@@ -100,16 +130,16 @@ const BlochSphereControls = () => {
           </Typography>
         </Grid>
         <Stack direction="row" spacing={2}>
-          <ButtonLowercase variant="contained" size="small">
+          <ButtonLowercase variant="contained" size="small" onClick={applyHadamard}>
             <span dangerouslySetInnerHTML={katexH} />
           </ButtonLowercase>
-          <ButtonLowercase variant="contained" size="small">
+          <ButtonLowercase variant="contained" size="small" onClick={applyPauliX}>
             <span dangerouslySetInnerHTML={katexSigmaX} />
           </ButtonLowercase>
-          <ButtonLowercase variant="contained" size="small" style={{ textTransform: 'lowercase' }}>
+          <ButtonLowercase variant="contained" size="small" onClick={applyPauliY}>
             <span dangerouslySetInnerHTML={katexSigmaY} />
           </ButtonLowercase>
-          <ButtonLowercase variant="contained" size="small">
+          <ButtonLowercase variant="contained" size="small" onClick={applyPauliZ}>
             <span dangerouslySetInnerHTML={katexSigmaZ} />
           </ButtonLowercase>
         </Stack>
