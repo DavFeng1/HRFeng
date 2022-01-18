@@ -11,6 +11,7 @@ import { StoreApiWithSubscribeWithSelector, subscribeWithSelector } from 'zustan
 
 import { useEffect } from 'react';
 
+// Store phi and theta in radians
 type StoreState = {
   phi: number;
   theta: number;

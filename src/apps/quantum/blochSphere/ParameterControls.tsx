@@ -15,34 +15,34 @@ const Input = styled(MuiInput)`
 `;
 
 const ParameterControls = () => {
-  const phi = useStore((state) => state.phi);
-  const theta = useStore((state) => state.theta);
+  const phi = (useStore((state) => state.phi) * 180) / Math.PI;
+  const theta = (useStore((state) => state.theta) * 180) / Math.PI;
 
   const katexPhiInnerHTML = { __html: katex.renderToString('\\phi') };
   const katexThetaInnerHTML = { __html: katex.renderToString('\\theta') };
 
   const handlePhiSliderChange = (event: Event, newValue: number | number[]) => {
     if (typeof newValue === 'number') {
-      useStore.setState({ phi: newValue });
+      useStore.setState({ phi: (newValue * Math.PI) / 180 });
     }
   };
 
   const handlePhiInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value === '' ? 0 : Number(event.target.value);
 
-    useStore.setState({ phi: inputValue });
+    useStore.setState({ phi: (inputValue * Math.PI) / 180 });
   };
 
   const handleThetaSliderChange = (event: Event, newValue: number | number[]) => {
     if (typeof newValue === 'number') {
-      useStore.setState({ theta: newValue });
+      useStore.setState({ theta: (newValue * Math.PI) / 180 });
     }
   };
 
   const handleThetaInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value === '' ? 0 : Number(event.target.value);
 
-    useStore.setState({ theta: inputValue });
+    useStore.setState({ theta: (inputValue * Math.PI) / 180 });
   };
 
   return (

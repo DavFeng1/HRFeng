@@ -33,8 +33,8 @@ const BlochSphere = () => {
   useEffect(
     () =>
       useStore.subscribe((state) => {
-        phiRef.current = (state.phi * Math.PI) / 180;
-        thetaRef.current = (state.theta * Math.PI) / 180;
+        phiRef.current = state.phi;
+        thetaRef.current = state.theta;
       }),
     [],
   );
@@ -75,9 +75,10 @@ const BlochSphere = () => {
   });
 
   // ===================================== Animation =====================================
-  const directionVec = new THREE.Vector3();
 
   const lerpVec = new THREE.Vector3();
+
+  // const slerpQ = new THREE.Quaternion();
 
   useFrame(() => {
     if (
@@ -93,21 +94,16 @@ const BlochSphere = () => {
       const theta = thetaRef.current || 0;
       const phi = phiRef.current || 0;
 
-      directionVec.set(
+      // Update state position
+      lerpVec.set(
         Math.cos(phi) * Math.sin(theta),
         Math.sin(phi) * Math.sin(theta),
         Math.cos(theta),
       );
+      lineRef.current.setDirection(lerpVec);
+      pointRef.current.position.lerp(lerpVec, 0.1);
 
-      pointRef.current.position.lerp(directionVec, 0.1);
-
-      // pointRef.current.position.x = Math.cos(phi) * Math.sin(theta);
-      // pointRef.current.position.y = Math.sin(phi) * Math.sin(theta);
-      // pointRef.current.position.z = Math.cos(theta);
-
-      lineRef.current.setDirection(directionVec);
-
-      // Update rings orientation
+      // ================= Update rings orientation =====================================
 
       // X ring scale
       lerpVec.set(Math.sin(theta), Math.sin(theta), 1);

@@ -18,10 +18,7 @@ const BlochSphereControls = () => {
     [],
   );
 
-  const storeUpdateEffect = (thetaVal: number, phiVal: number) => {
-    const theta = (thetaVal * Math.PI) / 180;
-    const phi = (phiVal * Math.PI) / 180;
-
+  const storeUpdateEffect = (theta: number, phi: number) => {
     const alpha = Math.cos(theta / 2);
     const beta = Math.sin(theta / 2);
     const expAlpha = Math.cos(phi);
@@ -58,17 +55,49 @@ const BlochSphereControls = () => {
 
   const applyPauliX = () => {
     console.log('pauli x');
+
+    const currTheta = useStore.getState().theta;
+    const currPhi = useStore.getState().phi;
+
+    useStore.setState({
+      phi: 2 * Math.PI - currPhi,
+      theta: Math.PI - currTheta,
+    });
   };
+
   const applyPauliY = () => {
     console.log('pauli Y');
+
+    const currTheta = useStore.getState().theta;
+    const currPhi = useStore.getState().phi;
+
+    useStore.setState({
+      phi: 3 * Math.PI - currPhi,
+      theta: Math.PI - currTheta,
+    });
   };
 
   const applyPauliZ = () => {
     console.log('pauli z');
+    const currTheta = useStore.getState().theta;
+    const currPhi = useStore.getState().phi;
+
+    useStore.setState({
+      phi: 3 * Math.PI + currPhi,
+      theta: currTheta,
+    });
   };
 
   const applyHadamard = () => {
     console.log('hadamard');
+
+    const currTheta = useStore.getState().theta;
+    const currPhi = useStore.getState().phi;
+
+    useStore.setState({
+      phi: 3 * Math.PI + currPhi,
+      theta: currTheta,
+    });
   };
 
   const katexZeroState = { __html: katex.renderToString('\\ket{0}') };
