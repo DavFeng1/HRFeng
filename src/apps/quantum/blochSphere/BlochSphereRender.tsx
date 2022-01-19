@@ -30,17 +30,22 @@ const BlochSphere = () => {
   const thetaRef = useRef(useStore.getState().theta);
 
   // ================================= LIFE CYCLE =========================================
-  useEffect(
-    () =>
-      useStore.subscribe((state) => {
-        phiRef.current = state.phi;
-        thetaRef.current = state.theta;
-      }),
-    [],
-  );
+  useEffect(() => {
+    console.log('BlochSphereRender.tsx useEffect[] Mounted');
+    useStore.subscribe((state) => {
+      phiRef.current = state.phi;
+      thetaRef.current = state.theta;
+    });
+
+    return () => {
+      console.log('BlochSphereRender.tsx useEffect[] Unmounted');
+    };
+  }, []);
 
   useEffect(() => {
+    console.log('BlochSphereRender.tsx useEffect[gl] Mounted');
     return () => {
+      console.log('BlochSphereRender.tsx useEffect[gl] disposing');
       threeState.gl.dispose();
     };
   }, [threeState.gl]);
@@ -101,7 +106,10 @@ const BlochSphere = () => {
         Math.cos(theta),
       );
       lineRef.current.setDirection(lerpVec);
-      pointRef.current.position.lerp(lerpVec, 0.1);
+
+      pointRef.current.position.x = Math.cos(phi) * Math.sin(theta);
+      pointRef.current.position.y = Math.sin(phi) * Math.sin(theta);
+      pointRef.current.position.z = Math.cos(theta);
 
       // ================= Update rings orientation =====================================
 

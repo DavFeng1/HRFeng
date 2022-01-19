@@ -30,8 +30,10 @@ const useStore = create<
 );
 
 const BlochSpherePage = () => {
+  console.log('BlochSphere.tsx useEffect[] mounted ');
   useEffect(() => {
     return () => {
+      console.log('BlochSphere.tsx useEffect[] unmounted');
       useStore.destroy();
     };
   }, []);

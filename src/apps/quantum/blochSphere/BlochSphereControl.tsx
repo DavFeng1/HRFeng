@@ -13,10 +13,14 @@ const BlochSphereControls = () => {
   const [currentStateLatex, setCurrentStateLatex] = useState<string>('');
 
   // ================================= LIFE CYCLE =========================================
-  useEffect(
-    () => useStore.subscribe((state) => storeUpdateEffect(state.theta, state.phi), console.log),
-    [],
-  );
+  useEffect(() => {
+    console.log('BlochSphereControl.tsx useEffect[] Mounted and subscribing');
+    useStore.subscribe((state) => storeUpdateEffect(state.theta, state.phi), console.log);
+
+    return () => {
+      console.log('BlochSphereControl.tsx useEffect[] Unmounting');
+    };
+  }, []);
 
   const storeUpdateEffect = (theta: number, phi: number) => {
     const alpha = Math.cos(theta / 2);
@@ -38,18 +42,18 @@ const BlochSphereControls = () => {
   };
 
   const setOneState = () => {
-    useStore.setState({ phi: 0, theta: 180 });
+    useStore.setState({ phi: 0, theta: Math.PI });
   };
 
   const setPlusState = () => {
-    useStore.setState({ phi: 0, theta: 90 });
+    useStore.setState({ phi: 0, theta: Math.PI / 2 });
   };
 
   const setMinusState = () => {
     console.log('set minus');
     useStore.setState({
-      phi: 180,
-      theta: 90,
+      phi: Math.PI,
+      theta: Math.PI / 2,
     });
   };
 
@@ -72,7 +76,7 @@ const BlochSphereControls = () => {
     const currPhi = useStore.getState().phi;
 
     useStore.setState({
-      phi: 3 * Math.PI - currPhi,
+      phi: (3 * Math.PI - currPhi) % Math.PI,
       theta: Math.PI - currTheta,
     });
   };
@@ -82,8 +86,15 @@ const BlochSphereControls = () => {
     const currTheta = useStore.getState().theta;
     const currPhi = useStore.getState().phi;
 
+    const neww = {
+      phi: (3 * Math.PI + currPhi) % Math.PI,
+      theta: currTheta,
+    };
+
+    console.log(neww);
+
     useStore.setState({
-      phi: 3 * Math.PI + currPhi,
+      phi: (3 * Math.PI + currPhi) % Math.PI,
       theta: currTheta,
     });
   };

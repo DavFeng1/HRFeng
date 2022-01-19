@@ -14,6 +14,8 @@ body {
   //     url('assets/images/ellipse.svg') 2x
   //   ),
   //   pointer;
+
+  height: 100%;
 }
 
 // ======================== CUSTOM SCROLLBAR =======================================
@@ -35,45 +37,3 @@ body {
   border-radius: 4px;
 }
 // ======================= STUFF ===================================================
-
-@keyframes fade-inout {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-/* support for opera */
-@-o-keyframes fade-inout {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-/* support for mozila */
-@-moz-keyframes fade-inout {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-/* support for safari and chrome */
-@-webkit-keyframes fade-inout {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-.fade-in-out {
-  -webkit-animation: fade-inout 5s infinite alternate;
-  -moz-animation: fade-inout 5s infinite alternate;
-  -o-animation: fade-inout 5s infinite alternate;
-  animation: fade-in-out 5s inifite alternate;
-}

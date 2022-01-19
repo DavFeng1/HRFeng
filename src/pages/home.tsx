@@ -1,163 +1,171 @@
 import * as THREE from 'three';
 
 import { Suspense, useRef, useEffect } from 'react';
-import { Grid, Typography } from '@mui/material';
-import { Canvas, useThree, useFrame } from '@react-three/fiber';
-import { useAspect, Text } from '@react-three/drei';
-import { Flex, Box } from '@react-three/flex';
+import { Grid, Typography, Paper, Slider } from '@mui/material';
+import { Canvas } from '@react-three/fiber';
 
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion, motionValue, Variants, useViewportScroll } from 'framer-motion';
 
-import RotatingTorusKnot from '@components/three/RotatingTorusKnot';
-
-import HomeBackground from '@components/three/HomeBackground';
+import HomeCanvas from '@components/three/Home';
 
 export const state = {
   top: 0,
 };
 
-const backgroundScrollFactor = 0.8;
-const backgroundScrollSpeed = 0.3;
+// window.addEventListener('scroll', console.log, false);
 
-const Title = () => {
-  return (
-    <Box
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
-      width="100%"
-      height="100%"
-    >
-      <Box margin={0.05}>
-        <Text color="white">
-          big beans are good
-          <meshStandardMaterial />
-        </Text>
-      </Box>
-    </Box>
-  );
+const contentOffsetY = motionValue(0);
+
+const landingAnimation: Variants = {
+  offscreen: {
+    opacity: 0,
+  },
+  onscreen: {
+    opacity: 1,
+  },
 };
 
-const HomeCanvas = () => {
-  const groupRef = useRef<THREE.Group>();
-  const spotLight = useRef();
+const projectsAnimation: Variants = {
+  offscreen: {
+    x: -900,
+    opacity: 0,
+  },
+  onscreen: {
+    x: 50,
+    opacity: 1,
+    //rotate: 10,
+    transition: {
+      type: 'tween',
+      // bounce: 0.4,
+      duration: 0.5,
+    },
+  },
+};
 
-  const { gl, size } = useThree();
+export const CircleIndicator = () => {
+  const { scrollYProgress } = useViewportScroll();
 
-  const [vpWidth, vpHeight] = useAspect(size.width, size.height);
-
-  const vec = new THREE.Vector3();
-
-  // Handle component lifecycle
-  useEffect(() => {
-    return () => {
-      gl.dispose();
-    };
-  }, [gl]);
-
-  useFrame(() => {
-    if (groupRef.current) {
-      groupRef.current.position.lerp(vec.set(-state.top / 100, 0, 0), backgroundScrollSpeed);
-    }
-  });
-
-  return (
-    <Suspense fallback={null}>
-      <perspectiveCamera args={[75, window.innerHeight / window.innerWidth, 0.1, 10000]} />
-      <ambientLight intensity={0.5} />
-      <pointLight position={[0, 2.5, 0]} />
-      <pointLight position={[100, 200, 100]} />
-      <pointLight position={[-100, -200, -100]} />
-      <spotLight
-        ref={spotLight}
-        position={[-2.5, 7, 0]}
-        penumbra={0.5}
-        castShadow
-        shadow-mapSize-width={1024}
-        shadow-mapSize-height={1024}
-      />
-
-      <group ref={groupRef}>
-        <HomeBackground />
-        <Flex
-          flexDirection="column"
-          size={[vpWidth, vpHeight, 0]}
-          position={[-vpWidth / 2, vpHeight / 2, 0]}
-        >
-          <Box
-            flexDirection="column"
-            alignItems="center"
-            justifyContent="center"
-            width="100%"
-            height="100%"
-          >
-            <Box margin={0.05}>
-              <RotatingTorusKnot />
-            </Box>
-          </Box>
-          <Box width="100%" marginTop={0.3} marginBottom={0.1}>
-            <Box>
-              <Title />
-            </Box>
-          </Box>
-        </Flex>
-      </group>
-    </Suspense>
-  );
+  return <Slider />;
 };
 
 const Home = () => {
-  const scrollHandler = () => {
+  const scrollHandler = (ev: Event) => {
     const top = document.body.getBoundingClientRect().top;
-    state.top = -top * backgroundScrollFactor;
+    state.top = -top;
   };
 
   document.body.onscroll = scrollHandler;
 
+  const { scrollYProgress } = useViewportScroll();
+
   return (
     <>
-      <Canvas style={{ position: 'fixed', top: 0, left: 0, zIndex: 0 }}>
-        <HomeCanvas />
+      {/* ========================THREE JS CANVAS BACKGROUND ===================*/}
+
+      <Canvas style={{ position: 'fixed', top: 0, left: 0, zIndex: -999 }}>
+        <HomeCanvas state={state} />
       </Canvas>
-      <Grid item container p={15} flexDirection={'column'} alignItems={'flex-start'}>
-        <Grid item zIndex={99} pt={10} sx={{ width: '70vw' }}>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{
-              opacity: 1,
-              transition: {
-                duration: 1.5,
-              },
-            }}
-          >
-            <Typography variant="h1"> Welcome.</Typography>
+
+      {/* ============================ FOREGROUND =============================*/}
+
+      {/* ============================ PAGE 1 =============================*/}
+      {/* <CircleIndicator /> */}
+
+      <Grid
+        item
+        container
+        p={15}
+        direction={'column'}
+        alignItems={'stretch'}
+        justifyContent={'center'}
+      >
+        <Grid item p={5}>
+          <motion.div variants={landingAnimation}>
+            <Typography variant="h1" zIndex={99}>
+              Welcome.
+            </Typography>
           </motion.div>
         </Grid>
-        <Grid item zIndex={99} pt={10} sx={{ width: '50vw' }}>
+
+        <Grid item p={5}>
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={{ opacity: 1, x: -200 }}
             animate={{
               opacity: 1,
+              x: 0,
               transition: {
-                duration: 2,
+                duration: 1,
               },
             }}
           >
-            <Typography variant="h4">
+            <Typography variant="h4" width={'45ch'}>
               Here you'll find a series of interative mathematics and physics simulations.
             </Typography>
           </motion.div>
         </Grid>
-        <Grid item sx={{ width: '60vw' }} pt={'100vh'} pb={'25vh'} zIndex={99}>
-          <Typography variant="h4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-            mollit anim id est laborum.
-          </Typography>
-        </Grid>
+      </Grid>
+
+      {/* ============================ PAGE 2 =============================*/}
+
+      <Grid item pl={5} pt={'25vh'} pb={'25vh'}>
+        <motion.div
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: false, amount: 1 }}
+        >
+          <motion.div variants={projectsAnimation}>
+            <Typography variant="h4" width={'45ch'}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+              dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+              mollit anim id est laborum.
+            </Typography>
+          </motion.div>
+        </motion.div>
+      </Grid>
+
+      {/* ============================ PAGE 3 =============================*/}
+
+      <Grid item pl={5} pt={'25vh'} pb={'25vh'}>
+        <motion.div
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: false, amount: 1 }}
+        >
+          <motion.div variants={projectsAnimation}>
+            <Typography variant="h4" width={'45ch'}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+              dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+              mollit anim id est laborum.
+            </Typography>
+          </motion.div>
+        </motion.div>
+      </Grid>
+
+      {/* ============================ PAGE 4 =============================*/}
+
+      <Grid item pl={5} pt={'25vh'} pb={'25vh'}>
+        <motion.div
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: false, amount: 1 }}
+        >
+          <motion.div variants={projectsAnimation}>
+            <Typography variant="h4" width={'45ch'}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+              dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+              mollit anim id est laborum.
+            </Typography>
+          </motion.div>
+        </motion.div>
       </Grid>
     </>
   );

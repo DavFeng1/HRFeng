@@ -86,7 +86,7 @@ const ParameterControls = () => {
             value={phi}
             onChange={handlePhiSliderChange}
             aria-labelledby="input-phi-slider"
-            max={180}
+            max={360}
             min={0}
             step={1}
           />

@@ -8,6 +8,7 @@ const HomeBackground = () => {
   const { scene } = useThree();
 
   useEffect(() => {
+    console.log('HomeBackground.tsx useEffect[scene] Rendering fog');
     const fog = new THREE.FogExp2(0x121212, 0.05);
     scene.fog = fog;
   }, [scene]);
