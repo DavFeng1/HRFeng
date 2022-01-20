@@ -11,17 +11,17 @@ const TopBar = (): JSX.Element => {
     <AppBar position="fixed" style={{ background: 'transparent', boxShadow: 'none' }}>
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          <Link to="/" style={{ color: '#FFF', textDecoration: 'none' }}>
+          <Link to="/" style={{ textDecoration: 'none' }}>
             /home
           </Link>
         </Typography>
         <Button color="inherit">
-          <Link to="/blochSphere" style={{ color: '#FFF', textDecoration: 'none' }}>
+          <Link to="/blochSphere" style={{ textDecoration: 'none' }}>
             /Projects
           </Link>
         </Button>
         <Button color="inherit">
-          <Link to="/contact" style={{ color: '#FFF', textDecoration: 'none' }}>
+          <Link to="/contact" style={{ textDecoration: 'none' }}>
             /Contact
           </Link>
         </Button>

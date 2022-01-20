@@ -1,5 +1,13 @@
+html {
+  scroll-behavior: smooth;
+}
+
 body {
+  // ------------ Styling ---------------
+  background: gray;
+
   // ------------ Scrolling -------------
+  scroll-behavior: smooth;
   overflow-x: hidden;
   overflow: overlay; /* Make scrollbar track transparent */
 

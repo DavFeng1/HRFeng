@@ -12,17 +12,17 @@ import '@fontsource/roboto/700.css';
 import './index.scss';
 import 'katex/dist/katex.min.css';
 
-import { ThemeProvider } from '@mui/material/styles';
+// import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 
-import theme from './theme';
+// import theme from './theme';
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-      <CssBaseline />
-      <App />
-    </ThemeProvider>
+    {/* <ThemeProvider theme={theme}> */}
+    {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+    <CssBaseline />
+    <App />
+    {/* </ThemeProvider> */}
   </React.StrictMode>,
   document.querySelector('#root'),
 );

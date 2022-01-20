@@ -12,10 +12,10 @@ const HomeBackground = () => {
     const fog = new THREE.FogExp2(0x121212, 0.05);
     scene.fog = fog;
   }, [scene]);
+  //  {/* <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade /> */}
 
   return (
     <>
-      <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade />
       <Plane
         position={[2, 0, 0]}
         rotation={[0, Math.PI / 2, 0]}
