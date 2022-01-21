@@ -2,7 +2,10 @@ import * as THREE from 'three';
 
 import { useRef } from 'react';
 import { TorusKnot } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber';
+
+import { useFrame, useLoader } from '@react-three/fiber';
+
+import marbleTexture from '@assets/images/marble.png';
 
 const RotatingTorusKnot = () => {
   const torusKnotRef = useRef<THREE.Mesh>();
@@ -13,6 +16,8 @@ const RotatingTorusKnot = () => {
     }
   });
 
+  const texture = useLoader(THREE.TextureLoader, marbleTexture);
+
   return (
     <TorusKnot
       ref={torusKnotRef}
@@ -20,7 +25,7 @@ const RotatingTorusKnot = () => {
       args={[1.25, 0.4, 128, 32]}
       position={[0, 2.5, 0]}
     >
-      <meshStandardMaterial color={0x692380} />
+      <meshStandardMaterial map={texture} />
     </TorusKnot>
   );
 };

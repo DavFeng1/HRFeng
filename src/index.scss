@@ -1,16 +1,19 @@
+:root {
+  --skew-amount: 15deg;
+  --magic-number: 0.09719;
+  --content-width: 100vw;
+  --skew-padding: calc(var(--content-width) * var(--magic-number));
+}
 html {
+  // ------------ Scrolling -------------
+  overflow: overlay; /* Make scrollbar track transparent */
+  max-width: 100%;
+  overflow-x: hidden;
   scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
 }
 
 body {
-  // ------------ Styling ---------------
-  background: gray;
-
-  // ------------ Scrolling -------------
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-  overflow: overlay; /* Make scrollbar track transparent */
-
   // ------------- Font Smoothing ---------
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -24,6 +27,67 @@ body {
   //   pointer;
 
   height: 100%;
+}
+
+a {
+  color: #fff;
+}
+
+// ======================== HOME  ============================================
+
+.page-container {
+  scroll-snap-align: start;
+}
+
+.left-diagonal-container,
+.right-diagonal-container {
+  min-height: 100vh;
+  min-width: calc(50vw + var(--skew-padding));
+  transform: SkewX(var(--skew-amount));
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+}
+
+.left-diagonal-container {
+  align-items: center;
+  align-content: center;
+  background-color: black;
+}
+
+.right-diagonal-container {
+  justify-content: space-around;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.left-content,
+.right-content {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
+
+.left-content {
+  padding-left: var(--skew-padding);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.right-content {
+  padding-left: var(--skew-padding);
+  min-height: 150px;
+  background-color: green;
+}
+
+.right-content:hover {
+  cursor: pointer;
+}
+
+.left-text,
+.right-text {
+  transform: skewX(calc(var(--skew-amount) * -1));
 }
 
 // ======================== CUSTOM SCROLLBAR =======================================

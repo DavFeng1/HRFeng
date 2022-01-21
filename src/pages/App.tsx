@@ -5,6 +5,7 @@ import BlochSpherePage from '@pages/BlochSphere';
 import Contact from '@pages/contact';
 
 import Layout from '@components/react/Layout';
+import { useEffect } from 'react';
 // import ScrollToTop from '@components/react/ScrollToTop';
 
 const AnimatedRoutes = () => {
@@ -22,9 +23,12 @@ const AnimatedRoutes = () => {
 };
 
 const App = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Router basename="/">
-      {/* <ScrollToTop /> */}
       <AnimatedRoutes />
     </Router>
   );

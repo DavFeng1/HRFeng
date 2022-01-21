@@ -1,20 +1,24 @@
 import * as THREE from 'three';
 
-import { Suspense, useRef, useEffect } from 'react';
+import { Suspense, useRef, useEffect, useState } from 'react';
 import { Grid, Typography, Paper, Slider } from '@mui/material';
 import { Canvas } from '@react-three/fiber';
-
-import { AnimatePresence, motion, motionValue, Variants, useViewportScroll } from 'framer-motion';
+import { cubicBezier } from 'popmotion';
+import {
+  AnimatePresence,
+  motion,
+  motionValue,
+  Variants,
+  useViewportScroll,
+  useTransform,
+  useSpring,
+} from 'framer-motion';
 
 import HomeCanvas from '@components/three/Home';
 
 export const state = {
   top: 0,
 };
-
-// window.addEventListener('scroll', console.log, false);
-
-const contentOffsetY = motionValue(0);
 
 const landingAnimation: Variants = {
   offscreen: {
@@ -27,19 +31,34 @@ const landingAnimation: Variants = {
   },
 };
 
-const projectsAnimation: Variants = {
+const slideFromLeft: Variants = {
   offscreen: {
-    x: -900,
+    x: -400,
     opacity: 0,
   },
   onscreen: {
-    x: 50,
+    x: 0,
     opacity: 1,
     //rotate: 10,
     transition: {
-      type: 'tween',
-      // bounce: 0.4,
-      duration: 0.5,
+      type: 'easeIn',
+      duration: 0.4,
+    },
+  },
+};
+
+const slideFromRight: Variants = {
+  offscreen: {
+    x: 400,
+    opacity: 0,
+  },
+  onscreen: {
+    x: 0,
+    opacity: 1,
+    //rotate: 10,
+    transition: {
+      ease: [0.6, 0.01, -0.05, 0.95],
+      duration: 1.1,
     },
   },
 };
@@ -52,37 +71,46 @@ const Home = () => {
 
   document.body.onscroll = scrollHandler;
 
+  const [isComplete, setIsComplete] = useState(false);
+
   const { scrollYProgress } = useViewportScroll();
+
+  const xRangeLeft = useTransform(scrollYProgress, [0, 0.5], [-900, 0], {
+    ease: [cubicBezier(0.9, 0.4, 0.3, 0.9)],
+  });
+  const xRangeRight = useTransform(scrollYProgress, [0, 0.5], [900, 0], {
+    ease: [cubicBezier(0.9, 0.4, 0.3, 0.9)],
+  });
 
   return (
     <>
       {/* ========================THREE JS CANVAS BACKGROUND ===================*/}
 
-      {/* <Canvas style={{ position: 'fixed', top: 0, left: 0, zIndex: -999 }}>
+      <Canvas style={{ position: 'fixed', top: 0, left: 0, zIndex: -999 }}>
         <HomeCanvas state={state} />
-      </Canvas> */}
+      </Canvas>
 
       {/* ============================ FOREGROUND =============================*/}
 
       {/* ============================ PAGE 1 =============================*/}
-      {/* <CircleIndicator /> */}
 
       <Grid
         item
         container
         p={15}
-        direction={'column'}
+        direction={'row'}
         alignItems={'stretch'}
         justifyContent={'center'}
+        sx={{ minHeight: '100vh' }}
+        className="page-container"
       >
-        <Grid item p={5}>
+        <Grid item xs={12}>
           <motion.div
-            initial={{ opacity: 0, scale: 1.5 }}
+            initial={{ opacity: 0 }}
             animate={{
               opacity: 1,
-              scale: 1,
               transition: {
-                duraction: 0.2,
+                duration: 1.5,
               },
             }}
           >
@@ -92,67 +120,105 @@ const Home = () => {
           </motion.div>
         </Grid>
 
-        <Grid item p={5}>
+        <Grid item xs={12}>
           <motion.div
             initial={{ opacity: 0, x: -400 }}
             animate={{
               opacity: 1,
               x: 0,
               transition: {
-                duration: 0.8,
+                ease: [0.1, 0.74, 0.47, 0.97],
+                duration: 1.5,
               },
             }}
           >
-            <Typography variant="h4" width={'45ch'}>
-              Here you'll find a series of interative mathematics and physics simulations.
+            <Typography variant="h4" width={'40ch'}>
+              This is my personal website
             </Typography>
           </motion.div>
         </Grid>
       </Grid>
 
       {/* ============================ PAGE 2 =============================*/}
-
-      <Grid item pl={5} pt={'25vh'} pb={'25vh'}>
+      <div
+        style={{
+          display: 'flex',
+          flexFlow: 'row nowrap',
+          alignItems: 'center',
+          alignContent: 'stretch',
+          justifyContent: 'center',
+          minHeight: '100vh',
+          minWidth: '100vw',
+        }}
+        className="page-container"
+      >
         <motion.div
-          initial="offscreen"
-          whileInView="onscreen"
-          viewport={{ once: false, amount: 1 }}
+          style={{
+            x: xRangeLeft,
+          }}
         >
-          <motion.div variants={projectsAnimation}>
-            <Typography variant="h4" width={'45ch'}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-              dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-              mollit anim id est laborum.
-            </Typography>
-          </motion.div>
+          <div className="left-diagonal-container">
+            <div className="left-content">
+              <Typography variant="h4" maxWidth={'45ch'} className="left-text">
+                The Coeus Project
+              </Typography>
+            </div>
+
+            <div className="left-content">
+              <Typography variant="body1" maxWidth={'45ch'} className="left-text">
+                The project is an attempt at elucidating big ideas in matheatics and physics through
+                interactive animations
+              </Typography>
+            </div>
+          </div>
         </motion.div>
-      </Grid>
+
+        <motion.div
+          style={{
+            x: xRangeRight,
+          }}
+        >
+          <div className="right-diagonal-container">
+            <div className="right-content">
+              <Typography variant="h5" maxWidth={'45ch'} className="right-text">
+                Quantum Mechanics
+              </Typography>
+            </div>
+            <div className="right-content">
+              <Typography variant="h5" maxWidth={'45ch'} className="right-text">
+                Special and General Relativity
+              </Typography>
+            </div>
+            <div className="right-content">
+              <Typography variant="h5" maxWidth={'45ch'} className="right-text">
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip e
+              </Typography>
+            </div>
+          </div>
+        </motion.div>
+      </div>
 
       {/* ============================ PAGE 3 =============================*/}
 
       <Grid
         item
-        pl={5}
-        pt={'25vh'}
-        pb={'25vh'}
-        sx={{ backgroundColor: 'green', background: 'green' }}
+        container
+        display={'flex'}
+        direction={'column'}
+        alignItems={'stretch'}
+        justifyContent={'center'}
+        p={15}
+        sx={{ backgroundColor: 'purple', width: 1, minHeight: '100vh' }}
+        className="page-container"
       >
         <motion.div
           initial="offscreen"
           whileInView="onscreen"
           viewport={{ once: false, amount: 1 }}
         >
-          <motion.div variants={projectsAnimation}>
+          <motion.div variants={slideFromLeft} style={{ backgroundColor: 'blue' }}>
             <Typography variant="h4" width={'45ch'}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-              dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-              mollit anim id est laborum.
+              conatct me contact me contact me contact me
             </Typography>
           </motion.div>
         </motion.div>

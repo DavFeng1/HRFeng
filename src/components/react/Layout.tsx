@@ -6,14 +6,14 @@ import TopBar from '@components/react/TopBar';
 
 const Layout = (): JSX.Element => {
   return (
-    <Grid container>
-      <Grid item>
+    <div style={{}}>
+      <div>
         <TopBar />
-      </Grid>
-      <Grid item container>
+      </div>
+      <div>
         <Outlet />
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   );
 };
 
