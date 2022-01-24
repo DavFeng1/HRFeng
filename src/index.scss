@@ -10,7 +10,6 @@ html {
   max-width: 100%;
   overflow-x: hidden;
   scroll-behavior: smooth;
-  scroll-snap-type: y proximity;
 }
 
 body {
@@ -32,62 +31,46 @@ body {
 a {
   color: #fff;
 }
+//  ======================= Custom Components ===============================
+
+.no-select {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
 
 // ======================== HOME  ============================================
 
 .page-container {
-  scroll-snap-align: start;
-}
-
-.left-diagonal-container,
-.right-diagonal-container {
   min-height: 100vh;
-  min-width: calc(50vw + var(--skew-padding));
-  transform: SkewX(var(--skew-amount));
-
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-around;
+  min-width: 100vw;
 }
 
-.left-diagonal-container {
+.row-container {
+  display: flex;
+  flex-flow: row nowrap;
   align-items: center;
-  align-content: center;
-  background-color: black;
-}
-
-.right-diagonal-container {
-  justify-content: space-around;
-  align-items: stretch;
   align-content: stretch;
-}
-
-.left-content,
-.right-content {
-  display: flex;
-  flex-flow: column nowrap;
   justify-content: center;
 }
 
-.left-content {
-  padding-left: var(--skew-padding);
-  padding-top: 10px;
-  padding-bottom: 10px;
+.text {
+  max-width: 45ch;
 }
 
-.right-content {
-  padding-left: var(--skew-padding);
-  min-height: 150px;
-  background-color: green;
-}
+// ================================= Page 1 ==================================
 
-.right-content:hover {
-  cursor: pointer;
-}
-
-.left-text,
-.right-text {
-  transform: skewX(calc(var(--skew-amount) * -1));
+.column-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
+  padding: 15vw;
 }
 
 // ======================== CUSTOM SCROLLBAR =======================================
@@ -100,12 +83,31 @@ a {
 ::-webkit-scrollbar {
   width: 10px;
   background: transparent;
-  border: 1px solid #2f1f35;
+  border: 1px solid transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(43, 12, 53, 0.7);
-  border: 1px solid #2f1f35;
+  background: rgba(49, 0, 105, 0.7);
+  // border: 1px solid #ffffff;
+  // box-shadow: 0 0 1em hsl(280, 100%, 50% / 1);
   border-radius: 4px;
 }
-// ======================= STUFF ===================================================
+// ======================= SHINY BUTTON ============================================
+@mixin transition($transition...) {
+  -moz-transition: $transition;
+  -o-transition: $transition;
+  -webkit-transition: $transition;
+  transition: $transition;
+}
+
+.shiny-button {
+  backdrop-filter: blur(9.9px);
+
+  --webkit-backdrop-filter: blur(9.9px);
+
+  @include transition(all 0.2s ease-in);
+  &:hover {
+    box-shadow: 0 0 30px 0 transparentize(#6df1d8, 0.2);
+    cursor: pointer;
+  }
+}

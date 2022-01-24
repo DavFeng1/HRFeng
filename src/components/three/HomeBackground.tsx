@@ -1,17 +1,13 @@
-import * as THREE from 'three';
-
 import { useEffect } from 'react';
-import { useThree } from '@react-three/fiber';
-import { Plane } from '@react-three/drei';
 
 const HomeBackground = () => {
-  const { scene } = useThree();
+  // const { scene } = useThree();
 
   useEffect(() => {
-    console.log('HomeBackground.tsx useEffect[scene] Rendering fog');
-    const fog = new THREE.FogExp2(0x121212, 0.05);
-    scene.fog = fog;
-  }, [scene]);
+    // console.log('HomeBackground.tsx ==> Rendering fog');
+    // const fog = new THREE.FogExp2(0x121212, 0.05);
+    // scene.fog = fog;
+  }, []);
 
   return (
     <>

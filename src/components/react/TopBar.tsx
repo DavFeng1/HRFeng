@@ -8,21 +8,24 @@ import AppBar from '@mui/material/AppBar';
 
 const TopBar = (): JSX.Element => {
   return (
-    <AppBar position="fixed" style={{ background: 'transparent', boxShadow: 'none' }}>
+    <AppBar
+      position="fixed"
+      style={{ background: 'transparent', boxShadow: 'none', zIndex: 0 }}
+    >
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <Link to="/" style={{ textDecoration: 'none' }}>
-            /home
+            home
           </Link>
         </Typography>
         <Button color="inherit">
           <Link to="/blochSphere" style={{ textDecoration: 'none' }}>
-            /Projects
+            Projects
           </Link>
         </Button>
         <Button color="inherit">
           <Link to="/contact" style={{ textDecoration: 'none' }}>
-            /Contact
+            Contact
           </Link>
         </Button>
       </Toolbar>

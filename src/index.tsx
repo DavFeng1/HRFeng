@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from '@pages/App';
+import AppRoutes from '@pages/AppRoutes';
 import reportWebVitals from './reportWebVitals';
 
 // Roboto fonts
@@ -11,17 +11,18 @@ import '@fontsource/roboto/700.css';
 
 import './index.scss';
 import 'katex/dist/katex.min.css';
+import 'locomotive-scroll/';
 
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 
 import theme from './theme';
+
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
       <CssBaseline />
-      <App />
+      <AppRoutes />
     </ThemeProvider>
   </React.StrictMode>,
   document.querySelector('#root'),

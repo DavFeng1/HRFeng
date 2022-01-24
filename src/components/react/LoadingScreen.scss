@@ -1,0 +1,172 @@
+// =============================== Loading Screen Stylings =========================
+
+#loading-screen {
+  position: absolute;
+  z-index: 10;
+  height: 100%;
+  width: 100%;
+  background-color: #121212;
+  --ring-hue-blue: 250.2;
+  --ring-hue-pink: 280;
+  --ring-hue-purple: 250.2;
+  --center-hue: 185.2;
+}
+
+#center {
+  z-index: 30;
+  position: absolute;
+  width: 2em;
+  height: 2em;
+  top: calc(50% - 1em);
+  left: calc(50% - 1em);
+  border-radius: 50%;
+  background: #121212;
+  box-shadow: 0 0 0.5em hsl(var(--center-hue), 100%, 50% / 0.5),
+    0 0 1em hsl(var(--center-hue), 100%, 50% / 0.8),
+    0 0 1.5em hsl(var(--center-hue), 100%, 50% / 0.3),
+    0 0 2em hsl(var(--center-hue), 100%, 50% / 0.1);
+}
+
+.ring {
+  position: absolute;
+  width: 10em;
+  height: 10em;
+  top: calc(50% - 5em);
+  left: calc(50% - 5em);
+}
+
+.ring #x-ring-container {
+  position: absolute;
+  transform: rotateX(-45deg) rotateY(45deg);
+}
+
+.ring #y-ring-container {
+  position: absolute;
+  transform: rotateY(50deg) rotateX(45deg);
+}
+
+.ring #z-ring-container {
+  position: absolute;
+  transform: rotateX(65deg);
+}
+
+.ring #z-ring {
+  position: absolute;
+  top: calc(50% + 7em);
+  width: 10em;
+  height: 10em;
+  border-radius: 50%;
+  border: 4px transparent;
+  border-top: 4px solid hsl(var(--ring-hue-blue), 100%, 50% / 1);
+  animation: animate 2s linear infinite;
+}
+
+.ring #y-ring {
+  position: absolute;
+  top: calc(50% + 2.5em);
+  left: calc(50% - 3em);
+  width: 10em;
+  height: 10em;
+  border-radius: 50%;
+  border: 4px transparent;
+  border-top: 4px solid hsl(var(--ring-hue-blue), 100%, 57% / 1);
+  animation: animate 2s linear infinite;
+  animation-direction: reverse;
+}
+
+.ring #x-ring {
+  position: absoute;
+  width: 10em;
+  height: 10em;
+  border-radius: 50%;
+  border: 4px transparent;
+  border-top: 4px solid hsl(var(--ring-hue-blue), 100%, 57% / 1);
+  animation: animate 2s linear infinite;
+}
+
+@keyframes animate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+#outer-ring {
+  position: absolute;
+
+  width: 20rem;
+  height: 20rem;
+
+  top: calc(50% - 10em);
+  left: calc(50% - 10rem);
+
+  border: 4px transparent;
+  border-radius: 50%;
+  border-top: 2px solid hsl(var(--ring-hue-blue), 100%, 50% / 0.7);
+
+  filter: drop-shadow(0 0 0.5em hsl(var(--ring-hue-blue), 100%, 50% / 1));
+
+  animation: progress 4s linear infinite;
+}
+
+#outer-ring::before {
+  content: '';
+  position: absolute;
+  top: -0.25em;
+  left: 9.5em;
+  height: 0.5em;
+  width: 0.5em;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 0 0 0.5em hsl(var(--ring-hue-blue), 100%, 50% / 1),
+    0 0 0.5em hsl(var(--ring-hue-blue), 100%, 50% / 0.75),
+    0 0 1em hsl(var(--ring-hue-blue), 100%, 50% / 0.4);
+  filter: blur(0.2em);
+}
+
+@keyframes progress {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// ========================== Progress Bar =======================
+#progress-percentage {
+  --progress: 0%;
+
+  position: absolute;
+  z-index: 100;
+  width: 20rem;
+  height: 2rem;
+
+  top: calc(50% + 10rem);
+  left: calc(50% - 10rem);
+}
+
+#progress-percentage::before {
+  content: '';
+  position: absolute;
+  top: 3rem;
+  left: 0;
+  width: var(--progress);
+  transition: 0.01s cubic-bezier(0.075, 0.82, 0.165, 1);
+  height: 0.5rem;
+  background: hsl(var(--ring-hue-purple), 100%, 50% / 0.55);
+
+  border: 2px solid hsl(var(--ring-hue-purple), 100%, 50% / 0.7);
+
+  filter: blur(0.5px);
+
+  box-shadow: 0 0 0.1em hsl(var(--ring-hue-purple), 100%, 50% / 0.7),
+    0 0 0.25em hsl(var(--ring-hue-purple), 100%, 50% / 0.75),
+    0 0 1em hsl(var(--ring-hue-purple), 100%, 50% / 0.4);
+
+  border-radius: 3rem;
+}

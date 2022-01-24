@@ -1,0 +1,49 @@
+// ================================ Page 2 ===================================
+
+.left-diagonal-container,
+.right-diagonal-container {
+  min-height: 100vh;
+  min-width: calc(50vw + var(--skew-padding));
+  transform: SkewX(var(--skew-amount));
+
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.left-diagonal-container {
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  background-color: black;
+}
+
+.right-diagonal-container {
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.left-content,
+.right-content {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
+
+.left-content {
+  padding-left: var(--skew-padding);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.right-content {
+  padding-left: var(--skew-padding);
+  min-height: 150px;
+  background-color: #240c76;
+}
+
+.left-text,
+.right-text {
+  transform: skewX(calc(var(--skew-amount) * -1));
+  max-width: 45ch;
+}
