@@ -1,6 +1,8 @@
 import { Typography } from '@mui/material';
 import { Variants, motion } from 'framer-motion';
 
+import '@pages/home/Contact.scss';
+
 const thirdPage: Variants = {
   offscreen: {
     y: 200,
@@ -22,24 +24,45 @@ const thirdPage: Variants = {
 
 const Contact = (): JSX.Element => {
   return (
-    <div style={{ backgroundColor: 'purple' }} className="page-container row-container">
-      <motion.div initial="offscreen" whileInView="onscreen" exit="exit">
-        <motion.div variants={thirdPage} style={{ backgroundColor: 'blue' }}>
-          <Typography variant="h4" width={'45ch'}>
-            conatct me contact me contact me contact me
-          </Typography>
-        </motion.div>
+    <div className="page-container contact-container">
+      <motion.div
+        initial="offscreen"
+        whileInView="onscreen"
+        exit="exit"
+        variants={thirdPage}
+        className="contact-box"
+      >
+        fenghourun@gmail.com
       </motion.div>
-      <div>
-        <Typography variant="h4" className="text">
-          big ebans
-        </Typography>
-      </div>
-      <div>
-        <Typography variant="h4" className="text">
-          bigger beans
-        </Typography>
-      </div>
+      <motion.div
+        initial="offscreen"
+        whileInView="onscreen"
+        exit="exit"
+        variants={thirdPage}
+        className="contact-box"
+      >
+        <a href="https://github.com/DavFeng1"> GitHub </a>
+      </motion.div>
+      <motion.div
+        initial="offscreen"
+        whileInView="onscreen"
+        exit="exit"
+        variants={thirdPage}
+        className="contact-box"
+      >
+        <a href="https://www.linkedin.com/in/david-feng-25a8b6b1/">
+          Linkedin
+        </a>
+      </motion.div>
+      <motion.div
+        initial="offscreen"
+        whileInView="onscreen"
+        exit="exit"
+        variants={thirdPage}
+        className="contact-box"
+      >
+        Resume
+      </motion.div>
     </div>
   );
 };

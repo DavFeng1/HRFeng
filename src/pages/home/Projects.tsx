@@ -32,7 +32,6 @@ const Projects = (): JSX.Element => {
       <motion.div
         style={{
           x: xRangeLeft,
-          opacity: opacityRange,
         }}
       >
         <div className="left-diagonal-container">
