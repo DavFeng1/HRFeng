@@ -14,7 +14,9 @@
   justify-content: center;
   align-items: center;
   align-content: center;
-  background-color: black;
+  background-color: transparent;
+  backdrop-filter: blur(9.9px);
+  box-shadow: 0 0 1em hsl(250.8, 100%, 50% / 1);
 }
 
 .right-diagonal-container {
@@ -39,7 +41,8 @@
 .right-content {
   padding-left: var(--skew-padding);
   min-height: 150px;
-  background-color: #240c76;
+  background-color: transparent;
+  border: 2px solid purple;
 }
 
 .left-text,

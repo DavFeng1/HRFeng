@@ -1,18 +1,50 @@
 .contact-container {
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
   align-items: center;
   align-content: center;
 }
 
+.contact-header {
+  // Flex box settings
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+
+  // Formatting
+  margin-right: 30px;
+  margin-left: 30px;
+  height: 200px;
+  width: 100%;
+  border-radius: 15px;
+  text-align: center;
+  backdrop-filter: blur(9.9px);
+  box-shadow: 0 0 1em hsl(250.8, 100%, 50% / 1);
+}
+
 .contact-box {
-  height: 100px;
+  // Flex box settings
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+
+  // Formatting
+  height: 200px;
   width: 200px;
-  border: 2px solid red;
+  margin-top: 50px;
+  border-radius: 50%;
+  backdrop-filter: blur(9.9px);
+  box-shadow: 0 0 1em hsl(250.8, 100%, 50% / 1);
+
+  transition: box-shadow 0.4s;
 }
 
 .contact-box:hover {
   cursor: pointer;
-  background: rgb(250, 167, 253);
+  box-shadow: 0 0 2em hsl(250.8, 100%, 50% / 0.5);
 }

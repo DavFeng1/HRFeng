@@ -1,5 +1,8 @@
-import { Typography } from '@mui/material';
 import { Variants, motion } from 'framer-motion';
+import { Typography } from '@mui/material';
+
+import githubLogo from '@assets/images/github.svg';
+import linkedinLogo from '@assets/images/linkedin.svg';
 
 import '@pages/home/Contact.scss';
 
@@ -13,7 +16,7 @@ const thirdPage: Variants = {
     opacity: 1,
     transition: {
       type: [0.6, 0.01, 0.5, 0.95],
-      duration: 1.6,
+      duration: 0.8,
     },
   },
   exit: {
@@ -30,7 +33,7 @@ const Contact = (): JSX.Element => {
         whileInView="onscreen"
         exit="exit"
         variants={thirdPage}
-        className="contact-box"
+        className="contact-header"
       >
         fenghourun@gmail.com
       </motion.div>
@@ -40,8 +43,11 @@ const Contact = (): JSX.Element => {
         exit="exit"
         variants={thirdPage}
         className="contact-box"
+        onClick={() => {
+          window.open('https://github.com/DavFeng1');
+        }}
       >
-        <a href="https://github.com/DavFeng1"> GitHub </a>
+        <img src={githubLogo} alt="this is github" />
       </motion.div>
       <motion.div
         initial="offscreen"
@@ -49,10 +55,17 @@ const Contact = (): JSX.Element => {
         exit="exit"
         variants={thirdPage}
         className="contact-box"
+        onClick={() => {
+          window.open('https://www.linkedin.com/in/david-feng-25a8b6b1/');
+        }}
       >
-        <a href="https://www.linkedin.com/in/david-feng-25a8b6b1/">
-          Linkedin
-        </a>
+        <img
+          style={{
+            width: '100%',
+          }}
+          src={linkedinLogo}
+          alt="this is linkedin"
+        />
       </motion.div>
       <motion.div
         initial="offscreen"

@@ -10,9 +10,11 @@ import { useStore } from '@pages/BlochSphere';
 
 import discTexture from '@assets/images/disc.png';
 
-THREE.Object3D.DefaultUp.set(0, 0, 1);
+type BlochSphereRendererProps = {
+  domElement: HTMLDivElement;
+};
 
-const BlochSphere = () => {
+const BlochSphere = ({ domElement }: BlochSphereRendererProps) => {
   const xRingRef = useRef<THREE.Object3D>(null);
   const yRingRef = useRef<THREE.Object3D>(null);
   const zRingRef = useRef<THREE.Object3D>(null);
@@ -69,7 +71,10 @@ const BlochSphere = () => {
   const state = new THREE.Vector3(0, 0, 0);
 
   const pointsGeometry = new THREE.BufferGeometry();
-  pointsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(state.toArray(), 3));
+  pointsGeometry.setAttribute(
+    'position',
+    new THREE.Float32BufferAttribute(state.toArray(), 3),
+  );
 
   const texture = useLoader(THREE.TextureLoader, discTexture);
   const pointsMaterial = new THREE.PointsMaterial({
@@ -99,53 +104,49 @@ const BlochSphere = () => {
       const theta = thetaRef.current || 0;
       const phi = phiRef.current || 0;
 
+      const cosPhi = Math.cos(phi);
+      const sinPhi = Math.sin(phi);
+      const cosTheta = Math.cos(theta);
+      const sinTheta = Math.sin(theta);
+
       // Update state position
-      lerpVec.set(
-        Math.cos(phi) * Math.sin(theta),
-        Math.sin(phi) * Math.sin(theta),
-        Math.cos(theta),
-      );
+      lerpVec.set(cosPhi * sinTheta, sinTheta * sinPhi, cosTheta);
       lineRef.current.setDirection(lerpVec);
 
-      pointRef.current.position.x = Math.cos(phi) * Math.sin(theta);
-      pointRef.current.position.y = Math.sin(phi) * Math.sin(theta);
-      pointRef.current.position.z = Math.cos(theta);
+      pointRef.current.position.x = cosPhi * sinTheta;
+      pointRef.current.position.y = sinPhi * sinTheta;
+      pointRef.current.position.z = cosTheta;
 
       // ================= Update rings orientation =====================================
-
       // X ring scale
-      lerpVec.set(Math.sin(theta), Math.sin(theta), 1);
+      lerpVec.set(sinTheta, sinTheta, 1);
       xRingRef.current.scale.lerp(lerpVec, 0.1);
 
       // XRing position
-      lerpVec.set(0, 0, Math.cos(theta));
+      lerpVec.set(0, 0, cosTheta);
       xRingRef.current.position.lerp(lerpVec, 0.1);
 
       // Y ring scale
-      lerpVec.set(
-        Math.sqrt(1 - Math.sin(theta) ** 2 * Math.sin(phi) ** 2),
-        Math.sqrt(1 - Math.sin(theta) ** 2 * Math.sin(phi) ** 2),
-        1,
-      );
+      const yRingScaleFactory = Math.sqrt(1 - sinTheta ** 2 * sinPhi ** 2);
+      lerpVec.set(yRingScaleFactory, yRingScaleFactory, 1);
       yRingRef.current.scale.lerp(lerpVec, 0.1);
 
       // Y Ring position
-      lerpVec.set(0, Math.sin(theta) * Math.sin(phi), 0);
+      lerpVec.set(0, sinTheta * sinPhi, 0);
       yRingRef.current.position.lerp(lerpVec, 0.1);
 
       // Z ring scale
-      lerpVec.set(
-        Math.sqrt(Math.cos(theta) ** 2 + Math.sin(theta) ** 2 * Math.sin(phi) ** 2),
-        Math.sqrt(Math.cos(theta) ** 2 + Math.sin(theta) ** 2 * Math.sin(phi) ** 2),
-        1,
+      const zRingScaleFactory = Math.sqrt(
+        cosTheta ** 2 + sinTheta ** 2 * sinPhi ** 2,
       );
+      lerpVec.set(zRingScaleFactory, zRingScaleFactory, 1);
       zRingRef.current.scale.lerp(lerpVec, 0.1);
 
       // Z ring position
-      lerpVec.set(Math.cos(phi) * Math.sin(theta), 0, 0);
+      lerpVec.set(cosPhi * sinTheta, 0, 0);
       zRingRef.current.position.lerp(lerpVec, 0.1);
 
-      // Update Text orientation
+      // ============================== TEXT ORIENTATION =========================
       zTextRef.current.lookAt(threeState.camera.position);
       yTextRef.current.lookAt(threeState.camera.position);
       xTextRef.current.lookAt(threeState.camera.position);
@@ -160,8 +161,14 @@ const BlochSphere = () => {
 
   return (
     <>
-      <perspectiveCamera args={[75, window.innerHeight / window.innerWidth, 0.1, 10000]} />
-      <OrbitControls minDistance={2} maxDistance={2.5} />
+      <perspectiveCamera
+        args={[75, window.innerHeight / window.innerWidth, 0.1, 10000]}
+      />
+      <OrbitControls
+        minDistance={2}
+        maxDistance={2.5}
+        domElement={domElement}
+      />
       <ambientLight intensity={0.5} />
       <pointLight position={[0, 200, 0]} />
       <pointLight position={[100, 200, 100]} />
@@ -173,7 +180,12 @@ const BlochSphere = () => {
       </mesh>
       <mesh>
         <sphereGeometry args={[1, 32, 16]} />
-        <meshLambertMaterial color={0x522d70} opacity={0.1} transparent={true} depthWrite={false} />
+        <meshLambertMaterial
+          color={0x522d70}
+          opacity={0.1}
+          transparent={true}
+          depthWrite={false}
+        />
       </mesh>
       <lineSegments geometry={edgesGeometry} material={linesMaterial} />
       <mesh ref={xRingRef}>
@@ -189,9 +201,16 @@ const BlochSphere = () => {
         <meshBasicMaterial color={0x9300ff} side={THREE.DoubleSide} />
       </mesh>
 
-      <points ref={pointRef} geometry={pointsGeometry} material={pointsMaterial} />
+      <points
+        ref={pointRef}
+        geometry={pointsGeometry}
+        material={pointsMaterial}
+      />
       <mesh>
-        <arrowHelper ref={lineRef} args={[state, origin, 1, 0x0080ff, 0]} />
+        <arrowHelper
+          ref={lineRef}
+          args={[state, origin, 1, 0x0080ff, 0]}
+        />
       </mesh>
 
       <mesh ref={xTextRef}>
@@ -211,16 +230,16 @@ const Fallback = () => {
   return <mesh></mesh>;
 };
 
-const BlochSphereRender = () => {
+const BlochSphereRender = ({ domElement }: BlochSphereRendererProps) => {
   return (
     <Canvas
       gl={{ antialias: true }}
       camera={{ fov: 75, position: [10, 15, 15] }}
-      style={{ height: '100%', width: '100%' }}
+      className="canvas-background"
     >
       {/* <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade /> */}
       <Suspense fallback={<Fallback />}>
-        <BlochSphere />
+        <BlochSphere domElement={domElement} />
       </Suspense>
     </Canvas>
   );

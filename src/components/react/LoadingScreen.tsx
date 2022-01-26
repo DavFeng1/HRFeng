@@ -1,27 +1,53 @@
-import { useEffect, useRef } from 'react';
+// import { useRef } from 'react';
 
-import { useHomePageStore } from '@pages/home';
+// import { useHomePageStore } from '@pages/home';
 
 import '@components/react/LoadingScreen.scss';
 
 const LoadingScreen = (): JSX.Element => {
-  const progressBarRef = useRef<HTMLDivElement>(null);
+  // const progressRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    console.log('LoadingScreen.tsx ==> Component mounted');
+  // useEffect(() => {
+  //   console.log('LoadingScreen.tsx ==> Component mounted');
 
-    useHomePageStore.subscribe((state) => {
-      console.log('updating css', state.loadingProgress);
-      progressBarRef.current?.style.setProperty(
-        '--progress',
-        `${state.loadingProgress.toString()}%`,
-      );
-    });
+  //   let currentProgress = 0;
+  //   let progressQueue: number[] = [0];
 
-    return () => {
-      console.log('LoadingScreen.tsx ==> Component unmounted');
-    };
-  }, []);
+  //   let nextProgress = progressQueue.shift();
+
+  //   const listenForUpdates = () => {
+  //     const id = setInterval(() => {
+  //       if (currentProgress >= 100) {
+  //         clearInterval(id);
+  //         useHomePageStore.setState({ isLoading: false });
+  //       }
+  //       if (nextProgress) {
+  //         if (currentProgress < nextProgress) {
+  //           progressRef.current?.style.setProperty(
+  //             'width',
+  //             `${currentProgress}%`,
+  //           );
+  //           currentProgress++;
+  //         } else {
+  //           currentProgress = nextProgress;
+  //           nextProgress = progressQueue.shift();
+  //         }
+  //       } else {
+  //         nextProgress = progressQueue.shift();
+  //       }
+  //     }, 1);
+  //   };
+
+  //   listenForUpdates();
+
+  //   useHomePageStore.subscribe((state) => {
+  //     progressQueue.push(state.loadingProgress);
+  //   });
+
+  //   return () => {
+  //     console.log('LoadingScreen.tsx ==> Component unmounted');
+  //   };
+  // }, []);
 
   return (
     <>
@@ -41,14 +67,9 @@ const LoadingScreen = (): JSX.Element => {
           <div id="z-ring-dot" />
         </div>
         <div id="outer-ring" />
-        <div
-          ref={progressBarRef}
-          id="progress-percentage"
-          role="progressbar"
-          aria-valuenow={0}
-          aria-valuemin={0}
-          aria-valuemax={100}
-        />
+        {/* <div id="progress-bar-container">
+          <div id="progress-bar" ref={progressRef}></div>
+        </div> */}
       </section>
     </>
   );

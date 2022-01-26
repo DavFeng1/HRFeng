@@ -31,7 +31,7 @@ const RotatingTorusKnot = () => {
       ref={torusKnotRef}
       scale={[0.4, 0.4, 0.4]}
       args={[1.25, 0.4, 128, 32]}
-      position={[1, 1.5, 1]}
+      position={[4, -1, 0]}
     >
       <meshPhysicalMaterial
         map={graniteTextureMap}

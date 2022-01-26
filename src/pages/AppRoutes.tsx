@@ -1,8 +1,12 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from 'react-router-dom';
 
 import Home from '@pages/home';
 import BlochSpherePage from '@pages/BlochSphere';
-import Contact from '@pages/contact';
 
 import Layout from '@components/react/Layout';
 import { useEffect } from 'react';
@@ -15,7 +19,6 @@ const AppRoutes = () => {
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
         <Route path="/blochSphere" element={<BlochSpherePage />} />
-        <Route path="/contact" element={<Contact />} />
       </Route>
     </Routes>
   );

@@ -13,6 +13,7 @@ import { useHomePageStore } from '@pages/home';
 import { MotionValue } from 'framer-motion';
 
 const HomeCanvas = () => {
+  // TODO: investigate why this ref is lost when switching pages
   const scrollPositionRef = useRef<MotionValue<number>>();
   const groupRef = useRef<THREE.Group>();
   const spotLight = useRef();
@@ -43,7 +44,7 @@ const HomeCanvas = () => {
   useFrame(() => {
     if (groupRef.current && scrollPositionRef.current) {
       groupRef.current.position.lerp(
-        vec.set(-15 * scrollPositionRef.current.get(), 0, 0),
+        vec.set(0, 15 * scrollPositionRef.current.get(), 0),
         0.3,
       );
     }

@@ -57,7 +57,7 @@
   height: 10em;
   border-radius: 50%;
   border: 4px transparent;
-  border-top: 4px solid hsl(var(--ring-hue-blue), 100%, 50% / 1);
+  border-top: 4px solid hsl(var(--ring-hue-blue), 100%, 50% / 0.7);
   animation: animate 2s linear infinite;
 }
 
@@ -69,7 +69,7 @@
   height: 10em;
   border-radius: 50%;
   border: 4px transparent;
-  border-top: 4px solid hsl(var(--ring-hue-blue), 100%, 57% / 1);
+  border-top: 4px solid hsl(var(--ring-hue-blue), 100%, 57% / 0.7);
   animation: animate 2s linear infinite;
   animation-direction: reverse;
 }
@@ -80,7 +80,7 @@
   height: 10em;
   border-radius: 50%;
   border: 4px transparent;
-  border-top: 4px solid hsl(var(--ring-hue-blue), 100%, 57% / 1);
+  border-top: 4px solid hsl(var(--ring-hue-blue), 100%, 57% / 0.74);
   animation: animate 2s linear infinite;
 }
 
@@ -138,11 +138,10 @@
 }
 
 // ========================== Progress Bar =======================
-#progress-percentage {
+#progress-bar-container {
   --progress: 0%;
 
   position: absolute;
-  z-index: 100;
   width: 20rem;
   height: 2rem;
 
@@ -150,23 +149,22 @@
   left: calc(50% - 10rem);
 }
 
-#progress-percentage::before {
+#progress-bar {
   content: '';
   position: absolute;
   top: 3rem;
   left: 0;
-  width: var(--progress);
+  width: 0%;
   transition: 0.01s cubic-bezier(0.075, 0.82, 0.165, 1);
-  height: 0.5rem;
+  height: 0.25rem;
   background: hsl(var(--ring-hue-purple), 100%, 50% / 0.55);
-
-  border: 2px solid hsl(var(--ring-hue-purple), 100%, 50% / 0.7);
 
   filter: blur(0.5px);
 
-  box-shadow: 0 0 0.1em hsl(var(--ring-hue-purple), 100%, 50% / 0.7),
-    0 0 0.25em hsl(var(--ring-hue-purple), 100%, 50% / 0.75),
-    0 0 1em hsl(var(--ring-hue-purple), 100%, 50% / 0.4);
+  box-shadow: 0 0 0.1em hsl(var(--ring-hue-purple), 100%, 50% / 0.4),
+    0 0 0.3em hsl(var(--ring-hue-purple), 100%, 50% / 0.75),
+    0 0 0.75em hsl(var(--ring-hue-purple), 100%, 50% / 0.8),
+    0 0 1.5em hsl(var(--ring-hue-purple), 100%, 50% / 0.9);
 
   border-radius: 3rem;
 }

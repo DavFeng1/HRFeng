@@ -35,9 +35,9 @@ export const useHomePageStore = create<
 );
 
 const Home = () => {
-  const [isLoading, setIsLoading] = useState(true);
-
   const { scrollYProgress } = useViewportScroll();
+
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     useHomePageStore.setState({ scrollPosition: scrollYProgress });
@@ -47,9 +47,7 @@ const Home = () => {
     console.log('home.tsx ==> Component mounted');
 
     useHomePageStore.subscribe((state) => {
-      if (state.loadingProgress === 100) {
-        setIsLoading(false);
-      }
+      if (state.loadingProgress === 100) setIsLoading(false);
     });
 
     return () => {
@@ -61,7 +59,7 @@ const Home = () => {
     <>
       {/* ========================THREE JS CANVAS BACKGROUND ===================*/}
 
-      <Canvas style={{ position: 'fixed', top: 0, left: 0, zIndex: -999 }}>
+      <Canvas className="canvas-background">
         <HomeCanvas />
       </Canvas>
 
