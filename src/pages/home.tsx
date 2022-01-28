@@ -70,8 +70,8 @@ const Home = () => {
       ) : (
         <>
           <Landing />
-          <Projects />
           <Contact />
+          <Projects />
         </>
       )}
     </>

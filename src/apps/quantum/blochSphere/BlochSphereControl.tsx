@@ -14,8 +14,13 @@ const BlochSphereControls = () => {
 
   // ================================= LIFE CYCLE =========================================
   useEffect(() => {
-    console.log('BlochSphereControl.tsx useEffect[] Mounted and subscribing');
-    useStore.subscribe((state) => storeUpdateEffect(state.theta, state.phi), console.log);
+    console.log(
+      'BlochSphereControl.tsx useEffect[] Mounted and subscribing',
+    );
+    useStore.subscribe(
+      (state) => storeUpdateEffect(state.theta, state.phi),
+      console.log,
+    );
 
     return () => {
       console.log('BlochSphereControl.tsx useEffect[] Unmounting');
@@ -28,9 +33,12 @@ const BlochSphereControls = () => {
     const expAlpha = Math.cos(phi);
     const expBeta = Math.sin(phi);
 
-    const firstCoefficient = Math.round((alpha + Number.EPSILON) * 100) / 100;
-    const secondCoefficientReal = Math.round((beta * expAlpha + Number.EPSILON) * 100) / 100;
-    const secondCoefficientImaginary = Math.round((beta * expBeta + Number.EPSILON) * 100) / 100;
+    const firstCoefficient =
+      Math.round((alpha + Number.EPSILON) * 100) / 100;
+    const secondCoefficientReal =
+      Math.round((beta * expAlpha + Number.EPSILON) * 100) / 100;
+    const secondCoefficientImaginary =
+      Math.round((beta * expBeta + Number.EPSILON) * 100) / 100;
 
     setCurrentStateLatex(
       `\\ket{\\psi} = ${firstCoefficient} \\ket{0} + (${secondCoefficientReal} + ${secondCoefficientImaginary} i) \\ket{1}`,
@@ -123,88 +131,110 @@ const BlochSphereControls = () => {
   const katexSigmaZ = { __html: katex.renderToString('\\sigma_z') };
 
   return (
-    <>
-      <Grid container item>
-        <Grid item xs={12}>
-          <Typography align="center" sx={{ p: '0.5em' }}>
-            States
-          </Typography>
-        </Grid>
-        <Grid container item>
-          <Grid item xs={12}>
+    <div id="bloch-sphere-controls" className="no-select">
+      <div className="bloch-sphere-controls-section">
+        <Typography align="center" sx={{ p: '0.5em' }}>
+          States
+        </Typography>
+        <Stack direction="row" spacing={3}>
+          <div>
             <Typography variant="caption"> Base States </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <Button variant="contained" size="small" onClick={setZeroState}>
-              <span dangerouslySetInnerHTML={katexZeroState} />
-            </Button>
-          </Grid>
-          <Grid item xs={6}>
-            <Button variant="contained" size="small" onClick={setOneState}>
-              <span dangerouslySetInnerHTML={katexOneState} />
-            </Button>
-          </Grid>
-        </Grid>
-        <Divider orientation="vertical" />
+            <Stack direction="row" spacing={3}>
+              <Button
+                variant="contained"
+                size="small"
+                onClick={setZeroState}
+              >
+                <span dangerouslySetInnerHTML={katexZeroState} />
+              </Button>
+              <Button
+                variant="contained"
+                size="small"
+                onClick={setOneState}
+              >
+                <span dangerouslySetInnerHTML={katexOneState} />
+              </Button>
+            </Stack>
+          </div>
+          <div>
+            <Typography variant="caption">Superposition States</Typography>
+            <Stack direction="row" spacing={3}>
+              <Button
+                variant="contained"
+                size="small"
+                onClick={setPlusState}
+              >
+                <span dangerouslySetInnerHTML={katexPlusState} />
+              </Button>
+              <Button
+                variant="contained"
+                size="small"
+                onClick={setMinusState}
+              >
+                <span dangerouslySetInnerHTML={katexMinusState} />
+              </Button>
+            </Stack>
+          </div>
+        </Stack>
+      </div>
 
-        <Grid container item>
-          <Grid item xs={12}>
-            <Typography variant="caption"> Superposition States </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <Button variant="contained" size="small" onClick={setPlusState}>
-              <span dangerouslySetInnerHTML={katexPlusState} />
-            </Button>
-          </Grid>
-          <Grid item xs={6}>
-            <Button variant="contained" size="small" onClick={setMinusState}>
-              <span dangerouslySetInnerHTML={katexMinusState} />
-            </Button>
-          </Grid>
-        </Grid>
-      </Grid>
-      <Grid container item xs={12}>
-        <Grid item xs={12}>
-          <Typography align="center" sx={{ p: '0.5em' }}>
-            Operators
-          </Typography>
-        </Grid>
-        <Stack direction="row" spacing={2}>
-          <ButtonLowercase variant="contained" size="small" onClick={applyHadamard}>
+      <div className="bloch-sphere-controls-section">
+        <Typography align="center" sx={{ p: '0.5em' }}>
+          Operators
+        </Typography>
+        <Stack direction="row" spacing={3}>
+          <ButtonLowercase
+            variant="contained"
+            size="small"
+            onClick={applyHadamard}
+          >
             <span dangerouslySetInnerHTML={katexH} />
           </ButtonLowercase>
-          <ButtonLowercase variant="contained" size="small" onClick={applyPauliX}>
+          <ButtonLowercase
+            variant="contained"
+            size="small"
+            onClick={applyPauliX}
+          >
             <span dangerouslySetInnerHTML={katexSigmaX} />
           </ButtonLowercase>
-          <ButtonLowercase variant="contained" size="small" onClick={applyPauliY}>
+          <ButtonLowercase
+            variant="contained"
+            size="small"
+            onClick={applyPauliY}
+          >
             <span dangerouslySetInnerHTML={katexSigmaY} />
           </ButtonLowercase>
-          <ButtonLowercase variant="contained" size="small" onClick={applyPauliZ}>
+          <ButtonLowercase
+            variant="contained"
+            size="small"
+            onClick={applyPauliZ}
+          >
             <span dangerouslySetInnerHTML={katexSigmaZ} />
           </ButtonLowercase>
         </Stack>
-      </Grid>
-      <Grid item xs={12}>
-        <Grid item xs={12}>
-          <Typography align="center" sx={{ p: '0.5em' }}>
-            State Parameters
-          </Typography>
-        </Grid>
+      </div>
+
+      <div className="bloch-sphere-controls-section">
+        <Typography align="center" sx={{ p: '0.5em' }}>
+          State Parameters
+        </Typography>
         <ParameterControls />
-      </Grid>
+      </div>
 
-      <Grid item xs={12}>
-        <Grid item xs={12}>
-          <Typography align="center" sx={{ p: '0.5em' }}>
-            Current state
-          </Typography>
+      <div className="bloch-sphere-controls-section">
+        <Typography align="center" sx={{ p: '0.5em' }}>
+          Current state
+        </Typography>
 
-          <Typography sx={{ textAlign: 'center' }} p={5}>
-            <span dangerouslySetInnerHTML={{ __html: katex.renderToString(currentStateLatex) }} />
-          </Typography>
-        </Grid>
-      </Grid>
-    </>
+        <Typography sx={{ textAlign: 'center' }} p={5}>
+          <span
+            dangerouslySetInnerHTML={{
+              __html: katex.renderToString(currentStateLatex),
+            }}
+          />
+        </Typography>
+      </div>
+    </div>
   );
 };
 

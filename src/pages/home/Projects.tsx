@@ -44,7 +44,7 @@ const Projects = (): JSX.Element => {
 
   // const xRangeLeft = useTransform(scrollPosition, [0, 0.45], [-900, 0]);
 
-  // const xRangeRight = useTransform(scrollPosition, [0, 0.45], [900, 0]);
+  const xRangeRight = useTransform(scrollPosition, [0, 0.45], [900, 0]);
 
   // const opacityRange = useTransform(scrollPosition, [0, 0.45], [0, 1], {
   //   ease: [cubicBezier(0.9, 0.4, 0.3, 0.9)],
@@ -60,15 +60,7 @@ const Projects = (): JSX.Element => {
 
   return (
     <div className="page-container row-container">
-      <motion.div
-      // initial="offscreen"
-      // whileInView="onscreen"
-      // exit="exit"
-      // variants={LeftTransition}
-      // style={{
-      //   x: xRangeLeft,
-      // }}
-      >
+      <motion.div>
         <div className="left-diagonal-container">
           <div className="left-content">
             <Typography variant="h3" className="left-text">
@@ -93,9 +85,6 @@ const Projects = (): JSX.Element => {
 
       <div className="right-diagonal-container">
         <motion.div
-          initial="offscreen"
-          whileInView="onscreen"
-          exit="exit"
           variants={RightTransition}
           className="right-content shiny-button"
         >
@@ -107,24 +96,12 @@ const Projects = (): JSX.Element => {
             Quantum Mechanics
           </Typography>
         </motion.div>
-        <motion.div
-          initial="offscreen"
-          whileInView="onscreen"
-          exit="exit"
-          variants={RightTransition}
-          className="right-content shiny-button"
-        >
+        <motion.div className="right-content shiny-button">
           <Typography variant="h5" className="right-text no-select">
             Relativity Theory
           </Typography>
         </motion.div>
-        <motion.div
-          initial="offscreen"
-          whileInView="onscreen"
-          exit="exit"
-          variants={RightTransition}
-          className="right-content shiny-button"
-        >
+        <motion.div className="right-content shiny-button">
           <Typography variant="h5" className="right-text no-select">
             Mathematics
           </Typography>

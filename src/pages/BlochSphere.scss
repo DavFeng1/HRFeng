@@ -1,0 +1,66 @@
+#bloch-sphere-container {
+  margin: 1em;
+}
+
+// ======================= DESCRIPTION PANEL ===================
+
+#bloch-sphere-description {
+  position: absolute;
+  margin: 1em;
+  padding: 2em;
+  right: 0;
+  top: 5%;
+  bottom: 5%;
+  width: 25vw;
+  background-color: black;
+  box-shadow: 0 0 1em hsl(250.8, 100%, 50% / 0.75),
+    inset 0 0 0.25em hsl(250.8, 100%, 50% / 0.5);
+  overflow-y: scroll;
+}
+
+.bloch-sphere-description-heading {
+}
+
+.bloch-sphere-description-body {
+  // outline: 1px solid green;
+  padding: 1em;
+}
+
+.bloch-sphere-description-accordion {
+  outline: 2px solid green;
+  background: transparent !important;
+}
+
+#bloch-sphere-description-title {
+  padding: 1em;
+  outline: 2px solid green;
+  background: transparent !important;
+}
+
+// ================================== CONTROLS PANEL =====================
+.bloch-sphere-controls-section {
+  padding: 0.5em;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+}
+
+#bloch-sphere-controls {
+  position: absolute;
+  margin: 2em;
+  padding: 2em;
+  width: 25vw;
+  top: 20%;
+
+  // Flex blox
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
+  backdrop-filter: blur(1.5px);
+  background-color: black;
+}

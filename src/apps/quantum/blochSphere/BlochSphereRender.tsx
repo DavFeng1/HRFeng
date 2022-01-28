@@ -1,14 +1,13 @@
 import * as THREE from 'three';
 
 import { Suspense, useRef, useEffect } from 'react';
-
 import { OrbitControls, Text } from '@react-three/drei';
-
 import { Canvas, useLoader, useFrame, useThree } from '@react-three/fiber';
 
 import { useStore } from '@pages/BlochSphere';
 
 import discTexture from '@assets/images/disc.png';
+import GeometricBackground from '@components/three/GeometricBackground';
 
 type BlochSphereRendererProps = {
   domElement: HTMLDivElement;
@@ -18,16 +17,13 @@ const BlochSphere = ({ domElement }: BlochSphereRendererProps) => {
   const xRingRef = useRef<THREE.Object3D>(null);
   const yRingRef = useRef<THREE.Object3D>(null);
   const zRingRef = useRef<THREE.Object3D>(null);
-  const lineRef = useRef<THREE.ArrowHelper>(null);
-
   const xTextRef = useRef<THREE.Object3D>(null);
   const yTextRef = useRef<THREE.Object3D>(null);
   const zTextRef = useRef<THREE.Object3D>(null);
-
   const pointRef = useRef<THREE.Object3D>(null);
+  const lineRef = useRef<THREE.ArrowHelper>(null);
 
   const threeState = useThree();
-
   const phiRef = useRef(useStore.getState().phi);
   const thetaRef = useRef(useStore.getState().theta);
 
@@ -165,8 +161,9 @@ const BlochSphere = ({ domElement }: BlochSphereRendererProps) => {
         args={[75, window.innerHeight / window.innerWidth, 0.1, 10000]}
       />
       <OrbitControls
-        minDistance={2}
-        maxDistance={2.5}
+        minDistance={2.5}
+        maxDistance={3.5}
+        maxPolarAngle={2 * Math.PI}
         domElement={domElement}
       />
       <ambientLight intensity={0.5} />
@@ -235,9 +232,9 @@ const BlochSphereRender = ({ domElement }: BlochSphereRendererProps) => {
     <Canvas
       gl={{ antialias: true }}
       camera={{ fov: 75, position: [10, 15, 15] }}
-      className="canvas-background"
+      className="canvas-background grabbable"
     >
-      {/* <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade /> */}
+      <GeometricBackground />
       <Suspense fallback={<Fallback />}>
         <BlochSphere domElement={domElement} />
       </Suspense>

@@ -14,12 +14,14 @@
   justify-content: center;
   align-items: center;
   align-content: center;
-  background-color: transparent;
-  backdrop-filter: blur(9.9px);
-  box-shadow: 0 0 1em hsl(250.8, 100%, 50% / 1);
+  background-color: var(--background-color);
+  outline: 1px solid hsl(250.8, 100%, 50% / 0.6);
+  margin-right: 1px;
 }
 
 .right-diagonal-container {
+  // display: flex;
+  // flex-flow: row nowrap;
   justify-content: flex-start;
   align-items: stretch;
   align-content: stretch;
@@ -42,11 +44,31 @@
   padding-left: var(--skew-padding);
   min-height: 150px;
   background-color: transparent;
-  border: 2px solid purple;
+  outline: 1px solid hsl(250.8, 100%, 50% / 0.6);
+  // box-shadow: 0 0 0.1em hsl(250.8, 100%, 50% / 0.6);
 }
 
 .left-text,
 .right-text {
   transform: skewX(calc(var(--skew-amount) * -1));
   max-width: 45ch;
+}
+
+@mixin transition($transition...) {
+  -moz-transition: $transition;
+  -o-transition: $transition;
+  -webkit-transition: $transition;
+  transition: $transition;
+}
+
+.shiny-button {
+  backdrop-filter: blur(9.9px);
+
+  --webkit-backdrop-filter: blur(9.9px);
+
+  @include transition(all 0.2s ease-in);
+  &:hover {
+    box-shadow: 0 0 1em hsl(250.8, 100%, 50% / 0.6);
+    cursor: pointer;
+  }
 }

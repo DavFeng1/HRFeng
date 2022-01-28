@@ -1,84 +1,88 @@
 import * as React from 'react';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
+
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Divider,
+} from '@mui/material';
 
 import Latex from 'react-latex';
 
 import text from '../../../assets/text/blochSphereText';
+import overviewText from '@assets/text/blochSphereOverview';
+import backgroundText from '@assets/text/blochSphereBackground';
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-
-const TabPanel = (props: TabPanelProps) => {
-  const { children, value, index, ...other } = props;
-
+const BlochSphereDescription = () => {
   return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }} component="div">
-          <Typography component={'span'}>{children}</Typography>
-        </Box>
-      )}
+    <div id="bloch-sphere-description">
+      <div id="bloch-sphere-description-title">
+        <Typography variant="h4">The Bloch Sphere</Typography>
+        <Divider />
+        <div className="bloch-sphere-description-body">
+          <Typography variant="body1" className="text">
+            {overviewText}
+          </Typography>
+        </div>
+      </div>
+
+      <Accordion className="bloch-sphere-description-accordion">
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <div className="bloch-sphere-description-heading">
+            <Typography variant="h5"> Background </Typography>
+          </div>
+        </AccordionSummary>
+        <AccordionDetails>
+          <div className="bloch-sphere-description-body">
+            <Typography className="text">{backgroundText}</Typography>
+          </div>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion className="bloch-sphere-description-accordion">
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <div className="bloch-sphere-description-heading">
+            <Typography variant="h5"> Definition </Typography>
+          </div>
+        </AccordionSummary>
+        <AccordionDetails>
+          <div className="bloch-sphere-description-body">
+            <Typography className="text"> {text} </Typography>
+          </div>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion className="bloch-sphere-description-accordion">
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <div className="bloch-sphere-description-heading">
+            <Typography variant="h5"> Operators </Typography>
+          </div>
+        </AccordionSummary>
+        <AccordionDetails>
+          <div className="bloch-sphere-description-body">
+            <Typography className="text">{text}</Typography>
+          </div>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion className="bloch-sphere-description-accordion">
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <div className="bloch-sphere-description-heading">
+            <Typography variant="h5">
+              <Latex>What is $\sigma_x$</Latex>
+            </Typography>
+          </div>
+        </AccordionSummary>
+        <AccordionDetails>
+          <div className="bloch-sphere-description-body">
+            <Typography className="text">{text}</Typography>
+          </div>
+        </AccordionDetails>
+      </Accordion>
     </div>
   );
 };
 
-const a11yProps = (index: number) => {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-};
-
-export default function BasicTabs() {
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
-
-  return (
-    <Box sx={{ width: '100%' }} component="div">
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }} component="div">
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Overview" {...a11yProps(0)} />
-          <Tab label="Background" {...a11yProps(1)} />
-          <Tab label="Parameters" {...a11yProps(2)} />
-        </Tabs>
-      </Box>
-
-      <TabPanel value={value} index={0}>
-        <Container fixed>
-          <Typography component="h1">
-            <Latex>What is $\sigma_x$</Latex>
-          </Typography>
-          <Typography className="explain">{text}</Typography>
-        </Container>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <Container fixed>
-          <Typography> Parameters </Typography>
-          <Typography className="explain">beans</Typography>
-        </Container>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <Container fixed>
-          <Typography> Background </Typography>
-          <Typography className="explain">{text}</Typography>
-        </Container>
-      </TabPanel>
-    </Box>
-  );
-}
+export default BlochSphereDescription;

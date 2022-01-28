@@ -14,6 +14,8 @@ import {
 
 import { useRef, useState, useEffect } from 'react';
 
+import '@pages/BlochSphere.scss';
+
 // Store phi and theta in radians
 type StoreState = {
   phi: number;
@@ -35,12 +37,8 @@ const useStore = create<
 const BlochSpherePage = () => {
   const canvasOrbitControlElementRef = useRef<HTMLDivElement>(null);
 
-  const [refReady, setRefReady] = useState(false);
-
-  console.log('BlochSphere.tsx useEffect[] mounted ');
   useEffect(() => {
-    setRefReady(true);
-
+    console.log('BlochSphere.tsx useEddfect[] mounted ');
     return () => {
       console.log('BlochSphere.tsx useEffect[] unmounted');
       useStore.destroy();
@@ -48,30 +46,14 @@ const BlochSpherePage = () => {
   }, []);
 
   return (
-    <>
-      <Typography variant="h1"> The Bloch Sphere </Typography>
-      <div
-        style={{
-          display: 'flex',
-          flexFlow: 'column nowrap',
-          justifyContent: 'center',
-          alignItems: 'flex-start',
-          alignContent: 'center',
-        }}
-        ref={canvasOrbitControlElementRef}
-      >
-        <Paper elevation={1} sx={{ height: 1, padding: '1em' }}>
-          <BlochSphereControls />
-        </Paper>
-
-        <BlochSphereDescription />
-      </div>
-      {refReady && (
-        <BlochSphereRender
-          domElement={canvasOrbitControlElementRef.current}
-        />
-      )}
-    </>
+    <div id="bloch-sphere-container">
+      <BlochSphereControls />
+      <BlochSphereDescription />
+      <BlochSphereRender
+        // @ts-ignore
+        domElement={canvasOrbitControlElementRef.current}
+      />
+    </div>
   );
 };
 

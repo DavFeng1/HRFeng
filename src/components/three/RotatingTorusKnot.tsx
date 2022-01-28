@@ -15,7 +15,7 @@ const RotatingTorusKnot = () => {
   useFrame(({ clock }) => {
     if (torusKnotRef.current) {
       torusKnotRef.current.rotation.x = torusKnotRef.current.rotation.y =
-        clock.getElapsedTime();
+        0.7 * clock.getElapsedTime();
     }
   });
 
@@ -31,7 +31,7 @@ const RotatingTorusKnot = () => {
       ref={torusKnotRef}
       scale={[0.4, 0.4, 0.4]}
       args={[1.25, 0.4, 128, 32]}
-      position={[4, -1, 0]}
+      position={[1, -2, 1]}
     >
       <meshPhysicalMaterial
         map={graniteTextureMap}

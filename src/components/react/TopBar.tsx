@@ -11,6 +11,8 @@ import { Link } from 'react-router-dom';
 
 import { useHomePageStore } from '@pages/home';
 
+import '@components/react/TopBar.scss';
+
 const TopBar = (): JSX.Element => {
   const scrollPosition = useHomePageStore((state) => state.scrollPosition);
   const opacityRange = useTransform(scrollPosition, [0, 0.45], [1, 0], {
@@ -29,20 +31,23 @@ const TopBar = (): JSX.Element => {
       >
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <Link to="/" style={{ textDecoration: 'none' }}>
+            <Link to="/" className="top-bar-text">
               home
             </Link>
           </Typography>
-          <Button color="inherit">
-            <Link to="/blochSphere" style={{ textDecoration: 'none' }}>
-              Projects
+          <div color="inherit" className="top-bar-button">
+            <Link to="/blochSphere" className="top-bar-text">
+              PROJECTS
             </Link>
-          </Button>
-          <Button color="inherit">
-            <Link to="/contact" style={{ textDecoration: 'none' }}>
-              Contact
+
+            <div className="top-bar-shadow" />
+          </div>
+          <div color="inherit" className="top-bar-button">
+            <Link to="/contact" className="top-bar-text">
+              CONTACT
             </Link>
-          </Button>
+            <div className="top-bar-shadow" />
+          </div>
         </Toolbar>
       </AppBar>
     </motion.div>

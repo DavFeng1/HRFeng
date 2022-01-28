@@ -9,6 +9,8 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
+// import '@fontsource/courier-prime';
+
 import './index.scss';
 import 'katex/dist/katex.min.css';
 import 'locomotive-scroll/';

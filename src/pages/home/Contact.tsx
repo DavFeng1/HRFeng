@@ -4,6 +4,8 @@ import { Typography } from '@mui/material';
 import githubLogo from '@assets/images/github.svg';
 import linkedinLogo from '@assets/images/linkedin.svg';
 
+import DownloadIcon from '@mui/icons-material/Download';
+
 import '@pages/home/Contact.scss';
 
 const thirdPage: Variants = {
@@ -35,46 +37,69 @@ const Contact = (): JSX.Element => {
         variants={thirdPage}
         className="contact-header"
       >
-        fenghourun@gmail.com
+        <Typography variant="h2">About Me</Typography>
       </motion.div>
       <motion.div
         initial="offscreen"
         whileInView="onscreen"
         exit="exit"
         variants={thirdPage}
-        className="contact-box"
         onClick={() => {
           window.open('https://github.com/DavFeng1');
         }}
+        style={{
+          textAlign: 'center',
+        }}
       >
-        <img src={githubLogo} alt="this is github" />
+        <div className="contact-box">
+          <img
+            style={{
+              width: '100%',
+            }}
+            src={githubLogo}
+            alt="this is github"
+          />
+        </div>
+        <div>GitHub</div>
       </motion.div>
       <motion.div
         initial="offscreen"
         whileInView="onscreen"
         exit="exit"
         variants={thirdPage}
-        className="contact-box"
         onClick={() => {
           window.open('https://www.linkedin.com/in/david-feng-25a8b6b1/');
         }}
+        style={{
+          textAlign: 'center',
+        }}
       >
-        <img
-          style={{
-            width: '100%',
-          }}
-          src={linkedinLogo}
-          alt="this is linkedin"
-        />
+        <div className="contact-box">
+          <img
+            style={{
+              width: '100%',
+            }}
+            src={linkedinLogo}
+            alt="this is linkedin"
+          />
+        </div>
+        <div>LinkedIn</div>
       </motion.div>
       <motion.div
         initial="offscreen"
         whileInView="onscreen"
         exit="exit"
         variants={thirdPage}
-        className="contact-box"
+        style={{
+          textAlign: 'center',
+        }}
       >
-        Resume
+        <div className="contact-box">
+          <a download href="../assets/images/resume.pdf">
+            <DownloadIcon />
+          </a>
+        </div>
+        <div> Resume </div>
       </motion.div>
     </div>
   );

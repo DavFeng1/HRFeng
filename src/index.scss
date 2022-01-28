@@ -3,7 +3,9 @@
   --magic-number: 0.09719;
   --content-width: 100vw;
   --skew-padding: calc(var(--content-width) * var(--magic-number));
+  --background-color: #121212;
 }
+
 html {
   // ------------ Scrolling -------------
   overflow: overlay; /* Make scrollbar track transparent */
@@ -17,15 +19,6 @@ body {
   // ------------- Font Smoothing ---------
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  // -------------- Cursor -------------
-  // cursor: url('assets/images/ellipse.svg'), pointer;
-  // cursor: -webkit-image-set(
-  //     url('assets/images/ellipse.svg') 1x,
-  //     url('assets/images/ellipse.svg') 2x
-  //   ),
-  //   pointer;
-
   height: 100%;
 }
 
@@ -40,14 +33,13 @@ a {
   -khtml-user-select: none; /* Konqueror HTML */
   -moz-user-select: none; /* Old versions of Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
+  user-select: none; /* Non-prefixed version, currently */
 }
 
 // ======================== HOME  ============================================
 
 .page-container {
-  min-height: 110vh;
+  min-height: 100vh;
   min-width: 100vw;
   scroll-snap-align: start;
 }
@@ -71,17 +63,6 @@ a {
   z-index: -999;
 }
 
-// ================================= Page 1 ==================================
-
-.column-container {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: flex-start;
-  align-content: flex-start;
-  padding: 15vw;
-}
-
 // ======================== CUSTOM SCROLLBAR =======================================
 
 ::-webkit-scrollbar-track {
@@ -90,34 +71,81 @@ a {
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 15px;
   background: transparent;
   border: 1px solid transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(49, 0, 105, 0.7);
-  // border: 1px solid #ffffff;
-  // box-shadow: 0 0 1em hsl(280, 100%, 50% / 1);
-  border-radius: 4px;
-}
-// ======================= SHINY BUTTON ============================================
-@mixin transition($transition...) {
-  -moz-transition: $transition;
-  -o-transition: $transition;
-  -webkit-transition: $transition;
-  transition: $transition;
+  background: rgba(16, 0, 34, 0.7);
 }
 
-.shiny-button {
-  backdrop-filter: blur(9.9px);
+.grabbable {
+  cursor: move; /* fallback if grab cursor is unsupported */
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
 
-  --webkit-backdrop-filter: blur(9.9px);
+/* (Optional) Apply a "closed-hand" cursor during drag operation. */
+.grabbable:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
 
-  @include transition(all 0.2s ease-in);
-  &:hover {
-    box-shadow: 0 0 30px 0 transparentize(#6df1d8, 0.2);
-    cursor: pointer;
-    // background-color: hsl(250.8, 100%, 50% / 0.7);
-  }
+// ========================================== FONTS ==========================
+@font-face {
+  font-family: 'Rany';
+  src: local('Rany'), url(./assets/fonts/Rany-Light.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Rany';
+  font-weight: lighter;
+  src: local('Rany'), url(./assets/fonts/Rany-Light.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Rany';
+  font-weight: bold;
+  src: local('Rany'), url(./assets/fonts/Rany-Light.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Rany';
+  font-weight: bolder;
+  src: local('Rany'), url(./assets/fonts/Rany-Light.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Rany';
+  font-weight: lighter;
+  font-style: italic;
+  src: local('Rany'),
+    url(./assets/fonts/Rany-Light-Italic.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Rany';
+  font-weight: normal;
+  font-style: italic;
+  src: local('Rany'),
+    url(./assets/fonts/Rany-Italic.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Rany';
+  font-weight: bold;
+  font-style: italic;
+  src: local('Rany'),
+    url(./assets/fonts/Rany-Medium-Italic.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Rany';
+  font-weight: bolder;
+  font-style: italic;
+  src: local('Rany'),
+    url(./assets/fonts/Rany-Bold-Italic.otf) format('opentype');
 }
