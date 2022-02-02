@@ -37,7 +37,7 @@ const Contact = (): JSX.Element => {
         variants={thirdPage}
         className="contact-header"
       >
-        <Typography variant="h2">About Me</Typography>
+        <Typography variant="h2">Contact</Typography>
       </motion.div>
       <motion.div
         initial="offscreen"

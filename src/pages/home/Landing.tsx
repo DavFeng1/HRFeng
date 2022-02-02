@@ -27,24 +27,24 @@ const Landing = (): JSX.Element => {
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, y: 75 }}
+        initial={{ opacity: 0, x: -90 }}
         animate={{
           opacity: 1,
-          y: 0,
+          x: 0,
           transition: {
-            ease: [0.1, 0.74, 0.47, 0.97],
-            duration: 0.8,
+            ease: [0.1, 0.74, 0.4, 0.9],
+            duration: 1.2,
           },
         }}
         style={{
           opacity: opacityRange,
         }}
       >
-        <Typography fontSize={80} width={'40ch'} textAlign={'center'}>
+        <Typography fontSize={90} width={'40ch'} textAlign={'center'}>
           “How small a thought it takes to fill a life.”
         </Typography>
         <Typography
-          fontSize={80}
+          fontSize={40}
           fontStyle={'italics'}
           width={'40ch'}
           textAlign={'center'}

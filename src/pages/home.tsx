@@ -13,6 +13,7 @@ import {
 import HomeCanvas from '@components/three/HomeCanvas';
 import LoadingScreen from '@components/react/LoadingScreen';
 
+import About from '@pages/home/About';
 import Landing from '@pages/home/Landing';
 import Projects from '@pages/home/Projects';
 import Contact from '@pages/home/Contact';
@@ -70,8 +71,9 @@ const Home = () => {
       ) : (
         <>
           <Landing />
+          <About />
+          {/* <Projects /> */}
           <Contact />
-          <Projects />
         </>
       )}
     </>

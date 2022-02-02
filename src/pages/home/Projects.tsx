@@ -23,22 +23,6 @@ const RightTransition: Variants = {
   },
 };
 
-// const LeftTransition: Variants = {
-//   offscreen: {
-//     x: -1000,
-//   },
-//   onscreen: {
-//     x: 0,
-//     opacity: 1,
-//     transition: {
-//       duration: 0.8,
-//     },
-//   },
-//   exit: {
-//     x: -1000,
-//   },
-// };
-
 const Projects = (): JSX.Element => {
   const scrollPosition = useHomePageStore((state) => state.scrollPosition);
 

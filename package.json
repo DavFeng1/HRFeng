@@ -27,7 +27,8 @@
     "react-latex": "^2.0.0",
     "react-router-dom": "^6.2.1",
     "react-scripts": "^5.0.0",
-    "three": "^0.135.0",
+    "three": "^0.137.0",
+    "three-stdlib": "^2.8.4",
     "web-vitals": "^2.1.2",
     "zustand": "^3.6.9"
   },

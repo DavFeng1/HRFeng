@@ -5,7 +5,7 @@
   z-index: 10;
   height: 100%;
   width: 100%;
-  background-color: #121212;
+  background-color: var(--background-color);
   --ring-hue-blue: 250.2;
   --ring-hue-pink: 280;
   --ring-hue-purple: 250.2;
@@ -20,7 +20,7 @@
   top: calc(50% - 1em);
   left: calc(50% - 1em);
   border-radius: 50%;
-  background: #121212;
+  background: var(--background-color);
   box-shadow: 0 0 0.5em hsl(var(--center-hue), 100%, 50% / 0.5),
     0 0 1em hsl(var(--center-hue), 100%, 50% / 0.8),
     0 0 1.5em hsl(var(--center-hue), 100%, 50% / 0.3),

@@ -1,0 +1,41 @@
+.about-container {
+  padding: 1em;
+}
+
+.about-header {
+  margin-top: 15em;
+  margin-bottom: 15em;
+  text-align: center;
+}
+
+.about-text,
+.about-text-right,
+.about-text-left,
+.about-footer {
+  padding: 1em;
+  margin-top: 15em;
+  margin-bottom: 15em;
+  text-align: center;
+  display: flex;
+  flex-flow: row nowrap;
+  // outline: 2px solid green;
+}
+.about-text {
+  justify-content: center;
+}
+
+.about-text-right {
+  margin-right: 3em;
+  justify-content: flex-end;
+}
+
+.about-text-left {
+  margin-left: 3em;
+  justify-content: flex-start;
+}
+
+.about-footer {
+  margin-top: 50vh;
+  margin-bottom: 50vh;
+  justify-content: center;
+}
