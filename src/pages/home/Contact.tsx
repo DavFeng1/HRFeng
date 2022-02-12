@@ -95,7 +95,10 @@ const Contact = (): JSX.Element => {
         }}
       >
         <div className="contact-box">
-          <a download href="../assets/images/resume.pdf">
+          <a
+            download
+            href="https://drive.google.com/uc?export=download&id=12SSpWMjCMpp4jfYDQXeoTjSJ9YD1wjB2"
+          >
             <DownloadIcon />
           </a>
         </div>

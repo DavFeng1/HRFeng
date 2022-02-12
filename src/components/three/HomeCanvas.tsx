@@ -3,13 +3,7 @@ import * as THREE from 'three';
 import { Suspense, useRef, useEffect } from 'react';
 
 import { useThree, useFrame } from '@react-three/fiber';
-import {
-  useAspect,
-  useProgress,
-  // useScroll,
-  Scroll,
-  ScrollControls,
-} from '@react-three/drei';
+import { useAspect, useProgress } from '@react-three/drei';
 import { Flex, Box } from '@react-three/flex';
 
 import RotatingTorusKnot from '@components/three/RotatingTorusKnot';
@@ -36,6 +30,8 @@ const HomeCanvas = () => {
   useEffect(() => {
     console.log('HomeCanvas.tsx ==> Component mounted');
 
+    gl.setClearAlpha(0);
+
     useHomePageStore.subscribe(
       (state) => (scrollPositionRef.current = state.scrollPosition),
     );
@@ -61,41 +57,35 @@ const HomeCanvas = () => {
     <Suspense fallback={null}>
       <ambientLight intensity={0.5} />
       <pointLight position={[0, 2.5, 0]} />
-      <pointLight position={[100, 200, 100]} />
-      <pointLight position={[-100, -200, -100]} />
       <spotLight
         ref={spotLight}
-        position={[-2.5, 7, 0]}
+        position={[0, 0, 10]}
         penumbra={0.5}
         castShadow
         shadow-mapSize-width={1024}
         shadow-mapSize-height={1024}
       />
 
-      <ScrollControls damping={4} pages={3}>
-        <Scroll>
-          <group ref={groupRef}>
-            <Flex
-              flexDirection="column"
-              size={[vpWidth, vpHeight, 0]}
-              position={[-vpWidth / 2, vpHeight / 2, 0]}
-            >
-              <HomeBackground />
-              <Box
-                flexDirection="column"
-                alignItems="center"
-                justifyContent="center"
-                width="100%"
-                height="100%"
-              >
-                <Box margin={0.05}>
-                  <RotatingTorusKnot />
-                </Box>
-              </Box>
-            </Flex>
-          </group>
-        </Scroll>
-      </ScrollControls>
+      <HomeBackground />
+      <group ref={groupRef}>
+        <Flex
+          flexDirection="column"
+          size={[vpWidth, vpHeight, 0]}
+          position={[-vpWidth / 2, vpHeight / 2, 0]}
+        >
+          <Box
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            width="100%"
+            height="100%"
+          >
+            <Box margin={0.05}>
+              <RotatingTorusKnot />
+            </Box>
+          </Box>
+        </Flex>
+      </group>
     </Suspense>
   );
 };

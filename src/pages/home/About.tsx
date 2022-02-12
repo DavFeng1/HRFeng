@@ -5,7 +5,7 @@ import '@pages/home/About.scss';
 
 const aboutPageHeader: Variants = {
   offscreen: {
-    y: 200,
+    y: 100,
     opacity: 0,
   },
   onscreen: {
@@ -15,16 +15,12 @@ const aboutPageHeader: Variants = {
       type: [0.6, 0.01, 0.5, 0.95],
       duration: 0.8,
     },
-  },
-  exit: {
-    opacity: 0,
-    y: -100,
   },
 };
 
 const aboutPageBody: Variants = {
   offscreen: {
-    y: 200,
+    y: 150,
     opacity: 0,
   },
   onscreen: {
@@ -34,10 +30,6 @@ const aboutPageBody: Variants = {
       type: [0.6, 0.01, 0.5, 0.95],
       duration: 0.8,
     },
-  },
-  exit: {
-    opacity: 0,
-    y: -200,
   },
 };
 
@@ -52,9 +44,6 @@ const aboutPageFooter: Variants = {
       duration: 2.1,
     },
   },
-  exit: {
-    opacity: 0,
-  },
 };
 
 const About = (): JSX.Element => {
@@ -63,28 +52,25 @@ const About = (): JSX.Element => {
       <motion.div
         initial="offscreen"
         whileInView="onscreen"
-        exit="exit"
         variants={aboutPageHeader}
         className="about-header"
       >
-        <Typography fontSize={110}>Welcome</Typography>
+        <Typography fontSize={90}>Hi, I'm David</Typography>
       </motion.div>
       <motion.div
         initial="offscreen"
         whileInView="onscreen"
-        exit="exit"
         variants={aboutPageBody}
         className="about-text"
       >
         <Typography fontSize={40} width={'25ch'}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididu
+          I'm a software engineer with a background in mathematics and
+          physics.
         </Typography>
       </motion.div>
       <motion.div
         initial="offscreen"
         whileInView="onscreen"
-        exit="exit"
         variants={aboutPageBody}
         className="about-text-left"
       >
@@ -96,24 +82,22 @@ const About = (): JSX.Element => {
       <motion.div
         initial="offscreen"
         whileInView="onscreen"
-        exit="exit"
         variants={aboutPageBody}
         className="about-text-right"
       >
         <Typography fontSize={40} width={'25ch'}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          I built these projects with the aim of exploring new technologies
+          but also to provide educational content
         </Typography>
       </motion.div>
       <motion.div
         initial="offscreen"
         whileInView="onscreen"
-        exit="exit"
         variants={aboutPageFooter}
         className="about-footer"
       >
         <Typography fontSize={90} width={'25ch'}>
-          Lorem ipsum dolor sit amet
+          Enjoy your stay
         </Typography>
       </motion.div>
     </div>

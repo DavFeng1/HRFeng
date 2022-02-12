@@ -15,7 +15,6 @@ import LoadingScreen from '@components/react/LoadingScreen';
 
 import About from '@pages/home/About';
 import Landing from '@pages/home/Landing';
-import Projects from '@pages/home/Projects';
 import Contact from '@pages/home/Contact';
 
 type HomePageStoreState = {
@@ -48,7 +47,9 @@ const Home = () => {
     console.log('home.tsx ==> Component mounted');
 
     useHomePageStore.subscribe((state) => {
-      if (state.loadingProgress === 100) setIsLoading(false);
+      if (state.loadingProgress === 100) {
+        setIsLoading(false);
+      }
     });
 
     return () => {

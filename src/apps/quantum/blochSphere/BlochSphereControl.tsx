@@ -1,12 +1,10 @@
 import katex from 'katex';
 
 import { useState, useEffect } from 'react';
-import { Button, Divider, Grid, Typography, Stack } from '@mui/material';
-
+import { Button, Typography, Stack } from '@mui/material';
 import { useStore } from '@pages/BlochSphere';
 
 import ButtonLowercase from '@components/react/ButtonLowercase';
-
 import ParameterControls from '@apps/quantum/blochSphere/ParameterControls';
 
 const BlochSphereControls = () => {

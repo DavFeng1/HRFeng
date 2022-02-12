@@ -40,7 +40,12 @@ const Landing = (): JSX.Element => {
           opacity: opacityRange,
         }}
       >
-        <Typography fontSize={90} width={'40ch'} textAlign={'center'}>
+        <Typography
+          fontSize={'5rem'}
+          max-width={'40ch'}
+          textAlign={'center'}
+          className="responsive-large-text"
+        >
           “How small a thought it takes to fill a life.”
         </Typography>
         <Typography

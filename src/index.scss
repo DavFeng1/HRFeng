@@ -3,7 +3,7 @@
   --magic-number: 0.09719;
   --content-width: 100vw;
   --skew-padding: calc(var(--content-width) * var(--magic-number));
-  --background-color: #000;
+  --background-color: #111;
 }
 
 html {
@@ -75,8 +75,7 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(113, 53, 255);
-
+  background: rgb(118, 110, 136);
   border-radius: 2px;
 }
 

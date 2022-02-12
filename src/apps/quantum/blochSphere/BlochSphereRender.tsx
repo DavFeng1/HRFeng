@@ -7,10 +7,9 @@ import { Canvas, useLoader, useFrame, useThree } from '@react-three/fiber';
 import { useStore } from '@pages/BlochSphere';
 
 import discTexture from '@assets/images/disc.png';
-import GeometricBackground from '@components/three/GeometricBackground';
 
 type BlochSphereRendererProps = {
-  domElement: HTMLDivElement;
+  domElement?: HTMLElement;
 };
 
 const BlochSphere = ({ domElement }: BlochSphereRendererProps) => {
@@ -165,6 +164,7 @@ const BlochSphere = ({ domElement }: BlochSphereRendererProps) => {
         maxDistance={3.5}
         maxPolarAngle={2 * Math.PI}
         domElement={domElement}
+        enableZoom={false}
       />
       <ambientLight intensity={0.5} />
       <pointLight position={[0, 200, 0]} />
@@ -232,9 +232,9 @@ const BlochSphereRender = ({ domElement }: BlochSphereRendererProps) => {
     <Canvas
       gl={{ antialias: true }}
       camera={{ fov: 75, position: [10, 15, 15] }}
-      className="canvas-background grabbable"
+      id="bloch-sphere-canvas"
+      className="grabbable"
     >
-      <GeometricBackground />
       <Suspense fallback={<Fallback />}>
         <BlochSphere domElement={domElement} />
       </Suspense>

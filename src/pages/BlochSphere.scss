@@ -1,40 +1,52 @@
 #bloch-sphere-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
   margin: 1em;
+}
+
+.bloch-sphere-section {
+  position: relative;
+  margin: 1em;
+  max-height: 100vh;
+  // outline: 2px solid red;
 }
 
 // ======================= DESCRIPTION PANEL ===================
 
 #bloch-sphere-description {
-  position: absolute;
   margin: 1em;
   padding: 2em;
-  right: 0;
-  top: 5%;
-  bottom: 5%;
-  width: 25vw;
-  background-color: black;
-  box-shadow: 0 0 1em hsl(250.8, 100%, 50% / 0.75),
-    inset 0 0 0.25em hsl(250.8, 100%, 50% / 0.5);
-  overflow-y: scroll;
 }
 
 .bloch-sphere-description-heading {
+  padding: 0.5rem;
 }
 
-.bloch-sphere-description-body {
-  // outline: 1px solid green;
-  padding: 1em;
+.bloch-sphere-description-text {
+  // outline: 1px solid pink;
+  padding: 1rem;
+  font-size: 1.5rem;
 }
-
 .bloch-sphere-description-accordion {
-  outline: 2px solid green;
+  // outline: 2px solid green;
   background: transparent !important;
 }
 
 #bloch-sphere-description-title {
   padding: 1em;
-  outline: 2px solid green;
+  // outline: 2px solid green;
   background: transparent !important;
+}
+
+// ========================= CANVAS ==========================
+
+#bloch-sphere-canvas {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  z-index: -999;
+  height: 100%;
+  // outline: 3px solid green;
 }
 
 // ================================== CONTROLS PANEL =====================
@@ -50,10 +62,13 @@
 
 #bloch-sphere-controls {
   position: absolute;
+
+  top: 25%;
   margin: 2em;
   padding: 2em;
   width: 25vw;
-  top: 20%;
+
+  // outline: 2px solid green;
 
   // Flex blox
   display: flex;
@@ -62,5 +77,4 @@
   align-items: flex-start;
   align-content: flex-start;
   backdrop-filter: blur(1.5px);
-  background-color: black;
 }
