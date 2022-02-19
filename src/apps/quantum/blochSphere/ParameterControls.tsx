@@ -8,7 +8,7 @@ import Grid from '@mui/material/Grid';
 import Slider from '@mui/material/Slider';
 import MuiInput from '@mui/material/Input';
 
-import { useStore } from '@pages/BlochSphere';
+import { useStore } from '@pages/projects/blochSphere/BlochSphere';
 
 const Input = styled(MuiInput)`
   width: 42px;
@@ -21,26 +21,38 @@ const ParameterControls = () => {
   const katexPhiInnerHTML = { __html: katex.renderToString('\\phi') };
   const katexThetaInnerHTML = { __html: katex.renderToString('\\theta') };
 
-  const handlePhiSliderChange = (event: Event, newValue: number | number[]) => {
+  const handlePhiSliderChange = (
+    event: Event,
+    newValue: number | number[],
+  ) => {
     if (typeof newValue === 'number') {
       useStore.setState({ phi: (newValue * Math.PI) / 180 });
     }
   };
 
-  const handlePhiInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value === '' ? 0 : Number(event.target.value);
+  const handlePhiInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const inputValue =
+      event.target.value === '' ? 0 : Number(event.target.value);
 
     useStore.setState({ phi: (inputValue * Math.PI) / 180 });
   };
 
-  const handleThetaSliderChange = (event: Event, newValue: number | number[]) => {
+  const handleThetaSliderChange = (
+    event: Event,
+    newValue: number | number[],
+  ) => {
     if (typeof newValue === 'number') {
       useStore.setState({ theta: (newValue * Math.PI) / 180 });
     }
   };
 
-  const handleThetaInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value === '' ? 0 : Number(event.target.value);
+  const handleThetaInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const inputValue =
+      event.target.value === '' ? 0 : Number(event.target.value);
 
     useStore.setState({ theta: (inputValue * Math.PI) / 180 });
   };
@@ -49,7 +61,10 @@ const ParameterControls = () => {
     <>
       <Grid container spacing={2} alignItems="center">
         <Grid item>
-          <div id="input-theta-slider" dangerouslySetInnerHTML={katexThetaInnerHTML} />
+          <div
+            id="input-theta-slider"
+            dangerouslySetInnerHTML={katexThetaInnerHTML}
+          />
         </Grid>
         <Grid item xs>
           <Slider
@@ -79,7 +94,10 @@ const ParameterControls = () => {
 
       <Grid container spacing={2} alignItems="center">
         <Grid item>
-          <div id="input-phi-slider" dangerouslySetInnerHTML={katexPhiInnerHTML} />
+          <div
+            id="input-phi-slider"
+            dangerouslySetInnerHTML={katexPhiInnerHTML}
+          />
         </Grid>
         <Grid item xs>
           <Slider

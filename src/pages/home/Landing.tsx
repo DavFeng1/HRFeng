@@ -1,60 +1,79 @@
 import { Typography } from '@mui/material';
-import { motion, useTransform } from 'framer-motion';
-import { useHomePageStore } from '@pages/home';
+import { motion, useTransform, Variants } from 'framer-motion';
 import { cubicBezier } from 'popmotion';
+import { useHomePageStore } from '@pages/home/HomeStore';
 
 import '@pages/home/Landing.scss';
+
+const marqueeVariant: Variants = {
+  animate: {
+    x: [0, -1400],
+    transition: {
+      x: {
+        repeat: Infinity,
+        repeatType: 'loop',
+        duration: 15,
+        ease: 'linear',
+      },
+    },
+  },
+};
+
+const captionVariant: Variants = {
+  initial: {
+    opacity: 0,
+    y: -200,
+  },
+
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      ease: [0.1, 0.74, 0.4, 0.9],
+      duration: 1.8,
+    },
+  },
+};
 
 const Landing = (): JSX.Element => {
   const scrollPosition = useHomePageStore((state) => state.scrollPosition);
 
-  const opacityRange = useTransform(scrollPosition, [0, 0.3], [1, 0], {
-    ease: [cubicBezier(0.9, 0.7, 0.5, 0.3)],
-  });
+  // const opacityRange = useTransform(scrollPosition, [0, 0.3], [1, 0], {
+  //   ease: [cubicBezier(0.9, 0.7, 0.5, 0.3)],
+  // });
 
   return (
     <div className="page-container landing-page-container">
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{
-          opacity: 1,
-          transition: {
-            duration: 0.8,
-          },
-        }}
+        variants={marqueeVariant}
+        initial="initial"
+        animate="animate"
+        className="marquee"
       >
-        {/* <Typography fontSize={150}> Welcome </Typography> */}
+        <Typography
+          component="span"
+          fontWeight="bold"
+          fontSize={250}
+          letterSpacing={7}
+        >
+          {'WELCOME WELCOME WELCOME WELCOME'}
+        </Typography>
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, x: -90 }}
-        animate={{
-          opacity: 1,
-          x: 0,
-          transition: {
-            ease: [0.1, 0.74, 0.4, 0.9],
-            duration: 1.2,
-          },
-        }}
-        style={{
-          opacity: opacityRange,
-        }}
+        variants={captionVariant}
+        initial="initial"
+        animate="animate"
+        className="landing-caption"
       >
-        <Typography
-          fontSize={'5rem'}
-          max-width={'40ch'}
-          textAlign={'center'}
-          className="responsive-large-text"
-        >
-          “How small a thought it takes to fill a life.”
+        <Typography fontSize={20} letterSpacing={6}>
+          DAVID FENG
         </Typography>
-        <Typography
-          fontSize={40}
-          fontStyle={'italics'}
-          width={'40ch'}
-          textAlign={'center'}
-        >
-          ― Ludwig Wittgenstein
+        <Typography fontSize={20} letterSpacing={6}>
+          SOFTWARE ENGINEER
+        </Typography>
+        <Typography fontSize={20} letterSpacing={6}>
+          BASED IN TORONTO
         </Typography>
       </motion.div>
     </div>

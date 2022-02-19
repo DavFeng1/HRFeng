@@ -75,8 +75,8 @@ const About = (): JSX.Element => {
         className="about-text-left"
       >
         <Typography fontSize={40} width={'25ch'}>
-          Here you'll find a collection of interactive animations inspired
-          by concepts from these fields.
+          I've worked primarily as a software engineer at numerous startups
+          in the Toronto and Bay Area.
         </Typography>
       </motion.div>
       <motion.div
@@ -86,8 +86,21 @@ const About = (): JSX.Element => {
         className="about-text-right"
       >
         <Typography fontSize={40} width={'25ch'}>
-          I built these projects with the aim of exploring new technologies
-          but also to provide educational content
+          Here you'll find a collection of interactive animations projects
+          I've been working on.
+        </Typography>
+      </motion.div>
+
+      <motion.div
+        initial="offscreen"
+        whileInView="onscreen"
+        variants={aboutPageBody}
+        className="about-text-left"
+      >
+        <Typography fontSize={40} width={'25ch'}>
+          Mathematics and physics is a passion of mines and I use these
+          projects as a means to explore these fields while learning new
+          technologies.
         </Typography>
       </motion.div>
       <motion.div
