@@ -28,7 +28,7 @@ const HomeBackground = () => {
   starGeometry.setFromPoints(vertices);
 
   const starMaterial = new THREE.PointsMaterial({
-    color: 0xfffff,
+    color: 0xd7d3ce,
     size: 0.5,
     map: useLoader(THREE.TextureLoader, discTexture),
     alphaTest: 0.5,

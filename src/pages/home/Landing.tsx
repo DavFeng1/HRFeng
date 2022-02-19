@@ -1,9 +1,23 @@
 import { Typography } from '@mui/material';
-import { motion, useTransform } from 'framer-motion';
-import { useHomePageStore } from '@pages/home';
+import { motion, useTransform, Variants } from 'framer-motion';
 import { cubicBezier } from 'popmotion';
+import { useHomePageStore } from '@pages/home/HomeStore';
 
 import '@pages/home/Landing.scss';
+
+const marqueeVariant: Variants = {
+  animate: {
+    x: [0, -1400],
+    transition: {
+      x: {
+        repeat: Infinity,
+        repeatType: 'loop',
+        duration: 5,
+        ease: 'linear',
+      },
+    },
+  },
+};
 
 const Landing = (): JSX.Element => {
   const scrollPosition = useHomePageStore((state) => state.scrollPosition);
@@ -15,15 +29,19 @@ const Landing = (): JSX.Element => {
   return (
     <div className="page-container landing-page-container">
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{
-          opacity: 1,
-          transition: {
-            duration: 0.8,
-          },
-        }}
+        variants={marqueeVariant}
+        initial="initial"
+        animate="animate"
+        className="marquee"
       >
-        {/* <Typography fontSize={150}> Welcome </Typography> */}
+        <Typography
+          component="span"
+          fontWeight="bold"
+          fontSize={250}
+          letterSpacing={7}
+        >
+          {'WELCOME WELCOME WELCOME WELCOME'}
+        </Typography>
       </motion.div>
 
       <motion.div
@@ -39,22 +57,16 @@ const Landing = (): JSX.Element => {
         style={{
           opacity: opacityRange,
         }}
+        className="landing-caption"
       >
-        <Typography
-          fontSize={'5rem'}
-          max-width={'40ch'}
-          textAlign={'center'}
-          className="responsive-large-text"
-        >
-          “How small a thought it takes to fill a life.”
+        <Typography variant="caption" fontSize={25} letterSpacing={6}>
+          DAVID FENG
         </Typography>
-        <Typography
-          fontSize={40}
-          fontStyle={'italics'}
-          width={'40ch'}
-          textAlign={'center'}
-        >
-          ― Ludwig Wittgenstein
+        <Typography fontSize={25} fontStyle={'italics'} letterSpacing={6}>
+          SOFTWARE ENGINEER
+        </Typography>
+        <Typography fontSize={25} fontStyle={'italics'} letterSpacing={6}>
+          BASED IN TORONTO
         </Typography>
       </motion.div>
     </div>

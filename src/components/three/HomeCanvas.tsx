@@ -1,27 +1,23 @@
 import * as THREE from 'three';
 
 import { Suspense, useRef, useEffect } from 'react';
-
 import { useThree, useFrame } from '@react-three/fiber';
 import { useAspect, useProgress } from '@react-three/drei';
 import { Flex, Box } from '@react-three/flex';
+import useHomePageStore, {
+  useHomePageControls,
+} from '@pages/home/HomeStore';
 
 import RotatingTorusKnot from '@components/three/RotatingTorusKnot';
 import HomeBackground from '@components/three/HomeBackground';
 
-import { useHomePageStore } from '@pages/home';
-import { MotionValue } from 'framer-motion';
-
 const HomeCanvas = () => {
-  // TODO: investigate why this ref is lost when switching pages
-  const scrollPositionRef = useRef<MotionValue<number>>();
-
-  // const scrollPosition = useScroll();
-  const groupRef = useRef<THREE.Group>();
+  const scrollGroupRef = useRef<THREE.Group>();
   const spotLight = useRef();
   const { gl, size } = useThree();
   const [vpWidth, vpHeight] = useAspect(size.width, size.height);
   const progress = useProgress();
+  const { scrollPosition } = useHomePageControls();
 
   useEffect(() => {
     useHomePageStore.setState({ loadingProgress: progress.progress });
@@ -32,10 +28,6 @@ const HomeCanvas = () => {
 
     gl.setClearAlpha(0);
 
-    useHomePageStore.subscribe(
-      (state) => (scrollPositionRef.current = state.scrollPosition),
-    );
-
     return () => {
       console.log('HomeCanvas.tsx ==> Component unmounted ==> gl.dispose');
       gl.dispose();
@@ -45,9 +37,9 @@ const HomeCanvas = () => {
   const vec = new THREE.Vector3();
 
   useFrame((state, delta) => {
-    if (groupRef.current && scrollPositionRef.current) {
-      groupRef.current.position.lerp(
-        vec.set(0, 20 * scrollPositionRef.current.get(), 0),
+    if (scrollGroupRef.current) {
+      scrollGroupRef.current.position.lerp(
+        vec.set(0, 20 * scrollPosition.get(), 0),
         0.3,
       );
     }
@@ -65,9 +57,9 @@ const HomeCanvas = () => {
         shadow-mapSize-width={1024}
         shadow-mapSize-height={1024}
       />
-
       <HomeBackground />
-      <group ref={groupRef}>
+
+      <group ref={scrollGroupRef}>
         <Flex
           flexDirection="column"
           size={[vpWidth, vpHeight, 0]}

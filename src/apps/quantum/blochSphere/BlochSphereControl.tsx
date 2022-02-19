@@ -2,7 +2,7 @@ import katex from 'katex';
 
 import { useState, useEffect } from 'react';
 import { Button, Typography, Stack } from '@mui/material';
-import { useStore } from '@pages/BlochSphere';
+import { useStore } from '@pages/projects/blochSphere/BlochSphere';
 
 import ButtonLowercase from '@components/react/ButtonLowercase';
 import ParameterControls from '@apps/quantum/blochSphere/ParameterControls';
@@ -56,7 +56,6 @@ const BlochSphereControls = () => {
   };
 
   const setMinusState = () => {
-    console.log('set minus');
     useStore.setState({
       phi: Math.PI,
       theta: Math.PI / 2,
@@ -64,8 +63,6 @@ const BlochSphereControls = () => {
   };
 
   const applyPauliX = () => {
-    console.log('pauli x');
-
     const currTheta = useStore.getState().theta;
     const currPhi = useStore.getState().phi;
 
@@ -76,8 +73,6 @@ const BlochSphereControls = () => {
   };
 
   const applyPauliY = () => {
-    console.log('pauli Y');
-
     const currTheta = useStore.getState().theta;
     const currPhi = useStore.getState().phi;
 
@@ -88,16 +83,8 @@ const BlochSphereControls = () => {
   };
 
   const applyPauliZ = () => {
-    console.log('pauli z');
     const currTheta = useStore.getState().theta;
     const currPhi = useStore.getState().phi;
-
-    const neww = {
-      phi: (3 * Math.PI + currPhi) % Math.PI,
-      theta: currTheta,
-    };
-
-    console.log(neww);
 
     useStore.setState({
       phi: (3 * Math.PI + currPhi) % Math.PI,
@@ -106,8 +93,6 @@ const BlochSphereControls = () => {
   };
 
   const applyHadamard = () => {
-    console.log('hadamard');
-
     const currTheta = useStore.getState().theta;
     const currPhi = useStore.getState().phi;
 
@@ -131,12 +116,12 @@ const BlochSphereControls = () => {
   return (
     <div id="bloch-sphere-controls" className="no-select">
       <div className="bloch-sphere-controls-section">
-        <Typography align="center" sx={{ p: '0.5em' }}>
+        <Typography variant="h4" align="center" sx={{ p: '0.5em' }}>
           States
         </Typography>
         <Stack direction="row" spacing={3}>
           <div>
-            <Typography variant="caption"> Base States </Typography>
+            <Typography variant="h6"> Base States </Typography>
             <Stack direction="row" spacing={3}>
               <Button
                 variant="contained"
@@ -155,7 +140,7 @@ const BlochSphereControls = () => {
             </Stack>
           </div>
           <div>
-            <Typography variant="caption">Superposition States</Typography>
+            <Typography variant="h6">Superposition States</Typography>
             <Stack direction="row" spacing={3}>
               <Button
                 variant="contained"
@@ -177,7 +162,7 @@ const BlochSphereControls = () => {
       </div>
 
       <div className="bloch-sphere-controls-section">
-        <Typography align="center" sx={{ p: '0.5em' }}>
+        <Typography variant="h4" align="center" sx={{ p: '0.5em' }}>
           Operators
         </Typography>
         <Stack direction="row" spacing={3}>
@@ -213,14 +198,14 @@ const BlochSphereControls = () => {
       </div>
 
       <div className="bloch-sphere-controls-section">
-        <Typography align="center" sx={{ p: '0.5em' }}>
+        <Typography variant="h4" align="center" sx={{ p: '0.5em' }}>
           State Parameters
         </Typography>
         <ParameterControls />
       </div>
 
       <div className="bloch-sphere-controls-section">
-        <Typography align="center" sx={{ p: '0.5em' }}>
+        <Typography variant="h4" align="center" sx={{ p: '0.5em' }}>
           Current state
         </Typography>
 

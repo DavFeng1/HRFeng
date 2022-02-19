@@ -2,8 +2,7 @@
   --skew-amount: 15deg;
   --magic-number: 0.09719;
   --content-width: 100vw;
-  --skew-padding: calc(var(--content-width) * var(--magic-number));
-  --background-color: #111;
+  --background-color: #1c1f24;
 }
 
 html {
@@ -70,7 +69,7 @@ a {
 }
 
 ::-webkit-scrollbar {
-  width: 3px;
+  width: 5px;
   background-color: transparent;
 }
 
@@ -108,21 +107,7 @@ a {
 @font-face {
   font-family: 'Rany';
   font-weight: bold;
-  src: local('Rany'), url(./assets/fonts/Rany-Light.otf) format('opentype');
-}
-
-@font-face {
-  font-family: 'Rany';
-  font-weight: bolder;
-  src: local('Rany'), url(./assets/fonts/Rany-Light.otf) format('opentype');
-}
-
-@font-face {
-  font-family: 'Rany';
-  font-weight: lighter;
-  font-style: italic;
-  src: local('Rany'),
-    url(./assets/fonts/Rany-Light-Italic.otf) format('opentype');
+  src: local('Rany'), url(./assets/fonts/Rany-Bold.otf) format('opentype');
 }
 
 @font-face {
@@ -135,7 +120,7 @@ a {
 
 @font-face {
   font-family: 'Rany';
-  font-weight: bold;
+  font-weight: medium;
   font-style: italic;
   src: local('Rany'),
     url(./assets/fonts/Rany-Medium-Italic.otf) format('opentype');
@@ -143,7 +128,7 @@ a {
 
 @font-face {
   font-family: 'Rany';
-  font-weight: bolder;
+  font-weight: bold;
   font-style: italic;
   src: local('Rany'),
     url(./assets/fonts/Rany-Bold-Italic.otf) format('opentype');

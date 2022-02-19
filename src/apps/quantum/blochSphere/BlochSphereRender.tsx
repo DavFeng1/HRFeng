@@ -4,15 +4,11 @@ import { Suspense, useRef, useEffect } from 'react';
 import { OrbitControls, Text } from '@react-three/drei';
 import { Canvas, useLoader, useFrame, useThree } from '@react-three/fiber';
 
-import { useStore } from '@pages/BlochSphere';
+import { useStore } from '@pages/projects/blochSphere/BlochSphere';
 
 import discTexture from '@assets/images/disc.png';
 
-type BlochSphereRendererProps = {
-  domElement?: HTMLElement;
-};
-
-const BlochSphere = ({ domElement }: BlochSphereRendererProps) => {
+const BlochSphere = () => {
   const xRingRef = useRef<THREE.Object3D>(null);
   const yRingRef = useRef<THREE.Object3D>(null);
   const zRingRef = useRef<THREE.Object3D>(null);
@@ -160,16 +156,12 @@ const BlochSphere = ({ domElement }: BlochSphereRendererProps) => {
         args={[75, window.innerHeight / window.innerWidth, 0.1, 10000]}
       />
       <OrbitControls
-        minDistance={2.5}
-        maxDistance={3.5}
+        minDistance={1.5}
+        maxDistance={2.5}
         maxPolarAngle={2 * Math.PI}
-        domElement={domElement}
         enableZoom={false}
       />
       <ambientLight intensity={0.5} />
-      <pointLight position={[0, 200, 0]} />
-      <pointLight position={[100, 200, 100]} />
-      <pointLight position={[-100, -200, -100]} />
       <mesh>
         <arrowHelper args={[axisX, origin, 1.3, 0x0080ff, 0.1]} />
         <arrowHelper args={[axisY, origin, 1.3, 0x0080ff, 0.1]} />
@@ -227,7 +219,7 @@ const Fallback = () => {
   return <mesh></mesh>;
 };
 
-const BlochSphereRender = ({ domElement }: BlochSphereRendererProps) => {
+const BlochSphereRender = () => {
   return (
     <Canvas
       gl={{ antialias: true }}
@@ -236,7 +228,7 @@ const BlochSphereRender = ({ domElement }: BlochSphereRendererProps) => {
       className="grabbable"
     >
       <Suspense fallback={<Fallback />}>
-        <BlochSphere domElement={domElement} />
+        <BlochSphere />
       </Suspense>
     </Canvas>
   );

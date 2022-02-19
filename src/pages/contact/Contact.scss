@@ -1,0 +1,44 @@
+.contact-header {
+  // Flex box settings
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+
+  // Formatting
+  margin-top: 10rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
+  height: 15rem;
+  width: 100%;
+  text-align: center;
+}
+
+#contact-item-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+}
+
+.contact-item {
+  min-height: 10vh;
+  margin-left: 15vw;
+  font-size: 5rem;
+
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-item:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.contact-item-detail {
+  margin-left: 3rem;
+}

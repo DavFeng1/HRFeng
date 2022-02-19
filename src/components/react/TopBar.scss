@@ -1,38 +1,73 @@
-.top-bar-button {
-  padding: 0.5em;
-  text-align: center;
-  height: 50px;
+// ====================== Top Bar =======================
+.top-bar {
+  box-shadow: none !important;
+  background: transparent !important;
 }
 
+.top-bar-button {
+  position: relative;
+  margin: 1em;
+  text-align: center;
+  height: 30px;
+  user-select: none;
+}
+
+// ====================== Button ==========================
 .top-bar-button:hover {
-  text-shadow: 0 0 1.5em hsl(250.8, 100%, 50% / 0.7),
-    0 0 1em hsl(250.8, 100%, 50% / 0.4),
-    0 0 0.5em hsl(250.8, 100%, 50% / 0.2);
+  cursor: pointer;
+}
+
+.top-bar-button::after {
+  content: '';
+
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.top-bar-button:hover::after {
+  // background-color: white;
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
 
 .top-bar-text {
-  color: hsl(250.8, 100%, 50% / 0.5);
   text-decoration: none;
-
-  text-shadow: 0 0 0.1em hsl(250.8, 100%, 50% / 0.8),
-    0 0 0.125em hsl(250.8, 100%, 50% / 0.5),
-    0 0 0.25em hsl(250.8, 100%, 50% / 0.2);
 }
 
-.top-bar-shadow {
-  content: '';
+// =========================== Home Button =================
+
+.top-bar-home-button {
   position: relative;
-  width: 10em;
-  height: 3em;
-  top: -60%;
-
-  transform: perspective(1em) rotateX(40deg) translateZ(-1em)
-    scale(1, 0.35);
-
-  filter: blur(1em);
-  opacity: 0.7;
+  user-select: none;
+  width: 5ch;
 }
 
-.top-bar-button:hover > .top-bar-shadow {
-  background-color: hsl(250.8, 100%, 50% / 0.7);
+.top-bar-home-button:hover {
+  cursor: pointer;
+}
+
+.top-bar-home-button::after {
+  content: '';
+  position: absolute;
+  width: 6.5ch;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.top-bar-home-button:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }

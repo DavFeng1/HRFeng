@@ -6,17 +6,24 @@
 }
 
 .bloch-sphere-section {
-  position: relative;
   margin: 1em;
-  max-height: 100vh;
   // outline: 2px solid red;
+}
+
+#bloch-sphere-render-section {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  margin: 1rem;
+  padding: 5rem;
+  // outline: 2px solid pink;
 }
 
 // ======================= DESCRIPTION PANEL ===================
 
 #bloch-sphere-description {
-  margin: 1em;
-  padding: 2em;
+  margin: 1rem;
+  padding: 2rem;
 }
 
 .bloch-sphere-description-heading {
@@ -24,34 +31,28 @@
 }
 
 .bloch-sphere-description-text {
-  // outline: 1px solid pink;
   padding: 1rem;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 .bloch-sphere-description-accordion {
-  // outline: 2px solid green;
   background: transparent !important;
 }
 
 #bloch-sphere-description-title {
   padding: 1em;
-  // outline: 2px solid green;
   background: transparent !important;
 }
 
 // ========================= CANVAS ==========================
 
 #bloch-sphere-canvas {
-  position: relative;
   aspect-ratio: 4 / 3;
-  z-index: -999;
-  height: 100%;
   // outline: 3px solid green;
 }
 
 // ================================== CONTROLS PANEL =====================
 .bloch-sphere-controls-section {
-  padding: 0.5em;
+  padding: 1em;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
@@ -61,14 +62,14 @@
 }
 
 #bloch-sphere-controls {
-  position: absolute;
-
   top: 25%;
-  margin: 2em;
   padding: 2em;
-  width: 25vw;
+  width: 35vw;
 
-  // outline: 2px solid green;
+  border-radius: 2rem;
+  border: 2px solid #4a535d;
+
+  transition: border 0.4s;
 
   // Flex blox
   display: flex;
@@ -76,5 +77,8 @@
   justify-content: center;
   align-items: flex-start;
   align-content: flex-start;
-  backdrop-filter: blur(1.5px);
+}
+
+#bloch-sphere-controls:hover {
+  border-color: white;
 }

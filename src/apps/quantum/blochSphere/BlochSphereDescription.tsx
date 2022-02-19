@@ -22,7 +22,7 @@ const BlochSphereDescription = () => {
   return (
     <div id="bloch-sphere-description">
       <div id="bloch-sphere-description-title">
-        <Typography fontSize={70}>The Bloch Sphere</Typography>
+        <Typography fontSize={60}>The Bloch Sphere</Typography>
         <Divider />
         <div className="bloch-sphere-description-text">{overviewText}</div>
       </div>
@@ -30,7 +30,7 @@ const BlochSphereDescription = () => {
       <Accordion className="bloch-sphere-description-accordion">
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <div className="bloch-sphere-description-heading">
-            <Typography fontSize={40}> Background </Typography>
+            <Typography fontSize={30}> Background </Typography>
           </div>
         </AccordionSummary>
         <AccordionDetails>
@@ -42,7 +42,7 @@ const BlochSphereDescription = () => {
       <Accordion className="bloch-sphere-description-accordion">
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <div className="bloch-sphere-description-heading">
-            <Typography fontSize={40}> States </Typography>
+            <Typography fontSize={30}> States </Typography>
           </div>
         </AccordionSummary>
         <AccordionDetails>
@@ -54,7 +54,7 @@ const BlochSphereDescription = () => {
       <Accordion className="bloch-sphere-description-accordion">
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <div className="bloch-sphere-description-heading">
-            <Typography fontSize={40}>
+            <Typography fontSize={30}>
               <Latex>Operators</Latex>
             </Typography>
           </div>

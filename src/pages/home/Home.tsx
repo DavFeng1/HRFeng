@@ -1,42 +1,14 @@
 import { useEffect, useState } from 'react';
-
 import { Canvas } from '@react-three/fiber';
-
-import { useViewportScroll, MotionValue } from 'framer-motion';
-
-import create, { SetState, GetState } from 'zustand';
-import {
-  StoreApiWithSubscribeWithSelector,
-  subscribeWithSelector,
-} from 'zustand/middleware';
-
+import { motion, useViewportScroll } from 'framer-motion';
+import { useHomePageStore } from '@pages/home/HomeStore';
 import HomeCanvas from '@components/three/HomeCanvas';
 import LoadingScreen from '@components/react/LoadingScreen';
-
 import About from '@pages/home/About';
 import Landing from '@pages/home/Landing';
-import Contact from '@pages/home/Contact';
-
-type HomePageStoreState = {
-  scrollPosition: MotionValue<number>;
-  loadingProgress: number;
-};
-
-export const useHomePageStore = create<
-  HomePageStoreState,
-  SetState<HomePageStoreState>,
-  GetState<HomePageStoreState>,
-  StoreApiWithSubscribeWithSelector<HomePageStoreState>
->(
-  subscribeWithSelector(() => ({
-    scrollPosition: new MotionValue<number>(0),
-    loadingProgress: 0,
-  })),
-);
 
 const Home = () => {
   const { scrollYProgress } = useViewportScroll();
-
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -53,19 +25,16 @@ const Home = () => {
     });
 
     return () => {
+      useHomePageStore.destroy();
       console.log('home.tsx ==> Component unmounted');
     };
   }, []);
 
   return (
-    <>
-      {/* ========================THREE JS CANVAS BACKGROUND ===================*/}
-
+    <motion.div exit={{ opacity: 0 }}>
       <Canvas className="canvas-background">
         <HomeCanvas />
       </Canvas>
-
-      {/* ======================== PAGE CONTENT =================================*/}
 
       {isLoading ? (
         <LoadingScreen />
@@ -73,11 +42,9 @@ const Home = () => {
         <>
           <Landing />
           <About />
-          {/* <Projects /> */}
-          <Contact />
         </>
       )}
-    </>
+    </motion.div>
   );
 };
 
