@@ -47,14 +47,20 @@
 .projects-card-link:hover {
   cursor: pointer;
 }
+
 .projects-card-link:after {
   content: '';
   display: block;
   width: 100%;
   opacity: 0;
+  border-bottom: 1px solid;
+  border-top: 1px solid;
+  transition: opacity 0.35s, -webkit-transform 0.35s;
   -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
-  transition: opacity 0.35s, transform 0.35s;
+  -webkit-transform: scale(0, 1) 0.35s;
+  transform: scale(0, 1);
 }
+
 .projects-card-link:hover:after {
   opacity: 1;
   -webkit-transform: scale(1);

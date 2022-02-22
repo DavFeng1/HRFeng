@@ -12,7 +12,7 @@ const marqueeVariant: Variants = {
       x: {
         repeat: Infinity,
         repeatType: 'loop',
-        duration: 5,
+        duration: 15,
         ease: 'linear',
       },
     },
@@ -66,13 +66,13 @@ const Landing = (): JSX.Element => {
         animate="animate"
         className="landing-caption"
       >
-        <Typography variant="caption" fontSize={25} letterSpacing={6}>
+        <Typography fontSize={20} letterSpacing={6}>
           DAVID FENG
         </Typography>
-        <Typography fontSize={25} fontStyle={'italics'} letterSpacing={6}>
+        <Typography fontSize={20} letterSpacing={6}>
           SOFTWARE ENGINEER
         </Typography>
-        <Typography fontSize={25} fontStyle={'italics'} letterSpacing={6}>
+        <Typography fontSize={20} letterSpacing={6}>
           BASED IN TORONTO
         </Typography>
       </motion.div>
