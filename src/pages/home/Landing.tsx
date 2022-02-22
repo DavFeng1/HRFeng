@@ -19,12 +19,28 @@ const marqueeVariant: Variants = {
   },
 };
 
+const captionVariant: Variants = {
+  initial: {
+    opacity: 0,
+    y: -200,
+  },
+
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      ease: [0.1, 0.74, 0.4, 0.9],
+      duration: 1.8,
+    },
+  },
+};
+
 const Landing = (): JSX.Element => {
   const scrollPosition = useHomePageStore((state) => state.scrollPosition);
 
-  const opacityRange = useTransform(scrollPosition, [0, 0.3], [1, 0], {
-    ease: [cubicBezier(0.9, 0.7, 0.5, 0.3)],
-  });
+  // const opacityRange = useTransform(scrollPosition, [0, 0.3], [1, 0], {
+  //   ease: [cubicBezier(0.9, 0.7, 0.5, 0.3)],
+  // });
 
   return (
     <div className="page-container landing-page-container">
@@ -45,18 +61,9 @@ const Landing = (): JSX.Element => {
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, x: -90 }}
-        animate={{
-          opacity: 1,
-          x: 0,
-          transition: {
-            ease: [0.1, 0.74, 0.4, 0.9],
-            duration: 1.2,
-          },
-        }}
-        style={{
-          opacity: opacityRange,
-        }}
+        variants={captionVariant}
+        initial="initial"
+        animate="animate"
         className="landing-caption"
       >
         <Typography variant="caption" fontSize={25} letterSpacing={6}>
