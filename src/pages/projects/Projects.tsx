@@ -71,7 +71,7 @@ const Projects = (): JSX.Element => {
         </div>
         <motion.div className="projects-card" variants={cardVariants}>
           <div className="projects-card-description">
-            <Typography variant="h1" fontWeight="bold" fontSize={150}>
+            <Typography variant="h1" fontWeight="bold" fontSize={100}>
               Bloch Sphere
             </Typography>
             <Typography
@@ -95,7 +95,7 @@ const Projects = (): JSX.Element => {
         </motion.div>
         <motion.div className="projects-card" variants={cardVariants}>
           <div className="projects-card-description">
-            <Typography variant="h1" fontWeight="bold" fontSize={150}>
+            <Typography variant="h1" fontWeight="bold" fontSize={100}>
               Lorentz Transformations
             </Typography>
             <Typography
@@ -115,7 +115,7 @@ const Projects = (): JSX.Element => {
         </motion.div>
         <motion.div className="projects-card" variants={cardVariants}>
           <div className="projects-card-description">
-            <Typography variant="h1" fontWeight="bold" fontSize={150}>
+            <Typography variant="h1" fontWeight="bold" fontSize={100}>
               Stereographic Projection
             </Typography>
             <Typography
