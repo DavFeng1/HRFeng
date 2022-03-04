@@ -1,19 +1,17 @@
-# 🚀 Welcome to your new awesome project!
+# 🚀 My Personal Website
 
-This project has been created using **webpack-cli**, you can now run
+### Stack
 
-```
-npm run build
-```
+- Typescript - React
+- Sass for styling
+- ThreeJS for 3D animations
 
-or
+### To run locally
 
-```
-yarn build
-```
+`npm start`
 
-to bundle your application
+### Projects included
 
-# To DO
-
-- smoothen loading progress
+- Bloch Sphere simulation (see https://en.wikipedia.org/wiki/Bloch_sphere)
+- Lorentz Transformation simulation WIP (see https://en.wikipedia.org/wiki/Lorentz_transformation)
+- Stereographic Projection simulation WIP (see https://en.wikipedia.org/wiki/Stereographic_projection)
