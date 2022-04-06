@@ -76,7 +76,7 @@ const About = (): JSX.Element => {
       >
         <Typography fontSize={40} width={'25ch'}>
           I've worked primarily as a software engineer at numerous startups
-          in the Toronto and Bay Area.
+          in the Toronto and Bay Area
         </Typography>
       </motion.div>
       <motion.div
@@ -86,8 +86,7 @@ const About = (): JSX.Element => {
         className="about-text-right"
       >
         <Typography fontSize={40} width={'25ch'}>
-          Here you'll find a collection of interactive animations projects
-          I've been working on.
+          Here you'll find some interactive animations I've been working on
         </Typography>
       </motion.div>
 
@@ -98,9 +97,8 @@ const About = (): JSX.Element => {
         className="about-text-left"
       >
         <Typography fontSize={40} width={'25ch'}>
-          Mathematics and physics is a passion of mines and I use these
-          projects as a means to explore these fields while learning new
-          technologies.
+          Mathematics and physics is a passion of mines and I'm always
+          looking for new ways to explore these subjects
         </Typography>
       </motion.div>
       <motion.div

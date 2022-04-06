@@ -66,7 +66,7 @@ const Projects = (): JSX.Element => {
           </Typography>
 
           <Typography variant="h3" textAlign="center">
-            Elucidating big ideas in mathematics and physics
+            I'm constantly updating this list so stay tuned!
           </Typography>
         </div>
         <motion.div className="projects-card" variants={cardVariants}>
@@ -96,7 +96,7 @@ const Projects = (): JSX.Element => {
         <motion.div className="projects-card" variants={cardVariants}>
           <div className="projects-card-description">
             <Typography variant="h1" fontWeight="bold" fontSize={100}>
-              Lorentz Transformations
+              L2Learn
             </Typography>
             <Typography
               variant="button"
@@ -104,19 +104,24 @@ const Projects = (): JSX.Element => {
               letterSpacing={5}
               className="projects-card-description-text"
             >
-              In special and general relativity, a Lorentz transformation
-              is a transformation on spacetime which preserves a Lorentzian
-              metric. It is used to transform between different frames of
-              refernce.
+              Ongoing project where I derive and implement various machine
+              learning models from scratch (zero dependencies)
             </Typography>
           </div>
 
-          <div className="projects-card-link">Coming Soon</div>
+          <div
+            className="projects-card-link"
+            onClick={(e) =>
+              window.open('https://github.com/DavFeng1/L2Learn')
+            }
+          >
+            View Project
+          </div>
         </motion.div>
         <motion.div className="projects-card" variants={cardVariants}>
           <div className="projects-card-description">
             <Typography variant="h1" fontWeight="bold" fontSize={100}>
-              Stereographic Projection
+              Hypercore
             </Typography>
             <Typography
               variant="button"
@@ -124,13 +129,20 @@ const Projects = (): JSX.Element => {
               letterSpacing={5}
               className="projects-card-description-text"
             >
-              In geometry, a stereographic projection is a mapping from the
-              sphere to two-dimensional Euclidean space. It is an important
-              concept that is used across many fields within pure
-              mathematics and physics.
+              Hypercore is a toy blockchain I wrote in Rust. I used this
+              project as a way to learn the Rust programming language as
+              well as the necessary concepts from cryptography used in
+              blockchain technology
             </Typography>
           </div>
-          <div className="projects-card-link">Coming Soon</div>
+          <div
+            className="projects-card-link"
+            onClick={(e) =>
+              window.open('https://github.com/DavFeng1/Hypercore')
+            }
+          >
+            View Project
+          </div>
         </motion.div>
       </motion.div>
     </div>
