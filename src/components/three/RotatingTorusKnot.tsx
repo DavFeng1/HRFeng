@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 
 const RotatingTorusKnot = () => {
-  const isoRef = useRef<THREE.Mesh>();
+  const isoRef = useRef<THREE.Mesh>(null);
 
   const isoGeometry = new THREE.IcosahedronGeometry(1, 0);
   const isoMaterial = new THREE.MeshPhysicalMaterial({

@@ -12,8 +12,8 @@ import RotatingTorusKnot from '@components/three/RotatingTorusKnot';
 import HomeBackground from '@components/three/HomeBackground';
 
 const HomeCanvas = () => {
-  const scrollGroupRef = useRef<THREE.Group>();
-  const spotLight = useRef();
+  const scrollGroupRef = useRef<THREE.Group>(null);
+  const spotLight = useRef(null);
   const { gl, size } = useThree();
   const [vpWidth, vpHeight] = useAspect(size.width, size.height);
   const progress = useProgress();

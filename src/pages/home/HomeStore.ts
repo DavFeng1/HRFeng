@@ -2,6 +2,7 @@ import { MotionValue } from 'framer-motion';
 import create, { SetState, GetState } from 'zustand';
 import shallow from 'zustand/shallow';
 
+
 import {
   StoreApiWithSubscribeWithSelector,
   subscribeWithSelector,
@@ -19,7 +20,7 @@ export const useHomePageStore = create<
   StoreApiWithSubscribeWithSelector<HomePageStoreState>
 >(
   subscribeWithSelector(() => ({
-    scrollPosition: new MotionValue<number>(0),
+    scrollPosition: new MotionValue<number>(),
     loadingProgress: 0,
   })),
 );

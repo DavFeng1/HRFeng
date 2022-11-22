@@ -9,7 +9,7 @@ import discTexture from '@assets/images/disc.png';
 const HomeBackground = () => {
   const { scene } = useThree();
 
-  const starsRef = useRef<THREE.Points>();
+  const starsRef = useRef<THREE.Points>(null);
 
   // =========================== STARS ======================================
 

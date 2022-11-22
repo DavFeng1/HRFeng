@@ -9,13 +9,13 @@ import { useStore } from '@pages/projects/blochSphere/BlochSphere';
 import discTexture from '@assets/images/disc.png';
 
 const BlochSphere = () => {
-  const xRingRef = useRef<THREE.Object3D>(null);
-  const yRingRef = useRef<THREE.Object3D>(null);
-  const zRingRef = useRef<THREE.Object3D>(null);
-  const xTextRef = useRef<THREE.Object3D>(null);
-  const yTextRef = useRef<THREE.Object3D>(null);
-  const zTextRef = useRef<THREE.Object3D>(null);
-  const pointRef = useRef<THREE.Object3D>(null);
+  const xRingRef = useRef<THREE.Mesh>(null);
+  const yRingRef = useRef<THREE.Mesh>(null);
+  const zRingRef = useRef<THREE.Mesh>(null);
+  const xTextRef = useRef<THREE.Mesh>(null);
+  const yTextRef = useRef<THREE.Mesh>(null);
+  const zTextRef = useRef<THREE.Mesh>(null);
+  const pointRef = useRef<THREE.Points>(null);
   const lineRef = useRef<THREE.ArrowHelper>(null);
 
   const threeState = useThree();
