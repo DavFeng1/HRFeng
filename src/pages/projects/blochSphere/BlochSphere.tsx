@@ -8,7 +8,6 @@ import { motion, Variants } from 'framer-motion';
 
 import BlochSphereRender from '@apps/quantum/blochSphere/BlochSphereRender';
 import BlochSphereControls from '@apps/quantum/blochSphere/BlochSphereControl';
-import BlochSphereDescription from '@apps/quantum/blochSphere/BlochSphereDescription';
 
 import '@pages/projects/blochSphere/BlochSphere.scss';
 
@@ -49,9 +48,6 @@ const BlochSpherePage = () => {
   return (
     <motion.div variants={pageTransitionVariant} exit="exit">
       <div id="bloch-sphere-container">
-        <section className="bloch-sphere-section">
-          <BlochSphereDescription />
-        </section>
         <section className="bloch-sphere-section">
           <div id="bloch-sphere-render-section">
             <BlochSphereControls />

@@ -1,7 +1,5 @@
 import { Typography } from '@mui/material';
-import { motion, useTransform, Variants } from 'framer-motion';
-import { cubicBezier } from 'popmotion';
-import { useHomePageStore } from '@pages/home/HomeStore';
+import { motion, Variants } from 'framer-motion';
 
 import '@pages/home/Landing.scss';
 
@@ -36,12 +34,6 @@ const captionVariant: Variants = {
 };
 
 const Landing = (): JSX.Element => {
-  const scrollPosition = useHomePageStore((state) => state.scrollPosition);
-
-  // const opacityRange = useTransform(scrollPosition, [0, 0.3], [1, 0], {
-  //   ease: [cubicBezier(0.9, 0.7, 0.5, 0.3)],
-  // });
-
   return (
     <div className="page-container landing-page-container">
       <motion.div
