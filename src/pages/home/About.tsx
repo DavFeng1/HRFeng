@@ -79,6 +79,7 @@ const About = (): JSX.Element => {
           in the Toronto and Bay Area
         </Typography>
       </motion.div>
+
       <motion.div
         initial="offscreen"
         whileInView="onscreen"
@@ -86,21 +87,11 @@ const About = (): JSX.Element => {
         className="about-text-right"
       >
         <Typography fontSize={40} width={'25ch'}>
-          Here you'll find some interactive animations I've been working on
-        </Typography>
-      </motion.div>
-
-      <motion.div
-        initial="offscreen"
-        whileInView="onscreen"
-        variants={aboutPageBody}
-        className="about-text-left"
-      >
-        <Typography fontSize={40} width={'25ch'}>
           Mathematics and physics is a passion of mines and I'm always
           looking for new ways to explore these subjects
         </Typography>
       </motion.div>
+
       <motion.div
         initial="offscreen"
         whileInView="onscreen"
