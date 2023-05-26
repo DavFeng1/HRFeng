@@ -93,57 +93,6 @@ const Projects = (): JSX.Element => {
             View Project
           </div>
         </motion.div>
-        <motion.div className="projects-card" variants={cardVariants}>
-          <div className="projects-card-description">
-            <Typography variant="h1" fontWeight="bold" fontSize={100}>
-              L2Learn
-            </Typography>
-            <Typography
-              variant="button"
-              fontSize={20}
-              letterSpacing={5}
-              className="projects-card-description-text"
-            >
-              Ongoing project where I derive and implement various machine
-              learning models from scratch (zero dependencies)
-            </Typography>
-          </div>
-
-          <div
-            className="projects-card-link"
-            onClick={(e) =>
-              window.open('https://github.com/DavFeng1/L2Learn')
-            }
-          >
-            View Project
-          </div>
-        </motion.div>
-        <motion.div className="projects-card" variants={cardVariants}>
-          <div className="projects-card-description">
-            <Typography variant="h1" fontWeight="bold" fontSize={100}>
-              Hypercore
-            </Typography>
-            <Typography
-              variant="button"
-              fontSize={20}
-              letterSpacing={5}
-              className="projects-card-description-text"
-            >
-              Hypercore is a toy blockchain I wrote in Rust. I used this
-              project as a way to learn the Rust programming language as
-              well as the necessary concepts from cryptography used in
-              blockchain technology
-            </Typography>
-          </div>
-          <div
-            className="projects-card-link"
-            onClick={(e) =>
-              window.open('https://github.com/DavFeng1/Hypercore')
-            }
-          >
-            View Project
-          </div>
-        </motion.div>
       </motion.div>
     </div>
   );
