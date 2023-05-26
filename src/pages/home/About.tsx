@@ -87,8 +87,7 @@ const About = (): JSX.Element => {
         className="about-text-right"
       >
         <Typography fontSize={40} width={'25ch'}>
-          Mathematics and physics is a passion of mines and I'm always
-          looking for new ways to explore these subjects
+          Here you'll find some of my writing and any projects I'm currently working on - with mathematical physics and programming being my primary interests.
         </Typography>
       </motion.div>
 

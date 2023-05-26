@@ -7,6 +7,7 @@ import {
 import { useEffect } from 'react';
 
 import Home from '@pages/home/Home';
+import Blog from '@pages/blog/Blog';
 import Projects from '@pages/projects/Projects';
 import Contact from '@pages/contact/Contact';
 import Layout from '@components/react/Layout';
@@ -26,6 +27,7 @@ const AppRoutes = () => {
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="/blog" element={<Blog />} />
           <Route path="/blochSphere" element={<BlochSphere />} />
           <Route path="/contact" element={<Contact />} />
         </Route>

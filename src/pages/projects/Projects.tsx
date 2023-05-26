@@ -66,7 +66,7 @@ const Projects = (): JSX.Element => {
           </Typography>
 
           <Typography variant="h3" textAlign="center">
-            I'm constantly updating this list so stay tuned!
+            Check out my github for more of my programming projects!
           </Typography>
         </div>
         <motion.div className="projects-card" variants={cardVariants}>
