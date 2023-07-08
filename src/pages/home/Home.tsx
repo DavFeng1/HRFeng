@@ -4,7 +4,6 @@ import { motion, useViewportScroll } from 'framer-motion';
 import { useHomePageStore } from '@pages/home/HomeStore';
 import HomeCanvas from '@components/three/HomeCanvas';
 import LoadingScreen from '@components/react/LoadingScreen';
-import About from '@pages/home/About';
 import Landing from '@pages/home/Landing';
 
 const Home = () => {
@@ -41,7 +40,7 @@ const Home = () => {
       ) : (
         <>
           <Landing />
-          <About />
+          {/* <About /> */}
         </>
       )}
     </motion.div>

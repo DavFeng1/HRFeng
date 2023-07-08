@@ -64,30 +64,7 @@ const About = (): JSX.Element => {
         className="about-text"
       >
         <Typography fontSize={40} width={'25ch'}>
-          I'm a software engineer with a background in mathematics and
-          physics.
-        </Typography>
-      </motion.div>
-      <motion.div
-        initial="offscreen"
-        whileInView="onscreen"
-        variants={aboutPageBody}
-        className="about-text-left"
-      >
-        <Typography fontSize={40} width={'25ch'}>
-          I've worked primarily as a software engineer at numerous startups
-          in the Toronto and Bay Area
-        </Typography>
-      </motion.div>
-
-      <motion.div
-        initial="offscreen"
-        whileInView="onscreen"
-        variants={aboutPageBody}
-        className="about-text-right"
-      >
-        <Typography fontSize={40} width={'25ch'}>
-          Here you'll find some of my writing and any projects I'm currently working on - with mathematical physics and programming being my primary interests.
+          Welcome to my website
         </Typography>
       </motion.div>
 

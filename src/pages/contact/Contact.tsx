@@ -6,7 +6,7 @@ import '@pages/contact/Contact.scss';
 
 const contactHeaderVariant: Variants = {
   initial: {
-    y: 200,
+    y: 100,
     opacity: 0,
   },
   animate: {
