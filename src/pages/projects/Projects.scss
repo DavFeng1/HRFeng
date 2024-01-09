@@ -1,10 +1,10 @@
 #projects-container {
   font-size: 2rem;
   width: 100%;
-
   display: flex;
   flex-flow: column nowrap;
-  justify-content: flex-start;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 #projects-header {

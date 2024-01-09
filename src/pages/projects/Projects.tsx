@@ -47,7 +47,7 @@ const Projects = (): JSX.Element => {
   }, []);
 
   return (
-    <div className="page-container row-container">
+    <div className="page-container">
       <motion.div
         variants={projectsVariants}
         initial="initial"

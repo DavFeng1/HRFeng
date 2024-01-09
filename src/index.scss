@@ -41,14 +41,8 @@ a {
   min-height: 100vh;
   min-width: 100vw;
   scroll-snap-align: start;
-}
-
-.row-container {
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  align-content: stretch;
-  justify-content: center;
+  margin-top: 15vh;
+  margin-bottom: 15vh;
 }
 
 .text {
