@@ -30,8 +30,17 @@ commute with each other and seperately satisfy the commutation relations of angu
 
 #### Solution
 
-The expressions for $\pmb{J_+}$ and $\pmb{J_-}$ provide the _complexification_ of the Lorentz algebra
+ Computing the commutation relations explicitly for the vector operators
+$$
+\begin{align}
+  [L^i, L^j] 
+  &= \epsilon^{iab} \epsilon^{jcd}[J^{ab}, J^{cd}]  \\
+  &= i\epsilon^{iab} \epsilon^{jcd} (g^{bc} J^{ad} - g^{ac} J^{bd} - g^{bd}J^{ac} - g^{ad} J^{bc}) \\
+  &= i\epsilon^{iab}  (\epsilon^{jcd}g^{bc} J^{ad} -\epsilon^{jcd} g^{ac} J^{bd} -\epsilon^{jcd} g^{bd}J^{ac} -\epsilon^{jcd} g^{ad} J^{bc}) \\
+\end{align}
+$$
 
+The expressions for $\pmb{J_+}$ and $\pmb{J_-}$ provide the _complexification_ of the Lorentz algebra.
 
 
 
