@@ -2,7 +2,7 @@ import katex from 'katex';
 
 import { useState, useEffect } from 'react';
 import { Button, Typography, Stack } from '@mui/material';
-import { useStore } from '@pages/projects/blochSphere/BlochSphere';
+import { useStore } from '@pages/simulations/blochSphere/BlochSphere';
 
 import ButtonLowercase from '@components/react/ButtonLowercase';
 import ParameterControls from '@apps/quantum/blochSphere/ParameterControls';
@@ -201,7 +201,7 @@ const BlochSphereControls = () => {
           Current state
         </Typography>
 
-        <Typography sx={{ textAlign: 'center' }} p={5}>
+        <Typography sx={{ textAlign: 'center' }}>
           <span
             dangerouslySetInnerHTML={{
               __html: katex.renderToString(currentStateLatex),

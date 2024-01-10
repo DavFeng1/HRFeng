@@ -8,7 +8,7 @@ import Grid from '@mui/material/Grid';
 import Slider from '@mui/material/Slider';
 import MuiInput from '@mui/material/Input';
 
-import { useStore } from '@pages/projects/blochSphere/BlochSphere';
+import { useStore } from '@pages/simulations/blochSphere/BlochSphere';
 
 const Input = styled(MuiInput)`
   width: 42px;

@@ -4,7 +4,7 @@ import { Suspense, useRef, useEffect } from 'react';
 import { OrbitControls, Text } from '@react-three/drei';
 import { Canvas, useLoader, useFrame, useThree } from '@react-three/fiber';
 
-import { useStore } from '@pages/projects/blochSphere/BlochSphere';
+import { useStore } from '@pages/simulations/blochSphere/BlochSphere';
 
 import discTexture from '@assets/images/disc.png';
 

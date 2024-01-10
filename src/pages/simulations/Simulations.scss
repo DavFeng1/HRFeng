@@ -1,4 +1,4 @@
-#projects-container {
+#simulations-container {
   font-size: 2rem;
   width: 100%;
   display: flex;
@@ -7,12 +7,12 @@
   justify-content: center;
 }
 
-#projects-header {
+#simulations-header {
   padding: 1rem;
   margin: 1rem;
 }
 
-.projects-card {
+.simulations-card {
   min-height: 25vh;
   width: 100%;
   margin-right: 15vw;
@@ -26,29 +26,29 @@
   transition: border 0.4s;
 }
 
-.projects-card:hover {
+.simulations-card:hover {
   border-color: white;
 }
-.projects-card-description {
+.simulations-card-description {
   display: flex;
   max-width: 80ch;
   flex-flow: column nowrap;
   justify-content: flex-start;
 }
 
-.projects-card-description-text {
+.simulations-card-description-text {
   max-width: 95ch;
 }
 
-.projects-card-link {
+.simulations-card-link {
   max-height: 3rem;
 }
 
-.projects-card-link:hover {
+.simulations-card-link:hover {
   cursor: pointer;
 }
 
-.projects-card-link:after {
+.simulations-card-link:after {
   content: '';
   display: block;
   width: 100%;
@@ -61,7 +61,7 @@
   transform: scale(0, 1);
 }
 
-.projects-card-link:hover:after {
+.simulations-card-link:hover:after {
   opacity: 1;
   -webkit-transform: scale(1);
   transform: scale(1);

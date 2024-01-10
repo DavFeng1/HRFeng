@@ -9,7 +9,7 @@ import { motion, Variants } from 'framer-motion';
 import BlochSphereRender from '@apps/quantum/blochSphere/BlochSphereRender';
 import BlochSphereControls from '@apps/quantum/blochSphere/BlochSphereControl';
 
-import '@pages/projects/blochSphere/BlochSphere.scss';
+import '@pages/simulations/blochSphere/BlochSphere.scss';
 
 // Store phi and theta in radians
 type BlochSphereStore = {
@@ -48,12 +48,10 @@ const BlochSpherePage = () => {
   return (
     <motion.div variants={pageTransitionVariant} exit="exit">
       <div id="bloch-sphere-container">
-        <section className="bloch-sphere-section">
           <div id="bloch-sphere-render-section">
             <BlochSphereControls />
             <BlochSphereRender />
           </div>
-        </section>
       </div>
     </motion.div>
   );

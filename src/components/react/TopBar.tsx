@@ -33,8 +33,8 @@ const TopBar = (): JSX.Element => {
               </Link>
             </Typography>
             <Typography variant="h5" component="div">
-              <Link to="/projects" className="top-bar-text">
-                <div className="top-bar-button">PROJECTS</div>
+              <Link to="/simulations" className="top-bar-text">
+                <div className="top-bar-button">SIMULATIONS</div>
               </Link>
             </Typography>
             <Typography variant="h5" component="div">

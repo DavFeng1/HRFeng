@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import { motion, Variants } from 'framer-motion';
 
-import '@pages/projects/Projects.scss';
+import '@pages/simulations/Simulations.scss';
 
-const projectsVariants: Variants = {
+const simulationsVariants: Variants = {
   initial: {
     opacity: 0,
   },
@@ -35,38 +35,38 @@ const cardVariants: Variants = {
   },
 };
 
-const Projects = (): JSX.Element => {
+const Simulations = (): JSX.Element => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('pages/landing/Projects.tsx ==> Component Mounted');
+    console.log('pages/landing/simulations.tsx ==> Component Mounted');
 
     return () => {
-      console.log('pages/landing/Projects.tsx ==> Component Unmounted');
+      console.log('pages/landing/simulations.tsx ==> Component Unmounted');
     };
   }, []);
 
   return (
     <div className="page-container">
       <motion.div
-        variants={projectsVariants}
+        variants={simulationsVariants}
         initial="initial"
         animate="animate"
         exit="exit"
-        id="projects-container"
+        id="simulations-container"
       >
-        <div id="projects-header">
+        <div id="simulations-header">
           <Typography
             variant="h3"
             fontWeight="bold"
             fontSize={90}
             textAlign="center"
           >
-            Projects
+            Simulations
           </Typography>
         </div>
-        <motion.div className="projects-card" variants={cardVariants}>
-          <div className="projects-card-description">
+        <motion.div className="simulations-card" variants={cardVariants}>
+          <div className="simulations-card-description">
             <Typography variant="h1" fontWeight="bold" fontSize={100}>
               Bloch Sphere
             </Typography>
@@ -74,7 +74,7 @@ const Projects = (): JSX.Element => {
               variant="button"
               fontSize={20}
               letterSpacing={5}
-              className="projects-card-description-text"
+              className="simulations-card-description-text"
             >
               The Bloch Sphere is a geometric representation of the pure
               states of a two level quantum system. It is often used in
@@ -83,7 +83,7 @@ const Projects = (): JSX.Element => {
           </div>
 
           <div
-            className="projects-card-link"
+            className="simulations-card-link"
             onClick={(e) => navigate('/blochSphere')}
           >
             View Project
@@ -94,4 +94,4 @@ const Projects = (): JSX.Element => {
   );
 };
 
-export default Projects;
+export default Simulations;
