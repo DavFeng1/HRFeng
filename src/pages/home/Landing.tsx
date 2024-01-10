@@ -35,7 +35,7 @@ const captionVariant: Variants = {
 
 const Landing = (): JSX.Element => {
   return (
-    <div className="page-container landing-page-container">
+    <div className="landing-page-container">
       <motion.div
         variants={marqueeVariant}
         initial="initial"
