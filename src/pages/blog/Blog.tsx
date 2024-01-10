@@ -28,7 +28,7 @@ const Blog = (): JSX.Element => {
           <Typography fontSize={20}>
             These are my personal notes and problem set solutions on various topics in math and physics.
           </Typography>
-          <Markdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>{qftMd}</Markdown>
+            <Markdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>{qftMd}</Markdown>
         </div>
       </div>
     )
