@@ -119,15 +119,11 @@ const BlochSphereControls = () => {
         <Typography variant="h4" align="center" sx={{ p: '0.5em' }}>
           States
         </Typography>
-        <Stack direction="row" spacing={3}>
+        <Stack direction="row" spacing={2}>
           <div>
-            <Typography variant="h6"> Base States </Typography>
-            <Stack direction="row" spacing={3}>
-              <Button
-                variant="contained"
-                size="small"
-                onClick={setZeroState}
-              >
+            <Typography variant="h6" noWrap align='center'> Base States </Typography>
+            <Stack direction="row" spacing={3} justifyContent='center'>
+              <Button variant="contained" size="small" onClick={setZeroState} >
                 <span dangerouslySetInnerHTML={katexZeroState} />
               </Button>
               <Button
@@ -140,13 +136,9 @@ const BlochSphereControls = () => {
             </Stack>
           </div>
           <div>
-            <Typography variant="h6">Superposition States</Typography>
-            <Stack direction="row" spacing={3}>
-              <Button
-                variant="contained"
-                size="small"
-                onClick={setPlusState}
-              >
+            <Typography variant="h6" noWrap align='center'>Superposition States</Typography>
+            <Stack direction="row" spacing={3} justifyContent='center'>
+              <Button variant="contained" size="small" onClick={setPlusState} >
                 <span dangerouslySetInnerHTML={katexPlusState} />
               </Button>
               <Button
