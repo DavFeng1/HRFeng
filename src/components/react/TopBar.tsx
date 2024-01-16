@@ -28,7 +28,7 @@ const TopBar = (): JSX.Element => {
               </div>
             </Typography>
             <Typography variant="h5" component="div">
-              <Link to="/blog" className="top-bar-text">
+              <Link to="/notes" className="top-bar-text">
                 <div className="top-bar-button">NOTES</div>
               </Link>
             </Typography>

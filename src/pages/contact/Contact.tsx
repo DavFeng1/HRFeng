@@ -53,7 +53,7 @@ const contactItemVariant: Variants = {
 
 const Contact = (): JSX.Element => {
   return (
-    <div className="page-container">
+    <div className="page-container" id="contact-container">
       <Toaster />
       <motion.div
         variants={contactHeaderVariant}
@@ -62,7 +62,7 @@ const Contact = (): JSX.Element => {
         exit="exit"
         className="contact-header"
       >
-        <Typography variant="button" fontSize={200}>
+        <Typography variant="button" fontSize={150} noWrap>
           Let's Work
         </Typography>
       </motion.div>
