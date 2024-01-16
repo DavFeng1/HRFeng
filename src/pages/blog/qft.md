@@ -34,14 +34,17 @@ commute with each other and seperately satisfy the commutation relations of angu
 $$
 \begin{align}
   [L^i, L^j] 
-  &= \epsilon^{iab} \epsilon^{jcd}[J^{ab}, J^{cd}]  \\
+  &= \frac{1}{4}\epsilon^{iab} \epsilon^{jcd}[J^{ab}, J^{cd}]  \\
 
-  &= i\epsilon^{iab} \epsilon^{jcd} (g^{bc} J^{ad} - g^{ac} J^{bd} - g^{bd}J^{ac} - g^{ad} J^{bc}) \\
-  &= i\epsilon^{iab}  (\epsilon^{jcd}g^{bc} J^{ad} -\epsilon^{jcd} g^{ac} J^{bd} -\epsilon^{jcd} g^{bd}J^{ac} -\epsilon^{jcd} g^{ad} J^{bc}) \\
+  &= \frac{i}{4}\epsilon^{iab} \epsilon^{jcd} (g^{bc} J^{ad} - g^{ac} J^{bd} - g^{bd}J^{ac} - g^{ad} J^{bc}) \\
+  &= \frac{i}{4}\epsilon^{iab}  (\epsilon^{jcd}g^{bc} J^{ad} -\epsilon^{jcd} g^{ac} J^{bd} -\epsilon^{jcd} g^{bd}J^{ac} -\epsilon^{jcd} g^{ad} J^{bc}) \\
 
-  &= i\epsilon^{iab}  (\epsilon^{jcd}g^{bc} J^{ad} -\epsilon^{jcd} g^{ac} J^{bd} +\epsilon^{jcd} g^{bc}J^{ad} +\epsilon^{jcd} g^{ac} J^{bd}) \\
-
-  &= 2i\epsilon^{iab}\epsilon^{jcd}g^{bc}J^{ad}
+  &= \frac{i}{4}\epsilon^{iab}  (\epsilon^{jcd}g^{bc} J^{ad} -\epsilon^{jcd} g^{ac} J^{bd} +\epsilon^{jcd} g^{bc}J^{ad} +\epsilon^{jcd} g^{ac} J^{bd}) \\
+  &= \frac{i}{2}\epsilon^{iab}\epsilon^{jcd}g^{bc}J^{ad} \\ 
+  &= -\frac{i}{2} \epsilon^{iab}\epsilon^{jcd}\delta^{bc}J^{ad} \\
+  &= \frac{i}{2}\epsilon^{iab} \epsilon^{jdb} J^{ad} \\
+  &= \frac{i}{2}( \delta^{ij} \delta^{ad} - \delta^{id} \delta^{ja} )J^{ad}  \\
+  &= \frac{i}{2}(\delta^{ij}J^{dd} - J^{ji})
 \end{align}
 $$
 
