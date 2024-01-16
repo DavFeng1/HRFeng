@@ -33,9 +33,11 @@ const Notes = (): JSX.Element => {
           ) : (
             <>
               <Typography fontSize={20}>
-                These are my personal notes and problem set solutions on various topics in math and physics.
+                These are my personal notes and problem set solutions for various books on math and physics.
               </Typography>
-              <Markdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>{qftMd}</Markdown>
+              <div id="markdown-container">
+                <Markdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>{qftMd}</Markdown>
+              </div>
             </>
           )}
         </div>

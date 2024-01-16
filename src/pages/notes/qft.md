@@ -1,7 +1,7 @@
 # Quantum Field Theory
 
-Following the standard text 'Introduction to Quantum Field Theory' by Peskin & Schroeder
-
+Solutions to the end of chapter problems in the standard text 'Introduction to Quantum Field Theory' by Peskin & Schroeder. 
+I will be adding to this as I work through the text.
 
 ## Problems
 
