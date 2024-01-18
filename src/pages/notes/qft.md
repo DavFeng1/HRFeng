@@ -43,9 +43,9 @@ $$
   & \text{relabel } c \longleftrightarrow d \text{ in the third and last term}\\
   &= \frac{i}{4}\epsilon^{iab}  (\epsilon^{jcd}g^{bc} J^{ad} -\epsilon^{jcd} g^{ac} J^{bd} +\epsilon^{jcd} g^{bc}J^{ad} -\epsilon^{jcd} g^{ac} J^{bd}) \\
   &=\frac{i}{2}(\epsilon^{iab}\epsilon^{jcd}g^{bc} J^{ad} -\epsilon^{iab}\epsilon^{jcd} g^{ac} J^{bd}) \\
-  & \text{swap } a \longleftrightarrow b \text{ in the secondterm}\\
+  & \text{swap } a \longleftrightarrow b \text{ in the second term}\\
   &=\frac{i}{2}(\epsilon^{iab}\epsilon^{jcd}g^{bc} J^{ad} +\epsilon^{iba}\epsilon^{jcd} g^{ac} J^{bd}) \\
-  & \text{relabel } a \longleftrightarrow b \text{ in the secondterm}\\
+  & \text{relabel } a \longleftrightarrow b \text{ in the second term}\\
   &=\frac{i}{2}(\epsilon^{iab}\epsilon^{jcd}g^{bc} J^{ad} +\epsilon^{iab}\epsilon^{jcd} g^{bc} J^{ad}) \\
   &= i\epsilon^{iab}\epsilon^{jcd}g^{bc}J^{ad} \\ 
   &= -i\epsilon^{iab}\epsilon^{jcd}\delta^{bc}J^{ad} \\
@@ -95,9 +95,9 @@ Finally we need to compute the commutation relations of $J_{\pm}^i$
 $$
 \begin{align}
   [J_+^i, J_+^j] &= \frac{1}{4}[L^i + iK^i, L^j + iK^j] \\
-  &= \frac{1}{4}([L^i , L^j + iK^j] + i[K^i, L^j + K^j]) \\
-  &= \frac{1}{4} ([L^i, L^j] + i[L^i, K^j] + i[K^i, L^j] + [K^i, K^j] )\\
+  &= \frac{1}{4}([L^i , L^j + iK^j] + i[K^i, L^j + iK^j]) \\
+  &= \frac{1}{4} ([L^i, L^j] + i[L^i, K^j] + i[K^i, L^j] - [K^i, K^j] )\\
   &= \frac{1}{4}(i\epsilon^{ijk}L^k + i\epsilon^{ijk}L^k)\\
-  &= \frac{i}{2} \epsilon^{ijk}L^k = 
+  &= \frac{i}{2} \epsilon^{ijk}L^k
 \end{align}
 $$
