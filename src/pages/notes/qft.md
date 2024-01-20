@@ -84,14 +84,24 @@ $$
 Now we have to show the expressions for $\pmb{J_+}$ and $\pmb{J_-}$ commute with each other
 
 $$
-\begin{align}
+\begin{aligned}
   [J_+, J_-] &= \frac{1}{4} [ \pmb{L} + i\pmb{K}, \pmb{L} - i\pmb{K}] \\
-  &= \frac{1}{4}[\pmb{L}^2 - i\pmb{LK} + i\pmb{KL} + \pmb{K}^2 - (\pmb{L}^2+ i\pmb{KL} - i\pmb{LK} + \pmb{K}^2)] \\
   &= 0
-\end{align}
+\end{aligned}
 $$
 
-Finally we need to compute the commutation relations of $J_{\pm}^i$ 
+Finally we need to compute the commutation relations of $J_{\pm}^i$ . First we need to compute one more result
+$$
+\begin{aligned}
+  [L_i, K_j] &= \frac{1}{2}\epsilon^{ilm}[J^{lm}, J^{0j}] \\
+  &= \frac{1}{2}(g^{l0} J^{mj} - g^{lj} J^{m0} - g^{m0}J^{lj} + g^{mj} J^{l0})
+
+\end{aligned}
+$$
+
+
+
+ The Lie bracket for $J_\pm$ is defined on the complexification $\mathfrak{so_\mathbb{C}}(1, 3)$
 $$
 \begin{align}
   [J_+^i, J_+^j] &= \frac{1}{4}[L^i + iK^i, L^j + iK^j] \\
