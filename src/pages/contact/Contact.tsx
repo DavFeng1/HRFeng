@@ -114,7 +114,7 @@ const Contact = (): JSX.Element => {
           <div
             onClick={() => {
               window.open(
-                'https://drive.google.com/uc?export=download&id=1Pz6RKhd5tx55R3iJ2flTfNvpBr77hlXw',
+                'https://drive.google.com/uc?export=download&id=1G-bLHBT0wdsffcOfYIis4Gd1a8gEGno2',
                 '_self',
               );
             }}
