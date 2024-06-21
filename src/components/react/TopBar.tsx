@@ -28,6 +28,11 @@ const TopBar = (): JSX.Element => {
               </div>
             </Typography>
             <Typography variant="h5" component="div">
+              <Link to="/contact" className="top-bar-text">
+                <div className="top-bar-button">CONTACT</div>
+              </Link>
+            </Typography>
+            <Typography variant="h5" component="div">
               <Link to="/notes" className="top-bar-text">
                 <div className="top-bar-button">NOTES</div>
               </Link>
@@ -35,11 +40,6 @@ const TopBar = (): JSX.Element => {
             <Typography variant="h5" component="div">
               <Link to="/simulations" className="top-bar-text">
                 <div className="top-bar-button">SIMULATIONS</div>
-              </Link>
-            </Typography>
-            <Typography variant="h5" component="div">
-              <Link to="/contact" className="top-bar-text">
-                <div className="top-bar-button">CONTACT</div>
               </Link>
             </Typography>
           </Toolbar>
