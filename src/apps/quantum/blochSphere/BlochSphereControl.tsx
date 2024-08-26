@@ -2,7 +2,7 @@ import katex from 'katex';
 
 import { useState, useEffect } from 'react';
 import { Button, Typography, Stack } from '@mui/material';
-import { useStore } from '@pages/simulations/blochSphere/BlochSphere';
+import { useStore } from '@pages/stuff/blochSphere/BlochSphere';
 
 import ButtonLowercase from '@components/react/ButtonLowercase';
 import ParameterControls from '@apps/quantum/blochSphere/ParameterControls';

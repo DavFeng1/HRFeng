@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import { motion, Variants } from 'framer-motion';
 
-import '@pages/simulations/Simulations.scss';
+import '@pages/stuff/Stuff.scss';
 
 const simulationsVariants: Variants = {
   initial: {
@@ -62,7 +62,7 @@ const Simulations = (): JSX.Element => {
             fontSize={90}
             textAlign="center"
           >
-            Simulations
+            {"('_>')"}
           </Typography>
         </div>
         <motion.div className="simulations-card" variants={cardVariants}>
@@ -86,7 +86,29 @@ const Simulations = (): JSX.Element => {
             className="simulations-card-link"
             onClick={(e) => navigate('/blochSphere')}
           >
-            View Project
+            View 
+          </div>
+        </motion.div>
+        <motion.div className="simulations-card" variants={cardVariants}>
+          <div className="simulations-card-description">
+            <Typography variant="h1" fontWeight="bold" fontSize={100}>
+              Notes 
+            </Typography>
+            <Typography
+              variant="button"
+              fontSize={20}
+              letterSpacing={5}
+              className="simulations-card-description-text"
+            >
+              Under construction
+            </Typography>
+          </div>
+
+          <div
+            className="simulations-card-link"
+            onClick={(e) => navigate('/notes')}
+          >
+            View 
           </div>
         </motion.div>
       </motion.div>

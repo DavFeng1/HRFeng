@@ -9,7 +9,7 @@ import { motion, Variants } from 'framer-motion';
 import BlochSphereRender from '@apps/quantum/blochSphere/BlochSphereRender';
 import BlochSphereControls from '@apps/quantum/blochSphere/BlochSphereControl';
 
-import '@pages/simulations/blochSphere/BlochSphere.scss';
+import '@pages/stuff/blochSphere/BlochSphere.scss';
 
 // Store phi and theta in radians
 type BlochSphereStore = {

@@ -8,10 +8,10 @@ import { useEffect } from 'react';
 
 import Home from '@pages/home/Home';
 import Notes from '@pages/notes/Notes';
-import Simulations from '@pages/simulations/Simulations';
+import Stuff from '@pages/stuff/Stuff';
 import Contact from '@pages/contact/Contact';
 import Layout from '@components/react/Layout';
-import BlochSphere from '@pages/simulations/blochSphere/BlochSphere';
+import BlochSphere from '@pages/stuff/blochSphere/BlochSphere';
 import { AnimatePresence } from 'framer-motion';
 
 const AppRoutes = () => {
@@ -22,11 +22,11 @@ const AppRoutes = () => {
   }, [location]);
 
   return (
-    <AnimatePresence exitBeforeEnter>
+    <AnimatePresence mode='wait'>
       <Routes location={location} key={location.pathname}>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/simulations" element={<Simulations />} />
+          <Route path="/stuff" element={<Stuff />} />
           <Route path="/notes" element={<Notes />} />
           <Route path="/blochSphere" element={<BlochSphere />} />
           <Route path="/contact" element={<Contact />} />
