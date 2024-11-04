@@ -62,7 +62,7 @@ const Landing = (): JSX.Element => {
           DAVID FENG
         </Typography>
         <Typography fontSize={20} letterSpacing={6}>
-          CURRENTLY SOFTWARE ENGINEER @SHAKEPAY
+          CURRENTLY SOFTWARE ENGINEER @FIRST PRINCIPLES
         </Typography>
         <Typography fontSize={20} letterSpacing={6}>
           BASED IN TORONTO
