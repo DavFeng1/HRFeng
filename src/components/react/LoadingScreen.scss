@@ -1,5 +1,7 @@
 // =============================== Loading Screen Stylings =========================
 
+@use "sass:math";
+
 #loading-screen {
   position: absolute;
   z-index: 10;
@@ -21,10 +23,10 @@
   left: calc(50% - 1em);
   border-radius: 50%;
   background: var(--background-color);
-  box-shadow: 0 0 0.5em hsl(var(--center-hue), 100%, 50% / 0.5),
-    0 0 1em hsl(var(--center-hue), 100%, 50% / 0.8),
-    0 0 1.5em hsl(var(--center-hue), 100%, 50% / 0.3),
-    0 0 2em hsl(var(--center-hue), 100%, 50% / 0.1);
+  box-shadow: 0 0 0.5em hsl(var(--center-hue), 100%, math.div(50%, 0.5)),
+    0 0 1em hsl(var(--center-hue), 100%, math.div(50%, 0.8)),
+    0 0 1.5em hsl(var(--center-hue), 100%, math.div(50%, 0.3)),
+    0 0 2em hsl(var(--center-hue), 100%, math.div(50%, 0.1));
 }
 
 .ring {
@@ -57,7 +59,7 @@
   height: 10em;
   border-radius: 50%;
   border: 4px transparent;
-  border-top: 4px solid hsl(var(--ring-hue-blue), 100%, 50% / 0.7);
+  border-top: 4px solid hsl(var(--ring-hue-blue), 100%, math.div(50%, 0.7));
   animation: animate 2s linear infinite;
 }
 
@@ -69,7 +71,7 @@
   height: 10em;
   border-radius: 50%;
   border: 4px transparent;
-  border-top: 4px solid hsl(var(--ring-hue-blue), 100%, 57% / 0.7);
+  border-top: 4px solid hsl(var(--ring-hue-blue), 100%, math.div(57%, 0.7));
   animation: animate 2s linear infinite;
   animation-direction: reverse;
 }
@@ -80,7 +82,7 @@
   height: 10em;
   border-radius: 50%;
   border: 4px transparent;
-  border-top: 4px solid hsl(var(--ring-hue-blue), 100%, 57% / 0.74);
+  border-top: 4px solid hsl(var(--ring-hue-blue), 100%, math.div(57%, 0.74));
   animation: animate 2s linear infinite;
 }
 
@@ -105,9 +107,9 @@
 
   border: 4px transparent;
   border-radius: 50%;
-  border-top: 2px solid hsl(var(--ring-hue-blue), 100%, 50% / 0.7);
+  border-top: 2px solid hsl(var(--ring-hue-blue), 100%, math.div(50%, 0.7));
 
-  filter: drop-shadow(0 0 0.5em hsl(var(--ring-hue-blue), 100%, 50% / 1));
+  filter: drop-shadow(0 0 0.5em hsl(var(--ring-hue-blue), 100%, math.div(50%, 1)));
 
   animation: progress 4s linear infinite;
 }
@@ -121,9 +123,9 @@
   width: 0.5em;
   border-radius: 50%;
   background-color: white;
-  box-shadow: 0 0 0.5em hsl(var(--ring-hue-blue), 100%, 50% / 1),
-    0 0 0.5em hsl(var(--ring-hue-blue), 100%, 50% / 0.75),
-    0 0 1em hsl(var(--ring-hue-blue), 100%, 50% / 0.4);
+  box-shadow: 0 0 0.5em hsl(var(--ring-hue-blue), 100%, math.div(50%, 1)),
+    0 0 0.5em hsl(var(--ring-hue-blue), 100%, math.div(50%, 0.75)),
+    0 0 1em hsl(var(--ring-hue-blue), 100%, math.div(50%, 0.4));
   filter: blur(0.2em);
 }
 
@@ -157,14 +159,14 @@
   width: 0%;
   transition: 0.01s cubic-bezier(0.075, 0.82, 0.165, 1);
   height: 0.25rem;
-  background: hsl(var(--ring-hue-purple), 100%, 50% / 0.55);
+  background: hsl(var(--ring-hue-purple), 100%, math.div(50%, 0.55));
 
   filter: blur(0.5px);
 
-  box-shadow: 0 0 0.1em hsl(var(--ring-hue-purple), 100%, 50% / 0.4),
-    0 0 0.3em hsl(var(--ring-hue-purple), 100%, 50% / 0.75),
-    0 0 0.75em hsl(var(--ring-hue-purple), 100%, 50% / 0.8),
-    0 0 1.5em hsl(var(--ring-hue-purple), 100%, 50% / 0.9);
+  box-shadow: 0 0 0.1em hsl(var(--ring-hue-purple), 100%, math.div(50%, 0.4)),
+    0 0 0.3em hsl(var(--ring-hue-purple), 100%, math.div(50%, 0.75)),
+    0 0 0.75em hsl(var(--ring-hue-purple), 100%, math.div(50%, 0.8)),
+    0 0 1.5em hsl(var(--ring-hue-purple), 100%, math.div(50%, 0.9));
 
   border-radius: 3rem;
 }
