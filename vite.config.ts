@@ -6,6 +6,9 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 export default defineConfig({
   base: '/',
   assetsInclude: ['**/*.md'],
-  plugins: [react(), tsconfigPaths() ]
+  plugins: [react(), tsconfigPaths() ],
+  build: {
+    outDir: 'dist'
+  }
 })
 
