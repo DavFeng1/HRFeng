@@ -89,7 +89,7 @@ const Contact = (): JSX.Element => {
         <motion.div variants={contactItemVariant} className="contact-item">
           <div
             onClick={() => {
-              window.open('https://github.com/DavFeng1');
+              window.open('https://github.com/fenghourun');
             }}
           >
             <Typography variant="button" fontSize={75} fontWeight="bold">
